@@ -24,6 +24,8 @@
 
 *在DemoContext中init方法中填入申请的APP_Key测试，并在DemoApi中配置HOST指向到自己的auth服务上*
 
+*如适用Eclipse开发请Import路径app/src/main
+
 #### 注意事项：
 
 imkit.jar中已经集成如下开源库为防重复引用特此提示
