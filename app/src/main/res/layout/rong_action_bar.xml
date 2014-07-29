@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <ImageView
+        android:id="@id/rc_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="center"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/rc_bar_back" />
+
+    <FrameLayout
+        android:id="@id/rc_title_layout"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/rc_back">
+
+        <ImageView
+            android:id="@id/rc_logo"
+            android:scaleType="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/rc_bar_logo" />
+
+        <TextView
+            android:id="@id/rc_new"
+            style="@android:style/TextAppearance.Small.Inverse"
+            android:scaleType="center"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|top"
+            android:gravity="center"
+            android:background="@drawable/rc_new_message" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@id/rc_title"
+        style="@android:style/TextAppearance.Medium.Inverse"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/rc_title_layout" />
+
+
+</merge>

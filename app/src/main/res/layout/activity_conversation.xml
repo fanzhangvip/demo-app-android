@@ -14,8 +14,10 @@
 
         <io.rong.imkit.veiw.ActionBar
             android:id="@+id/conversation_action_bar"
+            android:background="@color/title_bg"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/px_to_dip_96" />
+            android:layout_height="@dimen/px_to_dip_96"
+            />
 
         <io.rong.imkit.veiw.ConversationMessageBar
             android:id="@+id/conversation_message_bar"

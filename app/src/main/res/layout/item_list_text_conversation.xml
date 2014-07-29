@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/px_to_dip_22"
     android:background="#EBEBEB"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/conversation_message_time_tv"
@@ -27,88 +27,34 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/px_to_dip_22"
         android:background="#EBEBEB"
-        android:orientation="horizontal" >
+        android:orientation="vertical">
 
-        <io.rong.imkit.veiw.AsyncImageView
-            android:id="@+id/conversation_message_other_portrait"
-            android:layout_width="@dimen/px_to_dip_82"
-            android:layout_height="@dimen/px_to_dip_82"
-            android:layout_marginLeft="@dimen/px_to_dip_16"
-            android:layout_marginRight="@dimen/px_to_dip_16"
-            app:defDrawable="@drawable/default_portrait"
-            android:src="@drawable/default_portrait" />
 
         <LinearLayout
-            android:id="@+id/text_right_layout_layout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="right|center_vertical"
+            android:background="#EBEBEB"
             android:orientation="horizontal"
-            android:visibility="gone" >
+            android:layout_marginRight="@dimen/px_to_dip_100"
+            android:layout_marginBottom="@dimen/px_to_dip_25"
+            android:id="@+id/text_left_layout_layout">
 
-            <ProgressBar
-                android:id="@+id/conversation_message_progressbar"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center_vertical|right"
-                android:visibility="invisible" />
+            <io.rong.imkit.veiw.AsyncImageView
+                android:id="@+id/conversation_message_other_portrait"
+                android:layout_width="@dimen/px_to_dip_82"
+                android:layout_height="@dimen/px_to_dip_82"
+                android:layout_marginLeft="@dimen/px_to_dip_16"
+                android:layout_marginRight="@dimen/px_to_dip_16"
+                app:defDrawable="@drawable/default_portrait"
+                android:layout_gravity="left"
+                android:src="@drawable/default_portrait" />
 
-            <ImageView
-                android:id="@+id/conversation_message_send_failed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|right"
-                android:src="@drawable/send_message_fail_normal" />
 
             <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right|center_vertical"
-                android:background="@drawable/conversation_bubble_blue"
-                android:gravity="center_vertical|right"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/conversation_message_username_right_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:paddingLeft="@dimen/px_to_dip_15"
-                    android:visibility="gone" />
-
-                <TextView
-                    android:id="@+id/conversation_message_content_right_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:bufferType="spannable"
-                    android:gravity="left|center_vertical"
-                    android:lineSpacingExtra="@dimen/px_to_dip_6"
-                    android:paddingLeft="@dimen/px_to_dip_10"
-                    android:paddingRight="@dimen/px_to_dip_10"
-                    android:textColor="@color/conversation_item_text_color_right"
-                    android:textSize="@dimen/px_to_dip_32" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/text_left_layout_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="left|center_vertical"
-            android:orientation="horizontal"
-            android:visibility="gone" >
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left|center_vertical"
-                android:background="@drawable/conversation_bubble_white"
-                android:gravity="center_vertical|left"
-                android:orientation="vertical" >
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/conversation_message_username_left_tv"
@@ -116,32 +62,105 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:paddingLeft="@dimen/px_to_dip_15"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
 
-                <TextView
-                    android:id="@+id/conversation_message_content_left_tv"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:bufferType="spannable"
+                    android:layout_weight="1"
                     android:gravity="left|center_vertical"
-                    android:lineSpacingExtra="@dimen/px_to_dip_6"
-                    android:paddingLeft="@dimen/px_to_dip_10"
-                    android:paddingRight="@dimen/px_to_dip_10"
-                    android:textColor="@color/conversation_item_text_color_left"
-                    android:textSize="@dimen/px_to_dip_32" />
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:id="@+id/conversation_message_content_left_tv"
+                        android:background="@drawable/conversation_bubble_white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:bufferType="spannable"
+                        android:layout_gravity="left|center_vertical"
+                        android:gravity="left|center_vertical"
+                        android:lineSpacingExtra="@dimen/px_to_dip_6"
+                        android:paddingLeft="@dimen/px_to_dip_25"
+                        android:paddingRight="@dimen/px_to_dip_10"
+                        android:textColor="@color/conversation_item_text_color_left"
+                        android:textSize="@dimen/px_to_dip_32" />
+                </LinearLayout>
+
+
             </LinearLayout>
         </LinearLayout>
 
-        <io.rong.imkit.veiw.AsyncImageView
-            android:id="@+id/conversation_message_self_portrait"
-            android:layout_width="@dimen/px_to_dip_82"
-            android:layout_height="@dimen/px_to_dip_82"
-            android:layout_gravity="right"
-            android:layout_marginLeft="@dimen/px_to_dip_16"
-            android:layout_marginRight="@dimen/px_to_dip_16"
-            app:defDrawable="@drawable/default_portrait"
-            android:src="@drawable/default_portrait" />
+        <LinearLayout
+            android:id="@+id/text_right_layout_layout"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/px_to_dip_100"
+            android:layout_marginBottom="@dimen/px_to_dip_25"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right|center_vertical"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <ProgressBar
+                    android:id="@+id/conversation_message_progressbar"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical|right"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/conversation_message_send_failed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|right"
+                    android:src="@drawable/send_message_fail_normal" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:background="@drawable/conversation_bubble_blue"
+                    android:gravity="center_vertical|right"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/conversation_message_username_right_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:paddingLeft="@dimen/px_to_dip_15"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/conversation_message_content_right_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:bufferType="spannable"
+                        android:gravity="left|center_vertical"
+                        android:lineSpacingExtra="@dimen/px_to_dip_6"
+                        android:paddingLeft="@dimen/px_to_dip_10"
+                        android:paddingRight="@dimen/px_to_dip_10"
+                        android:textColor="@color/conversation_item_text_color_right"
+                        android:textSize="@dimen/px_to_dip_32" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <io.rong.imkit.veiw.AsyncImageView
+                android:id="@+id/conversation_message_self_portrait"
+                android:layout_width="@dimen/px_to_dip_82"
+                android:layout_height="@dimen/px_to_dip_82"
+                android:layout_gravity="right"
+                android:layout_marginLeft="@dimen/px_to_dip_16"
+                android:layout_marginRight="@dimen/px_to_dip_16"
+                android:src="@drawable/default_portrait" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

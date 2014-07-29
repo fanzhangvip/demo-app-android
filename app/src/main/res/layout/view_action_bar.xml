@@ -16,7 +16,6 @@
             android:layout_height="@dimen/px_to_dip_96"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/px_to_dip_8"
-            android:background="@drawable/action_bar_icon"
             android:contentDescription="@string/content_description"
             android:gravity="center_vertical|left" />
 
@@ -32,8 +31,7 @@
                 android:layout_height="@dimen/px_to_dip_60"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:contentDescription="@string/content_description"
-                android:src="@drawable/action_bar_logo" >
+                android:contentDescription="@string/content_description">
             </ImageView>
 
             <TextView

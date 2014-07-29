@@ -5,16 +5,10 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <io.rong.imkit.veiw.ActionBar
-        android:id="@android:id/widget_frame"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/px_to_dip_96" />
-
     <io.rong.imkit.veiw.PinnedHeaderListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginTop="@dimen/px_to_dip_96"
         android:fadingEdge="none"
         android:fastScrollEnabled="false"
         android:scrollbars="none" />

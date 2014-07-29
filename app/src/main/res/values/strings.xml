@@ -51,11 +51,13 @@
     <string name="conversation_setting_notify">"新消息通知"</string>
     <string name="conversation_setting_set_bg">"设置当前聊天背景"</string>
     <string name="conversation_setting_history_message">"查看聊天记录"</string>
-    <string name="conversation_setting_clear_message">"清空聊天消息"</string>
+    <string name="conversation_setting_clear_messages">"清空聊天消息"</string>
     <string name="conversation_setting_discussion_exit">"退出"</string>
     <string name="conversation_setting_discussion_exit_failure">"退出讨论失败"</string>
     <string name="conversation_setting_get_info_failure">"获取消息失败"</string>
-    <string name="default_name">"用户名"</string>
+    <string name="conversation_setting_exit_prompt">"你确定退出讨论组吗？"</string>
+    <string name="rc_conversation_setting_clear_messages_prompt">"你确定清空聊天记录？"</string>
+
     <!-- discussion -->
     <string name="discussion_create_failure">"创建讨论组失败"</string>
     <string name="discussion_create_loading_title">"正在玩命创建讨论组"</string>
@@ -103,8 +105,11 @@
     
     
     
-    
-    
+    <!-- public Field-->
+    <string name="rc_public_data_process">"数据处理中···"</string>
+    <string name="default_name">"用户名"</string>
+    <string name="alter_dialog_confirm">"确定"</string>
+    <string name="alter_dialog_cancel">"取消"</string>
     
     
     
