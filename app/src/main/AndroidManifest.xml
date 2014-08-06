@@ -17,6 +17,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:name=".DemoApplication"
@@ -43,16 +44,6 @@
         <!-- begin imkit request -->
 
         <activity
-            android:name="io.rong.imkit.activity.ConversationActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" >
-            <intent-filter>
-                <action android:name="io.rong.imkit.conversation.action" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name="io.rong.imkit.RongActivity"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -74,15 +65,6 @@
 
         <activity
             android:name="io.rong.imkit.activity.ConversationSettingActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="io.rong.imkit.activity.PublishShowImageActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="io.rong.imkit.activity.ShowDownloadImageActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="io.rong.imkit.activity.FriendListActivity"
             android:screenOrientation="portrait" />
 
         <service
@@ -106,6 +88,21 @@
             </intent-filter>
         </receiver>
         <!-- end -->
+
+        <!-- voip -->
+        <activity
+            android:name="io.rong.voipkit.activity.CallSideActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="io.rong.voipkit.activity.CalledSideActivity"
+            android:screenOrientation="portrait" />
+
+        <receiver android:name="io.rong.imkit.broadcast.SendMessageBroadcast">
+            <intent-filter>
+                <action android:name="io.rong.imkit.broadcast.SENDMESSAGE" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

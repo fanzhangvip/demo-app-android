@@ -5,16 +5,13 @@
     android:background="@android:color/white"
     android:orientation="vertical" >
 
-    <io.rong.imkit.veiw.ActionBar
-        android:id="@+id/show_download_image"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/px_to_dip_96" />
-
-    <ImageView
+    <uk.co.senab.photoview.PhotoView
         android:id="@android:id/icon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scaleType="fitCenter"
+        android:background="@android:color/black"
         android:contentDescription="@string/content_description" >
-    </ImageView>
+    </uk.co.senab.photoview.PhotoView>
 
 </LinearLayout>

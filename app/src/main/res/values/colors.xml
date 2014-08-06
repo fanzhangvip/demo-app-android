@@ -31,5 +31,6 @@
     <color name="rong_text_color_primary_inverse">@android:color/white</color>
     <color name="rong_text_color_secondary_inverse">@android:color/white</color>
     <color name="rong_text_color_tertiary_inverse">@android:color/white</color>
+    <color name="rc_bottom_toolbar_bg">#7f000000</color>
 
 </resources>

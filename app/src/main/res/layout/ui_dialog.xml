@@ -9,7 +9,8 @@
     <FrameLayout
         android:id="@+id/dialog_topbar"
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/px_to_dip_128"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/px_to_dip_128"
         android:padding="5dp" >
 
         <TextView

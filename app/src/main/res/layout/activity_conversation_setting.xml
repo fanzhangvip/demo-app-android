@@ -8,9 +8,9 @@
 
     <io.rong.imkit.veiw.ActionBar
         android:id="@+id/action_bar"
-        android:background="@color/title_bg"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/px_to_dip_96" />
+        android:layout_height="@dimen/px_to_dip_96"
+        android:background="@color/title_bg" />
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -30,6 +30,7 @@
                 android:layout_marginLeft="@dimen/px_to_dip_22"
                 android:layout_marginRight="@dimen/px_to_dip_22"
                 android:layout_marginTop="@dimen/px_to_dip_20"
+                android:layout_marginBottom="@dimen/px_to_dip_10"
                 android:background="#d3d3d3"
                 android:orientation="horizontal">
 
@@ -37,21 +38,58 @@
                     android:id="@android:id/list"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
+                    android:layout_marginBottom="@dimen/px_to_dip_10"
                     android:background="@android:color/transparent"
                     android:cacheColorHint="@android:color/transparent"
-                    android:layout_marginBottom="@dimen/px_to_dip_10"
+                    android:clipToPadding="false"
                     android:columnWidth="50dp"
                     android:gravity="center"
                     android:horizontalSpacing="@dimen/px_to_dip_52"
                     android:numColumns="auto_fit"
-                    android:stretchMode="columnWidth"
-                    android:clipToPadding="false"
                     android:paddingBottom="@dimen/px_to_dip_20"
+                    android:stretchMode="columnWidth"
                     android:verticalSpacing="@dimen/px_to_dip_26" />
             </LinearLayout>
 
+
+
             <RelativeLayout
-                android:id="@+id/rc_set_top_message"
+                android:id="@+id/rc_discussion_name_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_to_dip_96"
+                android:layout_marginLeft="@dimen/px_to_dip_34"
+                android:layout_marginRight="@dimen/px_to_dip_36">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/px_to_dip_10"
+                    android:text="@string/rc_conversation_setting_discussion_name"
+                    android:textColor="#252525"
+                    android:textSize="@dimen/px_to_dip_30" />
+
+                <TextView
+                    android:id="@android:id/text1"
+                    android:layout_width="@dimen/px_to_dip_230"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:singleLine="true" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_to_dip_2"
+                android:layout_marginLeft="@dimen/px_to_dip_34"
+                android:layout_marginRight="@dimen/px_to_dip_34"
+                android:background="#e4e4e4" />
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/px_to_dip_96"
                 android:layout_marginLeft="@dimen/px_to_dip_34"
@@ -69,12 +107,12 @@
 
                 <CheckBox
                     android:id="@android:id/button1"
-                    android:button="@drawable/checkbox_setting_selector"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:button="@drawable/checkbox_setting_selector"
                     android:gravity="center_vertical" />
             </RelativeLayout>
 
@@ -86,7 +124,6 @@
                 android:background="#e4e4e4" />
 
             <RelativeLayout
-                android:id="@+id/rc_new_messages_notify"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/px_to_dip_96"
                 android:layout_marginLeft="@dimen/px_to_dip_34"
@@ -103,13 +140,48 @@
                     android:textSize="@dimen/px_to_dip_30" />
 
                 <CheckBox
+                    android:id="@android:id/button2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@android:id/button2"
-                    android:button="@drawable/checkbox_setting_selector"
-                    android:layout_gravity="center_vertical"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:button="@drawable/checkbox_setting_selector"
+                    android:gravity="center_vertical" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_to_dip_2"
+                android:layout_marginLeft="@dimen/px_to_dip_34"
+                android:layout_marginRight="@dimen/px_to_dip_34"
+                android:background="#e4e4e4" />
+
+            <RelativeLayout
+                android:id="@+id/rc_open_member_invite_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_to_dip_96"
+                android:layout_marginLeft="@dimen/px_to_dip_34"
+                android:layout_marginRight="@dimen/px_to_dip_36">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/px_to_dip_10"
+                    android:text="@string/rc_conversation_setting_discussion_open_invite"
+                    android:textColor="#252525"
+                    android:textSize="@dimen/px_to_dip_30" />
+
+                <CheckBox
+                    android:id="@+id/rc_open_member_invite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:button="@drawable/checkbox_setting_selector"
                     android:gravity="center_vertical" />
             </RelativeLayout>
 
@@ -138,16 +210,23 @@
                     android:textSize="@dimen/px_to_dip_30" />
             </RelativeLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_to_dip_2"
+                android:layout_marginLeft="@dimen/px_to_dip_34"
+                android:layout_marginRight="@dimen/px_to_dip_34"
+                android:background="#e4e4e4" />
+
             <Button
                 android:id="@android:id/button3"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/px_to_dip_80"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/px_to_dip_80"
-                android:background="#ffff4444"
+                android:layout_marginBottom="@dimen/px_to_dip_60"
                 android:layout_marginLeft="@dimen/px_to_dip_36"
                 android:layout_marginRight="@dimen/px_to_dip_36"
-                android:layout_marginBottom="@dimen/px_to_dip_60"
+                android:layout_marginTop="@dimen/px_to_dip_80"
+                android:background="#ffff4444"
                 android:text="@string/conversation_setting_discussion_exit"></Button>
         </LinearLayout>
     </ScrollView>
