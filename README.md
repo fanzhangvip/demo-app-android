@@ -12,9 +12,11 @@
 
 **Gradle 1.11+**
 
-**RongIMSDK 0.9.5**
+**RongIMSDK 0.9.7**
 
 **Android Support V4**
+
+**Google GSON 2.2.+**
 
 *如需使用自行申请APP_Key测试，需要搭建自己的auth服务器*
 
