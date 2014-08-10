@@ -1,9 +1,11 @@
 package io.rong.imkit.demo;
 
+import io.rong.imkit.RongActivity;
 import io.rong.imkit.RongIM;
 import io.rong.imkit.demo.model.User;
 import io.rong.imkit.demo.ui.LoadingDialog;
 import io.rong.imkit.demo.ui.WinToast;
+import io.rong.imlib.RongIMClient;
 import io.rong.imlib.RongIMClient.ConnectCallback;
 import io.rong.imlib.RongIMClient.UserInfo;
 
@@ -93,26 +95,39 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
 
         String[] versionInfo = getVersionInfo();
         mBuildTextView.setText(String.format(getResources().getString(R.string.login_version_date), versionInfo[0]));
-        mVersionTextView.setText(String.format(getResources().getString(R.string.login_version_date), versionInfo[1]));
+        mVersionTextView.setText(String.format(getResources().getString(R.string.login_version_code), versionInfo[1]));
 
     }
 
-    private String[] getVersionInfo() {
-        String[] version = new String[2];
 
-        PackageManager packageManager = getPackageManager();
+    @SuppressWarnings("unchecked")
+    @Override
+    public void onClick(View v) {
 
-        try {
-            PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(), 0);
-            version[0] = String.valueOf(packageInfo.versionCode);
-            version[1] = packageInfo.versionName;
-            return version;
-        } catch (NameNotFoundException e) {
-            e.printStackTrace();
+        //打开注册页面
+        if (v == mRegisterBtn) {
+
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivityForResult(intent, REQUEST_CODE_REGISTER);
+        } else if (v == mLoginBtn) {
+            String username = mUserNameEditText.getEditableText().toString();
+            String password = mPasswordEditText.getEditableText().toString();
+
+            if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
+                WinToast.toast(LoginActivity.this, R.string.login_erro_is_null);
+                return;
+            }
+
+            if (mDialog != null && !mDialog.isShowing())
+                mDialog.show();
+
+            //发起登录 http请求 (注：非融云SDK接口，是demo接口)
+            loginHttpRequest = DemoContext.getInstance().getDemoApi().login(username, password, mDeviceId, this);
+
         }
 
-        return version;
     }
+
 
     @SuppressWarnings("unchecked")
     @Override
@@ -121,19 +136,8 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
         //登录成功  返回数据
         if (loginHttpRequest == request) {
 
-            Editor editor = DemoContext.getInstance().getSharedPreferences().edit();
-            editor.putString(INTENT_PASSWORD, mPasswordEditText.getText().toString());
-            editor.putString(INTENT_EMAIL, mUserNameEditText.getText().toString());
-            editor.commit();
-
             if (obj instanceof User) {
-                User user = (User) obj;
-
-                //发起获取好友列表的http请求  (注：非融云SDK接口，是demo接口)
-                getFriendsHttpRequest = DemoContext.getInstance().getDemoApi().getFriends(user.getCookie(), this);
-
-                DemoContext.getInstance().setCurrentUser(user);
-
+                final User user = (User) obj;
 
                 /**
                  * IMKit SDK调用第二步
@@ -147,6 +151,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
 
                     @Override
                     public void onSuccess(String userId) {
+
                         mHandler.obtainMessage(HANDLER_LOGIN_SUCCESS).sendToTarget();
                     }
 
@@ -156,6 +161,17 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
                     }
 
                 });
+
+                Editor editor = DemoContext.getInstance().getSharedPreferences().edit();
+                editor.putString(INTENT_PASSWORD, mPasswordEditText.getText().toString());
+                editor.putString(INTENT_EMAIL, mUserNameEditText.getText().toString());
+                editor.commit();
+
+
+                //发起获取好友列表的http请求  (注：非融云SDK接口，是demo接口)
+                getFriendsHttpRequest = DemoContext.getInstance().getDemoApi().getFriends(user.getCookie(), this);
+
+                DemoContext.getInstance().setCurrentUser(user);
 
             } else {
                 WinToast.toast(this, R.string.login_failure);
@@ -212,33 +228,6 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
 
     }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public void onClick(View v) {
-
-        //打开注册页面
-        if (v == mRegisterBtn) {
-
-            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-            startActivityForResult(intent, REQUEST_CODE_REGISTER);
-        } else if (v == mLoginBtn) {
-            String username = mUserNameEditText.getEditableText().toString();
-            String password = mPasswordEditText.getEditableText().toString();
-
-            if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
-                WinToast.toast(LoginActivity.this, R.string.login_erro_is_null);
-                return;
-            }
-
-            if (mDialog != null && !mDialog.isShowing())
-                mDialog.show();
-
-            //发起登录 http请求 (注：非融云SDK接口，是demo接口)
-            loginHttpRequest = DemoContext.getInstance().getDemoApi().login(username, password, mDeviceId, this);
-
-        }
-
-    }
 
     @Override
     public boolean handleMessage(Message msg) {
@@ -272,6 +261,24 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
                 mPasswordEditText.setText(data.getStringExtra(INTENT_PASSWORD));
             }
         }
+    }
+
+
+    private String[] getVersionInfo() {
+        String[] version = new String[2];
+
+        PackageManager packageManager = getPackageManager();
+
+        try {
+            PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(), 0);
+            version[0] = String.valueOf(packageInfo.versionCode);
+            version[1] = packageInfo.versionName;
+            return version;
+        } catch (NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return version;
     }
 
 

@@ -43,12 +43,6 @@ public class ActionBarDemo extends BaseFrameLayout implements View.OnClickListen
 
 		View view = LayoutInflater.from(context).inflate(R.layout.view_action_bar_demo, this);
 
-		// mReturnTextView = getView(view, "action_bar_back");
-		// mLogTextView = getView(view, "action_bar_logo");
-		// mTitleTextView = getView(view, "action_bar_title");
-		// mSeachTextView = getView(view, "action_bar_right_two");
-		// mMoreTextView = getView(view, "action_bar_right_one");
-		// mButtonTextView = getView(view, "action_bar_right_three");
 		mReturnTextView = getView(view, R.id.action_bar_back);
 		mLogTextView = getView(view, R.id.action_bar_logo);
 		mTitleTextView = getView(view, R.id.action_bar_title);
@@ -56,19 +50,15 @@ public class ActionBarDemo extends BaseFrameLayout implements View.OnClickListen
 		mMoreTextView = getView(view, R.id.action_bar_right_one);
 		mButtonTextView = getView(view, R.id.action_bar_right_three);
 
-		Typeface iconfont = Typeface.createFromAsset(context.getAssets(), "iconfont/iconfont.ttf");
-
 		// mReturnTextView.setTypeface(iconfont);
 		// mReturnTextView.setTextColor(getContext().getResources().getColor(android.R.color.white));
 		// mReturnTextView.setTextScaleX(0);
 
-		mLogTextView.setTypeface(iconfont);
+
 		mLogTextView.setTextColor(getContext().getResources().getColor(android.R.color.white));
 
-		mSeachTextView.setTypeface(iconfont);
 		mSeachTextView.setTextColor(getContext().getResources().getColor(android.R.color.white));
 
-		mMoreTextView.setTypeface(iconfont);
 		mMoreTextView.setTextColor(getContext().getResources().getColor(android.R.color.white));
 
 		mTitleTextView.setTextColor(getContext().getResources().getColor(android.R.color.white));

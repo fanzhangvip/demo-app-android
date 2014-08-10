@@ -83,14 +83,6 @@ public class DemoContext {
 
         mContext = context;
 
-        /**
-         * IMKit SDK调用第一步 初始化
-         * 第一个参数，  context上下文
-         * 第二个参数，APPKey换成自己的appkey
-         * 第三个参数，push消息通知所要打个的action页面
-         * 第四个参数，push消息中可以自定义push图标
-         */
-        RongIM.init(context, "e0x9wycfx7flq", "io.rong.imkit.conversationList.action", R.drawable.ic_launcher);
 
         //http初始化 用于登录、注册使用
         initHttp();

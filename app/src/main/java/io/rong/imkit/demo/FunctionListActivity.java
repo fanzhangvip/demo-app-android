@@ -1,5 +1,6 @@
 package io.rong.imkit.demo;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,36 +71,7 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
             });
 
         } else if (position == 2) {
-
-            /**
-             * 打开客服聊天页面
-             *
-             * API详见 http://docs.rongcloud.cn/android.html
-             */
-            RongIM.getInstance().startCustomerServiceChat(this, "rongcloud.net.kefu.service112", "融云小秘书", new RongIM.OnConversationStartedListener() {
-                @Override
-                public void onCreated(RongIMClient.ConversationType conversationType, String targetId) {
-                    Log.d("FunctioanListActivity", "----startCustomerServiceChat----onCreated--------");
-
-                }
-
-                @Override
-                public void onDestroyed() {
-                    Log.d("FunctioanListActivity", "----startCustomerServiceChat----onDestroyed--------");
-                }
-
-                @Override
-                public void onClickUserPortrait(RongIMClient.UserInfo user) {
-                    Log.d("FunctioanListActivity", "----startCustomerServiceChat----onClickUserPortrait--------");
-                }
-
-                @Override
-                public void onClickMessage(RongIMClient.Message message) {
-                    Log.d("FunctioanListActivity", "----startCustomerServiceChat----onClickMessage--------");
-                }
-            });
-
-
+            startActivity(new Intent(this, CustomServicesActivity.class));
         } else if (position == 3) {
 
 
@@ -108,7 +80,7 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
              *
              * API详见 http://docs.rongcloud.cn/android.html
              */
-            RongIM.getInstance().startPrivateChat(this, "40", "光头强",
+            RongIM.getInstance().startPrivateChat(this, "1", "光头强",
                     new RongIM.OnConversationStartedListener() {
 
                         @Override

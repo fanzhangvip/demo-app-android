@@ -1,10 +1,10 @@
 package io.rong.imkit.demo.common;
 
+import io.rong.imkit.demo.model.CustomerService;
 import io.rong.imkit.demo.model.Status;
 import io.rong.imkit.demo.model.User;
 import io.rong.imkit.demo.parser.GsonArrayParser;
 import io.rong.imkit.demo.parser.GsonParser;
-import io.rong.imkit.demo.parser.RegisterParser;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -24,11 +24,17 @@ import com.sea_monster.core.network.HttpHandler;
 
 public class DemoApi extends BaseApi {
 
-	private final static String HOST = "http://nav.cn.rong.io:8080/";
+	private final static String HOST = "http://119.254.110.79:8080/";
+
+
+    //客服
+//    public  final  static String  CUSTOM_SERVICE_HOST="http://api.kefu.rongcloud.cn/";//客服线上
+    public  final  static String  CUSTOM_SERVICE_HOST="http://api.kefu.rongcloud.net:8888/";//客服线下
 
 	private final static String DEMO_REG = "reg";
 	private final static String DEMO_LOGIN = "login";
 	private final static String DEMO_FRIENDS = "friends";
+	private final static String DEMO_GET_CUSTOM_SERVICE = "getGlobalInfo.do";
 
 	public DemoApi(HttpHandler handler, Context context) {
 		super(handler, context);
@@ -109,6 +115,25 @@ public class DemoApi extends BaseApi {
 		return httpRequest;
 
 	}
+
+    /**
+     * 获取客服列表
+     * @param appKey
+     * @param callback
+     * @return
+     */
+    public AbstractHttpRequest<ArrayList<CustomerService>> getCustomServiceList(String appKey, ApiCallback<ArrayList<CustomerService>> callback) {
+
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+        nameValuePairs.add(new BasicNameValuePair("appKey", appKey));
+
+        ApiReqeust<ArrayList<CustomerService>> apiReqeust = new DefaultApiReqeust<ArrayList<CustomerService>>(ApiReqeust.GET_METHOD, URI.create(CUSTOM_SERVICE_HOST + DEMO_GET_CUSTOM_SERVICE), nameValuePairs, callback);
+        AbstractHttpRequest<ArrayList<CustomerService>> httpRequest = apiReqeust.obtainRequest(new GsonArrayParser<CustomerService>(new TypeToken<ArrayList<CustomerService>>(){}), null, null);
+        handler.executeRequest(httpRequest);
+
+        return httpRequest;
+
+    }
 
 
 

@@ -10,7 +10,7 @@
         android:id="@id/rc_actionbar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@color/title_bg">
+        android:background="@color/rc_title_bg">
     </io.rong.imkit.veiw.ActionBar>
 
     <FrameLayout

@@ -24,7 +24,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/RcTheme" >
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name"
@@ -46,22 +46,39 @@
         <activity
             android:name="io.rong.imkit.RongActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="io.rong.imkit.push.action"/>
-                <data android:scheme="rong" android:host="io.rong.imkit.demo"/>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+
         </activity>
+
+        <activity android:name=".CustomServicesActivity"></activity>
+
 
         <activity
             android:name="io.rong.imkit.RongSingleActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="io.rong.imkit.conversationList.action" />
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="io.rong.imkit.demo"
+                    android:path="/conversationlist"
+                    android:scheme="rong" />
             </intent-filter>
         </activity>
+
+        <activity android:name="io.rong.imkit.RongSecActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="io.rong.imkit.demo"
+                    android:pathPrefix="/conversation"
+                    android:scheme="rong" />
+            </intent-filter>
+        </activity>
+
 
         <activity
             android:name="io.rong.imkit.activity.ConversationSettingActivity"
@@ -82,12 +99,13 @@
             android:process="io.rong.push.service" />
         <service android:name="io.rong.imlib.RongService" />
 
-        <receiver android:name="io.rong.imlib.RongReceiver" >
+        <receiver android:name="io.rong.imlib.RongReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
         <!-- end -->
+
 
         <!-- voip -->
         <activity
