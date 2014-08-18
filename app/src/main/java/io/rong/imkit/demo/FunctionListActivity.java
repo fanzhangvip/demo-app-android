@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import io.rong.imkit.RongIM;
+import io.rong.imkit.demo.common.DemoApi;
 import io.rong.imlib.RongIMClient;
 
 public class FunctionListActivity extends BaseActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
@@ -71,7 +72,27 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
             });
 
         } else if (position == 2) {
-            startActivity(new Intent(this, CustomServicesActivity.class));
+            RongIM.getInstance().startCustomerServiceChat(this, "kefu114", "客服", new RongIM.OnConversationStartedListener() {
+                @Override
+                public void onCreated(RongIMClient.ConversationType type, String s) {
+
+                }
+
+                @Override
+                public void onDestroyed() {
+
+                }
+
+                @Override
+                public void onClickUserPortrait(RongIMClient.UserInfo userInfo) {
+
+                }
+
+                @Override
+                public void onClickMessage(RongIMClient.Message message) {
+
+                }
+            });
         } else if (position == 3) {
 
 
@@ -104,6 +125,8 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
                         }
                     }
             );
+
+
         }
     }
 

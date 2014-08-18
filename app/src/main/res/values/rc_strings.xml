@@ -33,6 +33,7 @@
     <string name="message_type_image_content">"[图片]"</string>
     <string name="message_type_voice_content">"[语音]"</string>
     <string name="message_type_video_content">"[视频]"</string>
+    <string name="message_type_draft_content">"[草稿]"</string>
     <string name="tag_id">tagId</string>
 
     <!-- conversationSeting -->
