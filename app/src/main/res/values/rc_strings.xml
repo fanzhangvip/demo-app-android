@@ -2,18 +2,12 @@
 <resources>
 
     <string name="sys_resource_dir">"RongCloud"</string>
-    <string name="app_name">"融云"</string>
     <string name="content_description">"融云"</string>
     <string name="view_message_bar_send">"发送"</string>
     <string name="view_message_bar_voice_speak">"按住 说话"</string>
     <string name="view_message_bar_voice_speak_end">"松开 结束"</string>
     <string name="loading">"正在加载中\.\.\."</string>
     <string name="conversation_list_action_bar_title">"会话"</string>
-    <string name="action_bar_back">&#xe60e;</string>
-    <string name="action_bar_logo">&#xe605;</string>
-    <string name="action_bar_search">&#xe60a;</string>
-    <string name="action_bar_more">&#xe606;</string>
-    <string name="action_bar_add_people">&#xe602;</string>
 
     <!-- rich icon text -->
     <string name="rich_icon_image_txt">"图片"</string>
@@ -50,6 +44,7 @@
     <string name="rc_conversation_setting_clear_messages_prompt">"你确定清空聊天记录？"</string>
     <string name="rc_conversation_setting_discussion_name">"讨论组名称"</string>
     <string name="rc_conversation_setting_discussion_open_invite">"开放成员邀请"</string>
+    <string name="rc_conversation_setting_new_message_receive">"新消息通知"</string>
     <string name="rc_conversation_setting_update_discussion_name">"修改群名称"</string>
     <string name="rc_conversation_setting_exit_discussion_failure">"退出讨论组失败"</string>
     <string name="rc_conversation_setting_remove_discussion_member_failure">"移除讨论组成员失败"</string>

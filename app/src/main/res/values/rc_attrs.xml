@@ -144,37 +144,4 @@
         <!-- View background -->
         <attr name="android:background"/>
     </declare-styleable>
-
-
-
-    <declare-styleable name="TextAppearance">
-        <!-- Text color. -->
-        <attr name="textColor" format="reference|color" />
-        <!-- Size of the text. Recommended dimension type for text is "sp" for scaled-pixels (example: 15sp). -->
-        <attr name="textSize" format="dimension" />
-        <!-- Style (bold, italic, bolditalic) for the text. -->
-        <attr name="textStyle">
-            <flag name="normal" value="0" />
-            <flag name="bold" value="1" />
-            <flag name="italic" value="2" />
-        </attr>
-        <!-- Typeface (normal, sans, serif, monospace) for the text. -->
-        <attr name="typeface">
-            <enum name="normal" value="0" />
-            <enum name="sans" value="1" />
-            <enum name="serif" value="2" />
-            <enum name="monospace" value="3" />
-        </attr>
-        <!-- Color of the text selection highlight. -->
-        <attr name="textColorHighlight" format="reference|color" />
-        <!-- Color of the hint text. -->
-        <attr name="textColorHint" format="reference|color" />
-        <!-- Color of the links. -->
-        <attr name="textColorLink" format="reference|color" />
-        <!-- Present the text in ALL CAPS. This may use a small-caps form when available.
-        <attr name="textAllCaps" format="boolean" />-->
-    </declare-styleable>
-
-
-
 </resources>

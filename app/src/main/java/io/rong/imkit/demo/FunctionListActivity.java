@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import io.rong.imkit.RongIM;
 import io.rong.imkit.demo.common.DemoApi;
+import io.rong.imkit.veiw.ActionBar;
 import io.rong.imlib.RongIMClient;
 
 public class FunctionListActivity extends BaseActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
@@ -17,6 +18,7 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
     private ListView mListView;
     private FunctionListAdapter mFunctionListAdapter;
     private Button mLogout;
+    private ActionBar mActionBar;
 
 
     @Override
@@ -32,6 +34,7 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
         mListView.addHeaderView(headerView);
         mLogout = getViewById(android.R.id.button1);
         mLogout.setOnClickListener(this);
+        mActionBar = getViewById(R.id.action_bar);
 
     }
 
@@ -43,7 +46,12 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
         mListView.setAdapter(mFunctionListAdapter);
         mFunctionListAdapter.notifyDataSetChanged();
         mListView.setOnItemClickListener(this);
-
+        mActionBar.setOnBackClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 

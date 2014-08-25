@@ -1,11 +1,9 @@
 package io.rong.imkit.demo;
 
 import io.rong.imkit.demo.model.Status;
-import io.rong.imkit.demo.model.User;
-import io.rong.imkit.demo.ui.ActionBarDemo;
 import io.rong.imkit.demo.ui.WinToast;
+import io.rong.imkit.veiw.ActionBar;
 
-import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,8 +28,7 @@ public class RegisterActivity extends BaseApiActivity implements OnClickListener
 	private Button mRegisterButton;
 
 	private AbstractHttpRequest<Status> httpRequest;
-
-	private ActionBarDemo actionBar;
+    private ActionBar mActionBar;
 
 	@Override
 	protected int setContentViewResId() {
@@ -44,7 +41,7 @@ public class RegisterActivity extends BaseApiActivity implements OnClickListener
 		mPasswordEditText = getViewById(android.R.id.text2);
 		mNickNameEditText = getViewById(R.id.nick_name);
 		mRegisterButton = getViewById(android.R.id.button1);
-		actionBar = getViewById(R.id.mutil_user_select_action_bar);
+        mActionBar = getViewById(R.id.mutil_user_select_action_bar);
 
 	}
 
@@ -52,22 +49,13 @@ public class RegisterActivity extends BaseApiActivity implements OnClickListener
 	protected void initData() {
 		mRegisterButton.setOnClickListener(this);
 
-		actionBar.getLogTextView().setOnClickListener(new OnClickListener() {
+        mActionBar.setOnBackClick(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
-
-		actionBar.getReturnTextView().setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
-
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 	}
 
 	@SuppressWarnings("unchecked")

@@ -83,7 +83,7 @@
                             android:layout_gravity="left"
                             android:contentDescription="@string/content_description"
                             android:scaleType="center"
-                            android:src="@drawable/ic_launcher" />
+                            android:src="@drawable/rc_ic_launcher" />
 
                     </FrameLayout>
                 </LinearLayout>

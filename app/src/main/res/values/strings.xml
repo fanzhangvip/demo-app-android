@@ -23,7 +23,7 @@
     <string name="login_version_code">"版本:%1$s"</string>
     <!-- functions  activity-->
     <string name="function_list_logout">"注 销 用 户"</string>
-
+    <string name="app_name">融云</string>
     <!-- custom service  activity-->
     <string name="custom_service_get_list_failure">"获取客服失改"</string>
     <string name="custom_service_people_list">"客服人员列表"</string>

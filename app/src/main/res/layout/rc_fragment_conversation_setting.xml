@@ -27,10 +27,10 @@
                 android:id="@+id/user_layout"
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
+                android:layout_marginBottom="@dimen/px_to_dip_10"
                 android:layout_marginLeft="@dimen/px_to_dip_22"
                 android:layout_marginRight="@dimen/px_to_dip_22"
                 android:layout_marginTop="@dimen/px_to_dip_20"
-                android:layout_marginBottom="@dimen/px_to_dip_10"
                 android:background="#d3d3d3"
                 android:orientation="horizontal">
 
@@ -50,7 +50,6 @@
                     android:stretchMode="columnWidth"
                     android:verticalSpacing="@dimen/px_to_dip_26" />
             </LinearLayout>
-
 
 
             <RelativeLayout
@@ -83,9 +82,9 @@
 
 
                 <View
-                    android:layout_alignParentBottom="true"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/px_to_dip_2"
+                    android:layout_alignParentBottom="true"
                     android:background="#e4e4e4" />
             </RelativeLayout>
 
@@ -117,17 +116,18 @@
                     android:gravity="center_vertical" />
 
                 <View
-                    android:layout_alignParentBottom="true"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/px_to_dip_2"
+                    android:layout_alignParentBottom="true"
                     android:background="#e4e4e4" />
             </RelativeLayout>
 
-            <RelativeLayout android:visibility="gone"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/px_to_dip_96"
                 android:layout_marginLeft="@dimen/px_to_dip_34"
-                android:layout_marginRight="@dimen/px_to_dip_36">
+                android:layout_marginRight="@dimen/px_to_dip_36"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -150,19 +150,54 @@
                     android:gravity="center_vertical" />
 
                 <View
-                    android:layout_alignParentBottom="true"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/px_to_dip_2"
+                    android:layout_alignParentBottom="true"
+                    android:background="#e4e4e4" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_to_dip_96"
+                android:layout_marginLeft="@dimen/px_to_dip_34"
+                android:layout_marginRight="@dimen/px_to_dip_36"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/px_to_dip_10"
+                    android:text="@string/rc_conversation_setting_new_message_receive"
+                    android:textColor="#252525"
+                    android:textSize="@dimen/px_to_dip_30" />
+
+                <CheckBox
+                    android:id="@+id/rc_new_message_receive"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:button="@drawable/rc_switch_btn"
+                    android:gravity="center_vertical" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/px_to_dip_2"
+                    android:layout_alignParentBottom="true"
                     android:background="#e4e4e4" />
             </RelativeLayout>
 
 
-            <RelativeLayout  android:visibility="gone"
+            <RelativeLayout
                 android:id="@+id/rc_open_member_invite_layout"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/px_to_dip_96"
                 android:layout_marginLeft="@dimen/px_to_dip_34"
-                android:layout_marginRight="@dimen/px_to_dip_36">
+                android:layout_marginRight="@dimen/px_to_dip_36"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -185,9 +220,9 @@
                     android:gravity="center_vertical" />
 
                 <View
-                    android:layout_alignParentBottom="true"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/px_to_dip_2"
+                    android:layout_alignParentBottom="true"
                     android:background="#e4e4e4" />
             </RelativeLayout>
 
@@ -210,9 +245,9 @@
                     android:textSize="@dimen/px_to_dip_30" />
 
                 <View
-                    android:layout_alignParentBottom="true"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/px_to_dip_2"
+                    android:layout_alignParentBottom="true"
                     android:background="#e4e4e4" />
             </RelativeLayout>
 
@@ -221,14 +256,14 @@
                 android:id="@android:id/button3"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/px_to_dip_80"
-                android:textColor="@color/rc_text_color_primary_inverse"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="@dimen/px_to_dip_60"
                 android:layout_marginLeft="@dimen/px_to_dip_36"
                 android:layout_marginRight="@dimen/px_to_dip_36"
                 android:layout_marginTop="@dimen/px_to_dip_80"
                 android:background="#ffff4444"
-                android:text="@string/conversation_setting_discussion_exit"></Button>
+                android:text="@string/conversation_setting_discussion_exit"
+                android:textColor="@color/rc_text_color_primary_inverse"></Button>
         </LinearLayout>
     </ScrollView>
 
