@@ -12,7 +12,7 @@
 
 **Gradle 1.11+**
 
-**RongIMSDK 0.9.10**
+**RongIMSDK 0.9.11**
 
 **Android Support V4**
 
