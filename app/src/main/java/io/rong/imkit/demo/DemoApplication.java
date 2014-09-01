@@ -9,13 +9,12 @@ import io.rong.imkit.RongIM;
  */
 public class DemoApplication extends Application {
 
-	private static final String IS_FIRST = "is_first";
+    private static final String IS_FIRST = "is_first";
+    public static final String APP_KEY = "z3v5yqkbv8v30";
 
-//    public static final String APP_KEY="e0x9wycfx7flq";
-public static final String APP_KEY="z3v5yqkbv8v30";
-	@Override
-	public void onCreate() {
-		super.onCreate();
+    @Override
+    public void onCreate() {
+        super.onCreate();
 
         /**
          * IMKit SDK调用第一步 初始化
@@ -28,7 +27,7 @@ public static final String APP_KEY="z3v5yqkbv8v30";
         RongIM.init(this, APP_KEY, R.drawable.ic_launcher);
 
 
-		DemoContext.getInstance().init(this);
-	}
+        DemoContext.getInstance().init(this);
+    }
 
 }

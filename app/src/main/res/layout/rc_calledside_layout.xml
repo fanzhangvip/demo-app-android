@@ -71,7 +71,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/user_photo_container"
         android:layout_centerHorizontal="true"
-        android:text="小飞"
         android:textColor="@android:color/white"
         android:textSize="15dp" />
 

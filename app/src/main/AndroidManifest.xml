@@ -41,11 +41,18 @@
         <activity
             android:name=".FunctionListActivity"
             android:screenOrientation="portrait" />
-        <!-- begin imkit request -->
-<activity
+        <!-- Begin Rong Cloud -->
+
+        <activity
             android:name="io.rong.imkit.RongActivity"
             android:screenOrientation="portrait">
-
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:host="io.rong.imkit.demo"
+                    android:pathPrefix="/conversationsetting/"
+                    android:scheme="rong"/>
+            </intent-filter>
         </activity>
 
         <activity
@@ -61,8 +68,9 @@
                     android:scheme="rong" />
             </intent-filter>
         </activity>
-        
-        <activity android:name="io.rong.imkit.RongSecActivity"
+
+        <activity
+            android:name="io.rong.imkit.RongSecActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -76,35 +84,13 @@
         </activity>
 
         <activity
-            android:name="io.rong.imkit.activity.ConversationSettingActivity"
+            android:name="io.rong.voipkit.activity.CallSideActivity"
             android:screenOrientation="portrait" />
 
-        <service
-            android:name="io.rong.imkit.service.RCloudService"
-            android:enabled="true"
-            android:exported="false" />
-
-        <!-- end -->
-
-
-        <!-- begin imlib request -->
-
-        <service
-            android:name="io.rong.imlib.PushService"
-            android:process="io.rong.push.service" />
-        <service android:name="io.rong.imlib.RongService" />
-
-        <receiver android:name="io.rong.imlib.RongReceiver">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-        </receiver>
-        <!-- end -->
-
-
-        <!-- voip -->
-        <activity android:name="io.rong.voipkit.activity.CallSideActivity"  android:screenOrientation="portrait"/>
-        <activity android:name="io.rong.voipkit.activity.CalledSideActivity"  android:screenOrientation="portrait">
+        <activity
+            android:name="io.rong.voipkit.activity.CalledSideActivity"
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="io.rong.voipkit.calledSideActivity.action" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -116,6 +102,30 @@
                 <action android:name="io.rong.imkit.broadcast.SENDMESSAGE" />
             </intent-filter>
         </receiver>
+
+        <service
+            android:name="io.rong.imkit.service.RCloudService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <service
+            android:name="io.rong.imlib.PushService"
+            android:process="io.rong.push.service" />
+
+        <service android:name="io.rong.imlib.RongService" />
+
+        <receiver android:name="io.rong.imlib.RongReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+        <!-- End Rong Cloud -->
 
     </application>
 

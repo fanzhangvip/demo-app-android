@@ -245,8 +245,6 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
                 mDialog.dismiss();
 
             startActivity(new Intent(this, FunctionListActivity.class));
-
-
         }
         return false;
     }

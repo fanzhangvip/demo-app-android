@@ -46,7 +46,6 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="小飞"
         android:textColor="@android:color/white"
         android:textSize="15dp" />
 
@@ -64,7 +63,8 @@
             android:id="@+id/user_photo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/rc_ic_launcher" />
+            android:src="@drawable/rc_ic_portrait"
+            />
     </FrameLayout>
 
     <TextView

@@ -12,8 +12,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="@dimen/px_to_dip_15"
         android:layout_marginTop="@dimen/px_to_dip_15"
-        android:contentDescription="@string/content_description"
-        app:defDrawable="@drawable/rc_default_portrait" />
+        android:contentDescription="@string/content_description" />
 
     <TextView
         android:id="@android:id/text1"
@@ -22,10 +21,10 @@
         android:layout_below="@android:id/icon"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/px_to_dip_20"
-        android:text="@string/default_name"
-        android:textColor="#252525"
         android:ellipsize="end"
         android:singleLine="true"
+        android:text="@string/default_name"
+        android:textColor="#252525"
         android:textSize="@dimen/px_to_dip_30"></TextView>
 
     <ImageView

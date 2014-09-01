@@ -39,7 +39,7 @@
     <string name="conversation_setting_clear_messages">"清空聊天消息"</string>
     <string name="conversation_setting_discussion_exit">"删除并退出"</string>
     <string name="conversation_setting_discussion_exit_failure">"退出讨论失败"</string>
-    <string name="conversation_setting_get_info_failure">"获取消息失败"</string>
+    <string name="conversation_setting_get_info_failure">"获取信息失败"</string>
     <string name="conversation_setting_exit_prompt">"退出该讨论组后，将不再收到讨论组聊天信息，聊天记录也一并删除。确定退出？"</string>
     <string name="rc_conversation_setting_clear_messages_prompt">"你确定清空聊天记录？"</string>
     <string name="rc_conversation_setting_discussion_name">"讨论组名称"</string>

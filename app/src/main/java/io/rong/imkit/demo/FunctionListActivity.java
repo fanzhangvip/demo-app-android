@@ -8,7 +8,9 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import io.rong.imkit.RCloudContext;
 import io.rong.imkit.RongIM;
+import io.rong.imkit.common.RCloudConst;
 import io.rong.imkit.demo.common.DemoApi;
 import io.rong.imkit.veiw.ActionBar;
 import io.rong.imlib.RongIMClient;
@@ -109,7 +111,7 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
              *
              * API详见 http://docs.rongcloud.cn/android.html
              */
-            RongIM.getInstance().startPrivateChat(this, "1", "光头强",
+            RongIM.getInstance().startPrivateChat(this, DemoContext.getInstance().getCurrentUser().getUserId(), "光头强",
                     new RongIM.OnConversationStartedListener() {
 
                         @Override
