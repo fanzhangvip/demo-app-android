@@ -28,6 +28,12 @@ public class DemoApplication extends Application {
 
 
         DemoContext.getInstance().init(this);
+
+        try {
+            System.loadLibrary("imdemo");
+        } catch (UnsatisfiedLinkError e) {
+//            e.printStackTrace();
+        }
     }
 
 }
