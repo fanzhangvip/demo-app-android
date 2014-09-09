@@ -5,13 +5,7 @@
 
     <ImageView
         android:id="@id/rc_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:paddingLeft="5dp"
-        android:scaleType="center"
-        android:src="@drawable/rc_bar_back" />
+        style="@style/RcTheme.ActionBar.Back"/>
 
     <FrameLayout
         android:id="@id/rc_title_layout"
@@ -23,10 +17,7 @@
 
         <ImageView
             android:id="@id/rc_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="center"
-            android:src="@drawable/rc_bar_logo" />
+            style="@style/RcTheme.ActionBar.Logo"/>
 
         <TextView
             android:id="@id/rc_new"
@@ -44,7 +35,7 @@
 
     <TextView
         android:id="@id/rc_title"
-        style="@android:style/TextAppearance.Medium.Inverse"
+        style="@style/RcTheme.ActionBar.Title"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"

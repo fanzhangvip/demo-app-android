@@ -45,7 +45,7 @@
     <string name="rc_conversation_setting_discussion_name">"讨论组名称"</string>
     <string name="rc_conversation_setting_discussion_open_invite">"开放成员邀请"</string>
     <string name="rc_conversation_setting_new_message_receive">"新消息通知"</string>
-    <string name="rc_conversation_setting_update_discussion_name">"修改群名称"</string>
+    <string name="rc_conversation_setting_update_discussion_name">"修改讨论组名称"</string>
     <string name="rc_conversation_setting_exit_discussion_failure">"退出讨论组失败"</string>
     <string name="rc_conversation_setting_remove_discussion_member_failure">"移除讨论组成员失败"</string>
     <string name="rc_conversation_setting_add_discussion_member_failure">"添加讨论组成员失败"</string>
@@ -69,6 +69,8 @@
     <string name="dialog_converastion_delete_message">"删除消息"</string>
     <string name="dialog_converastion_remove">"从会话列表中移除"</string>
     <string name="converastion_list_notify_load_data">"正在初始化数据...."</string>
+    <!-- group -->
+    <string name="rc_group_conversation_list_name">"我的群组"</string>
 
     <!-- friend list -->
     <string name="friend_list_multi_choice_comfirt_btn">"确定(%1$s)"</string>

@@ -41,7 +41,12 @@
         <activity
             android:name=".FunctionListActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".GroupListActivity"
+            android:screenOrientation="portrait" />
         <!-- Begin Rong Cloud -->
+
 
         <activity
             android:name="io.rong.imkit.RongActivity"
@@ -52,6 +57,22 @@
                 <data android:host="io.rong.imkit.demo"
                     android:pathPrefix="/conversationsetting/"
                     android:scheme="rong"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="io.rong.imkit.demo"
+                    android:path="/grouplist"
+                    android:scheme="rong" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="io.rong.imkit.demo"
+                    android:path="/conversationgrouplist"
+                    android:scheme="rong" />
             </intent-filter>
         </activity>
 
@@ -97,14 +118,8 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="io.rong.imkit.broadcast.SendMessageBroadcast">
-            <intent-filter>
-                <action android:name="io.rong.imkit.broadcast.SENDMESSAGE" />
-            </intent-filter>
-        </receiver>
-
         <service
-            android:name="io.rong.imkit.service.RCloudService"
+            android:name="io.rong.imkit.service.RongIMService"
             android:enabled="true"
             android:exported="false" />
 

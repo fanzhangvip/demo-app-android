@@ -1,24 +1,5 @@
 package io.rong.imkit.demo;
 
-import io.rong.imkit.RongIM;
-import io.rong.imkit.RongIM.GetUserInfoProvider;
-import io.rong.imkit.demo.common.DemoApi;
-import io.rong.imkit.demo.model.User;
-import io.rong.imlib.RongIMClient.UserInfo;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.PriorityBlockingQueue;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import uk.co.senab.bitmapcache.BitmapLruCache;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Environment;
@@ -29,14 +10,28 @@ import android.util.Log;
 import com.sea_monster.core.common.Const;
 import com.sea_monster.core.network.DefaultHttpHandler;
 import com.sea_monster.core.network.HttpHandler;
-import com.sea_monster.core.resource.ResourceManager;
-import com.sea_monster.core.resource.cache.ResourceCacheWrapper;
 import com.sea_monster.core.resource.compress.IResourceCompressHandler;
-import com.sea_monster.core.resource.compress.ResourceCompressHandler;
 import com.sea_monster.core.resource.io.FileSysHandler;
 import com.sea_monster.core.resource.io.IFileSysHandler;
-import com.sea_monster.core.resource.io.ResourceRemoteWrapper;
-import com.sea_monster.core.utils.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.PriorityBlockingQueue;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import io.rong.imkit.RongIM;
+import io.rong.imkit.RongIM.GetUserInfoProvider;
+import io.rong.imkit.demo.common.DemoApi;
+import io.rong.imkit.demo.model.User;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.RongIMClient.UserInfo;
 
 public class DemoContext {
 
@@ -63,6 +58,8 @@ public class DemoContext {
     private User currentUser;
     private ArrayList<UserInfo> mUserInfos;
 
+    private HashMap<String, RongIMClient.Group> groupMap;
+
     public static DemoContext getInstance() {
 
         if (self == null) {
@@ -83,14 +80,11 @@ public class DemoContext {
 
         mContext = context;
 
-
         //http初始化 用于登录、注册使用
         initHttp();
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
         mDemoApi = new DemoApi(mHttpHandler, context);
-
     }
 
     void initHttp() {
@@ -112,27 +106,26 @@ public class DemoContext {
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             location = Environment.getExternalStorageDirectory();
         } else {
-        	location = mContext.getFilesDir();
+            location = mContext.getFilesDir();
         }
 //        location.mkdirs();
 
         // New Handler
         mFileSysHandler = new FileSysHandler(sExecutor, location, "RongCloud", "img");
         mHttpHandler = new DefaultHttpHandler(mContext, sExecutor);
-        mCompressHandler = new ResourceCompressHandler(mContext, mFileSysHandler);
+    }
 
-        // Build Cache
-        File baseDir = new File(location, "RongCloud");
-        File cacheDir = new File(baseDir, "cache");
-        FileUtils.createDirectory(cacheDir, true);
-        BitmapLruCache.Builder builder = new BitmapLruCache.Builder(mContext);
-        builder.setMemoryCacheEnabled(true).setMemoryCacheMaxSizeUsingHeapSize();
-        builder.setDiskCacheEnabled(true).setDiskCacheLocation(cacheDir);
-        BitmapLruCache cache = builder.build();
 
-        ResourceCacheWrapper cacheWrapper = new ResourceCacheWrapper(mContext, cache, mFileSysHandler, mCompressHandler);
-        ResourceRemoteWrapper remoteWrapper = new ResourceRemoteWrapper(mContext, mFileSysHandler, mHttpHandler);
-        ResourceManager.init(mContext, remoteWrapper, cacheWrapper);
+    public void receviceMessage() {
+
+        RongIM.getInstance().setReceiveMessageListener(new RongIM.OnReceiveMessageListener() {
+
+            @Override
+            public void onReceived(RongIMClient.Message message) {
+                Log.d("DemoContext", "receviceMessage------------>:" + message.getObjectName());
+            }
+
+        });
     }
 
     /**
@@ -175,7 +168,28 @@ public class DemoContext {
     }
 
     /**
+     * 设置群组信息提供者
+     */
+    public void setGroupInfoProvider(){
+
+        RongIM.getInstance().setGetGroupInfoProvider(new RongIM.GetGroupInfoProvider() {
+
+            @Override
+            public RongIMClient.Group getGroupInfo(String groupId) {
+
+                if (groupMap != null && !groupMap.isEmpty()) {
+                    return groupMap.get(groupId);
+                } else {
+                    return null;
+                }
+
+            }
+        });
+    }
+
+    /**
      * 获取用户信息
+     *
      * @param userId
      * @return
      */
@@ -267,7 +281,6 @@ public class DemoContext {
     }
 
 
-
     public User getCurrentUser() {
         return currentUser;
     }
@@ -285,7 +298,13 @@ public class DemoContext {
     }
 
 
+    public void setGroupMap(HashMap<String, RongIMClient.Group> groupMap) {
+        this.groupMap = groupMap;
+    }
 
+    public HashMap<String, RongIMClient.Group> getGroupMap() {
+        return groupMap;
+    }
 
 
 }

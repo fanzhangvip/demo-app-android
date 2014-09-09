@@ -8,10 +8,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
-import io.rong.imkit.RCloudContext;
 import io.rong.imkit.RongIM;
-import io.rong.imkit.common.RCloudConst;
-import io.rong.imkit.demo.common.DemoApi;
 import io.rong.imkit.veiw.ActionBar;
 import io.rong.imlib.RongIMClient;
 
@@ -20,7 +17,7 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
     private ListView mListView;
     private FunctionListAdapter mFunctionListAdapter;
     private Button mLogout;
-    private ActionBar mActionBar;
+    private ActionBar mAction;
 
 
     @Override
@@ -36,8 +33,7 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
         mListView.addHeaderView(headerView);
         mLogout = getViewById(android.R.id.button1);
         mLogout.setOnClickListener(this);
-        mActionBar = getViewById(R.id.action_bar);
-
+        mAction = getViewById(R.id.action_bar);
     }
 
     @Override
@@ -48,12 +44,13 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
         mListView.setAdapter(mFunctionListAdapter);
         mFunctionListAdapter.notifyDataSetChanged();
         mListView.setOnItemClickListener(this);
-        mActionBar.setOnBackClick(new View.OnClickListener() {
+        mAction.setOnBackClick(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+
     }
 
 
@@ -82,9 +79,10 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
             });
 
         } else if (position == 2) {
-            RongIM.getInstance().startCustomerServiceChat(this, "kefu114", "客服", new RongIM.OnConversationStartedListener() {
+            RongIM.getInstance().startCustomerServiceChat(this, "rongcloud.net.kefu.service112", "客服", new RongIM.OnConversationStartedListener() {
+                //            RongIM.getInstance().startCustomerServiceChat(this,"kefu112","客服",new RongIM.OnConversationStartedListener() {
                 @Override
-                public void onCreated(RongIMClient.ConversationType type, String s) {
+                public void onCreated(RongIMClient.ConversationType conversationType, String targetId) {
 
                 }
 
@@ -94,7 +92,7 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
                 }
 
                 @Override
-                public void onClickUserPortrait(RongIMClient.UserInfo userInfo) {
+                public void onClickUserPortrait(RongIMClient.UserInfo user) {
 
                 }
 
@@ -135,8 +133,8 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
                         }
                     }
             );
-
-
+        } else if (position == 4) {
+            startActivity(new Intent(this, GroupListActivity.class));
         }
     }
 

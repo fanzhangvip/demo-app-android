@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import java.util.List;
 
 
-
 public class ParcelUtils {
 
     final static int EXIST_SEPARATOR = 1;

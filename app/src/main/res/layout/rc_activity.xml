@@ -8,9 +8,7 @@
 
     <io.rong.imkit.veiw.ActionBar
         android:id="@id/rc_actionbar"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@color/rc_title_bg">
+        style="@style/RcTheme.ActionBar">
     </io.rong.imkit.veiw.ActionBar>
 
     <FrameLayout

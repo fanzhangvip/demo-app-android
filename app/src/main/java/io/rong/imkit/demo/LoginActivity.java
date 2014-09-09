@@ -1,17 +1,5 @@
 package io.rong.imkit.demo;
 
-import io.rong.imkit.RongActivity;
-import io.rong.imkit.RongIM;
-import io.rong.imkit.demo.model.User;
-import io.rong.imkit.demo.ui.LoadingDialog;
-import io.rong.imkit.demo.ui.WinToast;
-import io.rong.imlib.RongIMClient;
-import io.rong.imlib.RongIMClient.ConnectCallback;
-import io.rong.imlib.RongIMClient.UserInfo;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +12,7 @@ import android.os.Handler.Callback;
 import android.os.Message;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -32,6 +21,20 @@ import android.widget.TextView;
 
 import com.sea_monster.core.exception.BaseException;
 import com.sea_monster.core.network.AbstractHttpRequest;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import io.rong.imkit.RCloudContext;
+import io.rong.imkit.RongIM;
+import io.rong.imkit.demo.model.User;
+import io.rong.imkit.demo.ui.LoadingDialog;
+import io.rong.imkit.demo.ui.WinToast;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.RongIMClient.ConnectCallback;
+import io.rong.imlib.RongIMClient.OperationCallback;
+import io.rong.imlib.RongIMClient.UserInfo;
 
 public class LoginActivity extends BaseApiActivity implements OnClickListener, Callback {
 
@@ -151,7 +154,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
 
                     @Override
                     public void onSuccess(String userId) {
-
+                        Log.d("LoginActivity", "---------userId----------:" + userId);
                         mHandler.obtainMessage(HANDLER_LOGIN_SUCCESS).sendToTarget();
                     }
 
@@ -172,6 +175,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
                 getFriendsHttpRequest = DemoContext.getInstance().getDemoApi().getFriends(user.getCookie(), this);
 
                 DemoContext.getInstance().setCurrentUser(user);
+
 
             } else {
                 WinToast.toast(this, R.string.login_failure);
@@ -239,14 +243,53 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
                 mDialog.dismiss();
 
         } else if (msg.what == HANDLER_LOGIN_SUCCESS) {
+
+            DemoContext.getInstance().setGroupInfoProvider();
+            DemoContext.getInstance().receviceMessage();
+
             WinToast.toast(LoginActivity.this, R.string.login_success);
 
             if (mDialog != null)
                 mDialog.dismiss();
 
             startActivity(new Intent(this, FunctionListActivity.class));
+
+            initGroupInfo();
         }
         return false;
+    }
+
+    private void initGroupInfo(){
+
+        Log.e("syncGroup","======enter=======syncGroup===============");
+
+
+
+        RongIMClient.Group group1=new RongIMClient.Group("group001","群组1");
+        RongIMClient.Group group2=new RongIMClient.Group("group002","群组2");
+        RongIMClient.Group group3=new RongIMClient.Group("group003","群组3");
+        List<RongIMClient.Group> groups=new ArrayList<RongIMClient.Group>();
+        groups.add(group1);
+        groups.add(group2);
+        groups.add(group3);
+
+        HashMap<String,RongIMClient.Group> groupM = new HashMap<String,RongIMClient.Group>();
+        groupM.put("group001",group1);
+        groupM.put("group002",group2);
+        groupM.put("group003",group3);
+
+
+
+        RCloudContext.getInstance().getRongIMClient().syncGroup(groups, new OperationCallback(){
+            public void onSuccess(){
+                Log.e("syncGroup","=============syncGroup====onSuccess===========");
+            }
+            public void onError(ErrorCode errorCode){
+                Log.e("syncGroup","=============syncGroup====onError==========="+errorCode);
+            }
+        });
+
+        DemoContext.getInstance().setGroupMap(groupM);
     }
 
     @Override

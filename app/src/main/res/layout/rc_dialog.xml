@@ -19,13 +19,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:ellipsize="end"
             android:paddingTop="4dp"
             android:textColor="@color/dialog_conversation_line_color"
             android:textSize="@dimen/px_to_dip_30" >
         </TextView>
     </FrameLayout>
 
-    <View
+    <View android:id="@+id/dialog_top_line"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/px_to_dip_1"
         android:background="@color/dialog_conversation_line_color" />

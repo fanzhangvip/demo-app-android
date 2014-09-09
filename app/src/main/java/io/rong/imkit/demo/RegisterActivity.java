@@ -1,12 +1,5 @@
 package io.rong.imkit.demo;
 
-import io.rong.imkit.demo.model.Status;
-import io.rong.imkit.demo.ui.WinToast;
-import io.rong.imkit.veiw.ActionBar;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.text.TextUtils;
@@ -19,6 +12,13 @@ import android.widget.EditText;
 import com.sea_monster.core.exception.BaseException;
 import com.sea_monster.core.network.AbstractHttpRequest;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import io.rong.imkit.demo.model.Status;
+import io.rong.imkit.demo.ui.WinToast;
+import io.rong.imkit.veiw.ActionBar;
+
 public class RegisterActivity extends BaseApiActivity implements OnClickListener {
 	private static final String TAG = "RegisterActivity";
 
@@ -28,7 +28,8 @@ public class RegisterActivity extends BaseApiActivity implements OnClickListener
 	private Button mRegisterButton;
 
 	private AbstractHttpRequest<Status> httpRequest;
-    private ActionBar mActionBar;
+
+	private ActionBar actionBar;
 
 	@Override
 	protected int setContentViewResId() {
@@ -41,15 +42,14 @@ public class RegisterActivity extends BaseApiActivity implements OnClickListener
 		mPasswordEditText = getViewById(android.R.id.text2);
 		mNickNameEditText = getViewById(R.id.nick_name);
 		mRegisterButton = getViewById(android.R.id.button1);
-        mActionBar = getViewById(R.id.mutil_user_select_action_bar);
+		actionBar = getViewById(R.id.mutil_user_select_action_bar);
 
 	}
 
 	@Override
 	protected void initData() {
 		mRegisterButton.setOnClickListener(this);
-
-        mActionBar.setOnBackClick(new OnClickListener() {
+		actionBar.setOnBackClick(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
