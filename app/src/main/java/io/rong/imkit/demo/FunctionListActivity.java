@@ -79,8 +79,8 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
             });
 
         } else if (position == 2) {
-            RongIM.getInstance().startCustomerServiceChat(this, "rongcloud.net.kefu.service112", "客服", new RongIM.OnConversationStartedListener() {
-                //            RongIM.getInstance().startCustomerServiceChat(this,"kefu112","客服",new RongIM.OnConversationStartedListener() {
+//            RongIM.getInstance().startCustomerServiceChat(this, "rongcloud.net.kefu.service112", "客服", new RongIM.OnConversationStartedListener() {
+            RongIM.getInstance().startCustomerServiceChat(this, "kefu114", "客服", new RongIM.OnConversationStartedListener() {
                 @Override
                 public void onCreated(RongIMClient.ConversationType conversationType, String targetId) {
 

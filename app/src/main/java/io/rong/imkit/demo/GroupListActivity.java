@@ -9,6 +9,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import io.rong.imkit.veiw.ActionBar;
 import io.rong.imlib.RongIMClient;
 
 /**
@@ -19,6 +20,7 @@ public class GroupListActivity extends BaseActivity implements AdapterView.OnIte
 
     private ListView mListView;
     private GroupListAdapter mGroupListAdapter;
+    private ActionBar mActionBar;
 
     @Override
     protected int setContentViewResId() {
@@ -28,6 +30,7 @@ public class GroupListActivity extends BaseActivity implements AdapterView.OnIte
     @Override
     protected void initView() {
         mListView = getViewById(android.R.id.list);
+        mActionBar = getViewById(R.id.action_bar);
     }
 
     @Override
@@ -41,6 +44,12 @@ public class GroupListActivity extends BaseActivity implements AdapterView.OnIte
             groups.add(groupMap.get(groupId));
         }
 
+        mActionBar.setOnBackClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         mGroupListAdapter = new GroupListAdapter(this, groups);
         mListView.setAdapter(mGroupListAdapter);
         mGroupListAdapter.notifyDataSetChanged();
