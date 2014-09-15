@@ -135,6 +135,10 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
             );
         } else if (position == 4) {
             startActivity(new Intent(this, GroupListActivity.class));
+        } else if (position == 5){
+            startActivity(new Intent(this, TestFragmentActivity.class));
+        } else if (position == 6){
+            startActivity(new Intent(this, TestFragment2Activity.class));
         }
     }
 

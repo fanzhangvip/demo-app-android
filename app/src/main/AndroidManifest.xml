@@ -45,6 +45,11 @@
         <activity
             android:name=".GroupListActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".TestFragmentActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".TestFragment2Activity"
+            android:screenOrientation="portrait"/>
         <!-- Begin Rong Cloud -->
 
 
