@@ -86,6 +86,7 @@
 
 
             <RelativeLayout
+                android:id="@+id/rc_set_top"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/px_to_dip_96"
                 android:layout_marginLeft="@dimen/px_to_dip_34"

@@ -53,7 +53,7 @@
 
     <!-- discussion -->
     <string name="discussion_create_failure">"创建讨论组失败"</string>
-    <string name="discussion_create_loading_title">"正在玩命创建讨论组"</string>
+    <string name="discussion_create_loading_title">"正在创建讨论组"</string>
     <string name="discussion_remove_member_failure">"删除成员失败"</string>
     <string name="default_discussion_name">"讨论组"</string>
 

@@ -3,12 +3,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-
     <io.rong.imkit.veiw.ActionBar
-        android:id="@+id/action_bar"
-        android:background="@color/title_bg"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/px_to_dip_96" />
+        android:id="@id/rc_actionbar"
+        style="@style/RcTheme.ActionBar">
+    </io.rong.imkit.veiw.ActionBar>
 
     <ListView
         android:id="@android:id/list"

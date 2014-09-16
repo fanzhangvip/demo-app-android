@@ -11,7 +11,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * 
+ *
  * Entity mapped to table USER.
  */
 

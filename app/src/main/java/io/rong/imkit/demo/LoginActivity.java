@@ -209,10 +209,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
         ArrayList<UserInfo> friends = new ArrayList<UserInfo>();
 
         for (User user : users) {
-            UserInfo info = new UserInfo();
-            info.setUserId(String.valueOf(user.getId()));
-            info.setName(user.getUsername());
-            info.setPortraitUri(user.getPortrait());
+            UserInfo info = new UserInfo(String.valueOf(user.getId()),user.getUsername(),user.getPortrait());
             friends.add(info);
         }
 

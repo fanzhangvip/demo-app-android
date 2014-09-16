@@ -24,13 +24,13 @@ public class GroupListActivity extends BaseActivity implements AdapterView.OnIte
 
     @Override
     protected int setContentViewResId() {
-        return R.layout.rc_activity_group_list;
+        return R.layout.activity_group_list;
     }
 
     @Override
     protected void initView() {
         mListView = getViewById(android.R.id.list);
-        mActionBar = getViewById(R.id.action_bar);
+        mActionBar = getViewById(R.id.rc_actionbar);
     }
 
     @Override

@@ -17,10 +17,11 @@ public class TestFragment2Activity extends FragmentActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getIntent().setData(Uri.parse("rong://io.rong.imkit.demo").buildUpon().appendPath("conversation").appendPath("private").appendQueryParameter("targetId",DemoContext.getInstance().getCurrentUser().getUserId()).appendQueryParameter("title","会话Fragment" +
-                "自定义").build());
+        getIntent().setData(Uri.parse("rong://io.rong.imkit.demo").buildUpon().appendPath("conversation").appendPath("private")
+                .appendQueryParameter("targetId",DemoContext.getInstance().getCurrentUser().getUserId()).build());
         setContentView(R.layout.activity_test2_fragment);
         mActionBar = (ActionBar)findViewById(R.id.rc_actionbar);
+        mActionBar.getTitleTextView().setText("会话自定义Fragment测试");
         mActionBar.setOnBackClick(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
