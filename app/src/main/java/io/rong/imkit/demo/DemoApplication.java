@@ -1,8 +1,10 @@
 package io.rong.imkit.demo;
 
 import android.app.Application;
+import android.util.Log;
 
 import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
 
 /**
  * Created by zhjchen on 14-3-20.
@@ -10,7 +12,9 @@ import io.rong.imkit.RongIM;
 public class DemoApplication extends Application {
 
     private static final String IS_FIRST = "is_first";
-    public static final String APP_KEY = "z3v5yqkbv8v30";
+    DemoContext mContext;
+//    public static final String APP_KEY = "e0x9wycfx7flq";
+    public static final String APP_KEY="z3v5yqkbv8v30";
 
     @Override
     public void onCreate() {
@@ -23,12 +27,28 @@ public class DemoApplication extends Application {
          * 第三个参数，push消息通知所要打个的action页面
          * 第四个参数，push消息中可以自定义push图标
          */
-
         RongIM.init(this, APP_KEY, R.drawable.ic_launcher);
+        RongIM.setConversationBehaviorListener(new RongIM.ConversationBehaviorListener() {
+            @Override
+            public void onClickUserPortrait(RongIMClient.ConversationType conversationType, RongIMClient.UserInfo user) {
+                Log.d("Begavior", conversationType.getName()+":"+user.getName());
+            }
 
+            @Override
+            public void onClickMessage(RongIMClient.Message message) {
+                Log.d("Begavior", message.getObjectName()+":"+message.getMessageId());
 
-        DemoContext.getInstance().init(this);
+            }
+        });
 
+        mContext = DemoContext.getInstance();
+        mContext.init(this);
+
+        try {
+            System.loadLibrary("imdemo");
+        } catch (UnsatisfiedLinkError e) {
+//            e.printStackTrace();
+        }
     }
 
 }

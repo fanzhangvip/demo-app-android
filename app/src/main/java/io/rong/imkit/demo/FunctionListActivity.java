@@ -66,73 +66,21 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
              *
              * API详见 http://docs.rongcloud.cn/android.html
              */
-            RongIM.getInstance().startConversationList(this, new RongIM.OnConversationListStartedListener() {
-                @Override
-                public void onCreated() {
-                    Log.d("FunctioanListActivity", "----startConversationList----onCreated--------");
-                }
-
-                @Override
-                public void onDestroyed() {
-                    Log.d("FunctioanListActivity", "----startConversationList----onDestroyed--------");
-                }
-            });
+            RongIM.getInstance().startConversationList(this);
 
         } else if (position == 2) {
-//            RongIM.getInstance().startCustomerServiceChat(this, "rongcloud.net.kefu.service112", "客服", new RongIM.OnConversationStartedListener() {
-            RongIM.getInstance().startCustomerServiceChat(this, "kefu114", "客服", new RongIM.OnConversationStartedListener() {
-                @Override
-                public void onCreated(RongIMClient.ConversationType conversationType, String targetId) {
-
-                }
-
-                @Override
-                public void onDestroyed() {
-
-                }
-
-                @Override
-                public void onClickUserPortrait(RongIMClient.UserInfo user) {
-
-                }
-
-                @Override
-                public void onClickMessage(RongIMClient.Message message) {
-
-                }
-            });
+            /**
+             * 打开客服会话
+             */
+            RongIM.getInstance().startCustomerServiceChat(this, "kefu114", "客服");
         } else if (position == 3) {
-
 
             /**
              * 打开二人会话页面
              *
              * API详见 http://docs.rongcloud.cn/android.html
              */
-            RongIM.getInstance().startPrivateChat(this, DemoContext.getInstance().getCurrentUser().getUserId(), "光头强",
-                    new RongIM.OnConversationStartedListener() {
-
-                        @Override
-                        public void onCreated(RongIMClient.ConversationType conversationType, String targetId) {
-                            Log.d("FunctioanListActivity", "----startPrivateChat----onCreated--------");
-                        }
-
-                        @Override
-                        public void onDestroyed() {
-                            Log.d("FunctioanListActivity", "----startPrivateChat----onDestroyed--------");
-                        }
-
-                        @Override
-                        public void onClickUserPortrait(RongIMClient.UserInfo user) {
-                            Log.d("FunctioanListActivity", "----startPrivateChat----onClickUserPortrait--------");
-                        }
-
-                        @Override
-                        public void onClickMessage(RongIMClient.Message message) {
-                            Log.d("FunctioanListActivity", "----startPrivateChat----onClickMessage--------");
-                        }
-                    }
-            );
+            RongIM.getInstance().startPrivateChat(this, DemoContext.getInstance().getCurrentUser().getUserId(), "光头强");
         } else if (position == 4) {
             startActivity(new Intent(this, GroupListActivity.class));
         } else if (position == 5){
@@ -152,7 +100,7 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
              *
              * API详见 http://docs.rongcloud.cn/android.html
              */
-            RongIM.getInstance().disconnect();
+            RongIM.getInstance().disconnect(false);
 
 
             finish();
