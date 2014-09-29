@@ -1,7 +1,10 @@
 package io.rong.imkit.demo;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
+
+import com.networkbench.agent.impl.NBSAppAgent;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
@@ -13,8 +16,8 @@ public class DemoApplication extends Application {
 
     private static final String IS_FIRST = "is_first";
     DemoContext mContext;
-//    public static final String APP_KEY = "e0x9wycfx7flq";
-    public static final String APP_KEY="z3v5yqkbv8v30";
+    //    public static final String APP_KEY = "e0x9wycfx7flq";
+    public static final String APP_KEY = "z3v5yqkbv8v30";
 
     @Override
     public void onCreate() {
@@ -30,19 +33,21 @@ public class DemoApplication extends Application {
         RongIM.init(this, APP_KEY, R.drawable.ic_launcher);
         RongIM.setConversationBehaviorListener(new RongIM.ConversationBehaviorListener() {
             @Override
-            public void onClickUserPortrait(RongIMClient.ConversationType conversationType, RongIMClient.UserInfo user) {
-                Log.d("Begavior", conversationType.getName()+":"+user.getName());
+            public void onClickUserPortrait(Context context, RongIMClient.ConversationType conversationType, RongIMClient.UserInfo user) {
+                Log.d("Begavior", conversationType.getName() + ":" + user.getName() + " context:" + context);
             }
 
             @Override
-            public void onClickMessage(RongIMClient.Message message) {
-                Log.d("Begavior", message.getObjectName()+":"+message.getMessageId());
+            public void onClickMessage(Context context, RongIMClient.Message message) {
+                Log.d("Begavior", message.getObjectName() + ":" + message.getMessageId() + " context:" + context);
 
             }
         });
 
         mContext = DemoContext.getInstance();
         mContext.init(this);
+
+        NBSAppAgent.setLicenseKey("a546c342ba704acf91b27e9603b6860d").withLocationServiceEnabled(true).start(this);
 
         try {
             System.loadLibrary("imdemo");

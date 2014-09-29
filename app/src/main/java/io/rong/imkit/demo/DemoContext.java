@@ -121,7 +121,7 @@ public class DemoContext {
         RongIM.getInstance().setReceiveMessageListener(new RongIM.OnReceiveMessageListener() {
 
             @Override
-            public void onReceived(RongIMClient.Message message) {
+            public void onReceived(RongIMClient.Message message, int left) {
                 Log.d("DemoContext", "receviceMessage------------>:" + message.getObjectName());
             }
 

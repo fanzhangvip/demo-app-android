@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'newlens'
 
 android {
     compileSdkVersion 19
@@ -9,7 +10,7 @@ android {
         minSdkVersion 10
         targetSdkVersion 19
         versionCode 2014090123
-        versionName "1.0.3"
+        versionName "1.0.4"
     }
     buildTypes {
         release {
@@ -36,4 +37,5 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:support-v4:19.0.0'
     compile 'com.google.code.gson:gson:2.2.+'
+    compile "com.networkbench.newlens.agent.android:nbs.newlens.agent:1.2.1"
 }
