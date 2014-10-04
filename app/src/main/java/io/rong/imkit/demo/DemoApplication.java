@@ -47,6 +47,7 @@ public class DemoApplication extends Application {
         mContext = DemoContext.getInstance();
         mContext.init(this);
 
+
         NBSAppAgent.setLicenseKey("a546c342ba704acf91b27e9603b6860d").withLocationServiceEnabled(true).start(this);
 
         try {
