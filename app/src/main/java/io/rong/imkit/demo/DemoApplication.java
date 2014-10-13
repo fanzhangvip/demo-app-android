@@ -2,9 +2,10 @@ package io.rong.imkit.demo;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
-
-import com.networkbench.agent.impl.NBSAppAgent;
+import java.lang.reflect.Method;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
@@ -35,6 +36,11 @@ public class DemoApplication extends Application {
             @Override
             public void onClickUserPortrait(Context context, RongIMClient.ConversationType conversationType, RongIMClient.UserInfo user) {
                 Log.d("Begavior", conversationType.getName() + ":" + user.getName() + " context:" + context);
+
+                Uri uri = Uri.parse("rong://" + context.getApplicationInfo().packageName).buildUpon()
+                        .appendPath("conversationsetting").appendPath(conversationType.getName().toLowerCase())
+                        .appendQueryParameter("targetId", user.getUserId()).build();
+                context.startActivity(new Intent(Intent.ACTION_VIEW, uri));
             }
 
             @Override
@@ -47,8 +53,15 @@ public class DemoApplication extends Application {
         mContext = DemoContext.getInstance();
         mContext.init(this);
 
+        try {
+            Class c;
+            c = Class.forName("com.networkbench.agent.impl.NBSAppAgent");
+            Method m = c.getMethod("setLicenseKey", new Class[]{String.class});
+            m.invoke(c, new Object[]{"a546c342ba704acf91b27e9603b6860d"});
 
-        NBSAppAgent.setLicenseKey("a546c342ba704acf91b27e9603b6860d").withLocationServiceEnabled(true).start(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         try {
             System.loadLibrary("imdemo");
