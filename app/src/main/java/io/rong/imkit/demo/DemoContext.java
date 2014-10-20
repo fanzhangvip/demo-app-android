@@ -1,18 +1,11 @@
 package io.rong.imkit.demo;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.os.Environment;
-import android.preference.PreferenceManager;
-import android.text.TextUtils;
-import android.util.Log;
-
-import com.sea_monster.core.common.Const;
-import com.sea_monster.core.network.DefaultHttpHandler;
-import com.sea_monster.core.network.HttpHandler;
-import com.sea_monster.core.resource.compress.IResourceCompressHandler;
-import com.sea_monster.core.resource.io.FileSysHandler;
-import com.sea_monster.core.resource.io.IFileSysHandler;
+import io.rong.imkit.RongIM;
+import io.rong.imkit.RongIM.GetUserInfoProvider;
+import io.rong.imkit.demo.common.DemoApi;
+import io.rong.imkit.demo.model.User;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.RongIMClient.UserInfo;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,12 +19,26 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import io.rong.imkit.RongIM;
-import io.rong.imkit.RongIM.GetUserInfoProvider;
-import io.rong.imkit.demo.common.DemoApi;
-import io.rong.imkit.demo.model.User;
-import io.rong.imlib.RongIMClient;
-import io.rong.imlib.RongIMClient.UserInfo;
+import uk.co.senab.bitmapcache.BitmapLruCache;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Environment;
+import android.preference.PreferenceManager;
+import android.text.TextUtils;
+import android.util.Log;
+
+import com.sea_monster.core.common.Const;
+import com.sea_monster.core.network.DefaultHttpHandler;
+import com.sea_monster.core.network.HttpHandler;
+import com.sea_monster.core.resource.ResourceManager;
+import com.sea_monster.core.resource.cache.ResourceCacheWrapper;
+import com.sea_monster.core.resource.compress.IResourceCompressHandler;
+import com.sea_monster.core.resource.compress.ResourceCompressHandler;
+import com.sea_monster.core.resource.io.FileSysHandler;
+import com.sea_monster.core.resource.io.IFileSysHandler;
+import com.sea_monster.core.resource.io.ResourceRemoteWrapper;
+import com.sea_monster.core.utils.FileUtils;
 
 public class DemoContext {
 
@@ -85,6 +92,8 @@ public class DemoContext {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         mDemoApi = new DemoApi(mHttpHandler, context);
+
+        initGroupInfo();
     }
 
     void initHttp() {
@@ -170,7 +179,7 @@ public class DemoContext {
     /**
      * 设置群组信息提供者
      */
-    public void setGroupInfoProvider(){
+    public void setGroupInfoProvider() {
 
         RongIM.getInstance().setGetGroupInfoProvider(new RongIM.GetGroupInfoProvider() {
 
@@ -306,5 +315,26 @@ public class DemoContext {
         return groupMap;
     }
 
+
+    private void initGroupInfo() {
+
+        Log.e("syncGroup", "======enter=======syncGroup===============");
+
+
+        RongIMClient.Group group1 = new RongIMClient.Group("group001", "群组一", "http://www.yjz9.com/uploadfile/2014/0807/20140807114030812.jpg");
+        RongIMClient.Group group2 = new RongIMClient.Group("group002", "群组二", "http://www.yjz9.com/uploadfile/2014/0330/20140330023925331.jpg");
+        RongIMClient.Group group3 = new RongIMClient.Group("group003", "群组三", "http://www.yjz9.com/uploadfile/2014/0921/20140921013004454.jpg");
+        List<RongIMClient.Group> groups = new ArrayList<RongIMClient.Group>();
+        groups.add(group1);
+        groups.add(group2);
+        groups.add(group3);
+
+        HashMap<String, RongIMClient.Group> groupM = new HashMap<String, RongIMClient.Group>();
+        groupM.put("group001", group1);
+        groupM.put("group002", group2);
+        groupM.put("group003", group3);
+
+        DemoContext.getInstance().setGroupMap(groupM);
+    }
 
 }

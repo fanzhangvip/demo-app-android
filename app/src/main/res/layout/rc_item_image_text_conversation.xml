@@ -32,6 +32,7 @@
 
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/text_left_layout_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,10 +47,11 @@
                 android:src="@drawable/rc_default_portrait"
                 android:layout_width="@dimen/px_to_dip_82"
                 android:layout_height="@dimen/px_to_dip_82"
+                app:shape="square"
                 android:layout_gravity="left"
                 android:layout_marginLeft="@dimen/px_to_dip_16"
                 android:layout_marginRight="@dimen/px_to_dip_16"
-                app:shape="square" />
+                />
 
 
             <LinearLayout
@@ -72,19 +74,24 @@
                     android:gravity="left|center_vertical"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/conversation_message_content_left_tv"
-                        android:layout_width="wrap_content"
+                    <FrameLayout
+                        android:id="@+id/conversation_message_left_tv"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="left|center_vertical"
-                        android:background="@drawable/rc_conversation_bubble_white"
-                        android:bufferType="spannable"
-                        android:gravity="left|center_vertical"
-                        android:lineSpacingExtra="@dimen/px_to_dip_6"
-                        android:paddingLeft="@dimen/px_to_dip_25"
-                        android:paddingRight="@dimen/px_to_dip_10"
-                        android:textColor="@color/rc_item_conversation_recevier_color"
-                        android:textSize="@dimen/px_to_dip_32" />
+                        android:background="@drawable/rc_conversation_bubble_white">
+
+                        <include layout="@layout/rc_image_text_left"/>
+
+                        <!--<io.rong.imkit.veiw.AsyncImageView-->
+                            <!--android:id="@+id/conversation_message_left_tv"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_gravity="left"-->
+                            <!--android:contentDescription="@string/content_description"-->
+                            <!--android:scaleType="center"-->
+                            <!--android:src="@drawable/rc_ic_launcher" />-->
+
+                    </FrameLayout>
                 </LinearLayout>
 
 
@@ -112,23 +119,24 @@
                     android:id="@+id/conversation_message_progressbar"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:layout_gravity="center_vertical|right"
                     android:padding="5dp"
-                    android:visibility="invisible" />
+                    android:layout_gravity="center_vertical|right"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/conversation_message_send_failed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|right"
                     android:padding="5dp"
+                    android:visibility="gone"
+                    android:layout_gravity="center_vertical|right"
                     android:src="@drawable/rc_ic_warning" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|center_vertical"
-                    android:background="@drawable/rc_conversation_bubble_blue"
+                    android:background="@drawable/rc_conversation_image_text_bubble_blue"
                     android:gravity="center_vertical|right"
                     android:orientation="vertical">
 
@@ -140,17 +148,31 @@
                         android:paddingLeft="@dimen/px_to_dip_15"
                         android:visibility="gone" />
 
-                    <TextView
-                        android:id="@+id/conversation_message_content_right_tv"
+
+                    <FrameLayout
+                        android:id="@+id/conversation_message_right_tv"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:bufferType="spannable"
-                        android:gravity="left|center_vertical"
-                        android:lineSpacingExtra="@dimen/px_to_dip_6"
-                        android:paddingLeft="@dimen/px_to_dip_10"
-                        android:paddingRight="@dimen/px_to_dip_10"
-                        android:textColor="@color/rc_item_conversation_send_color"
-                        android:textSize="@dimen/px_to_dip_32" />
+                        android:layout_height="wrap_content">
+
+                        <include layout="@layout/rc_image_text_right"/>
+
+                        <!--<io.rong.imkit.veiw.AsyncImageView-->
+                            <!--android:id="@+id/conversation_message_right_tv"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_gravity="left"-->
+                            <!--android:contentDescription="@string/content_description"-->
+                            <!--android:scaleType="center" />-->
+
+                        <TextView
+                            android:id="@+id/progress_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:textColor="@android:color/white"
+                            android:visibility="gone" />
+                    </FrameLayout>
                 </LinearLayout>
             </LinearLayout>
 
@@ -161,9 +183,10 @@
                 android:layout_width="@dimen/px_to_dip_82"
                 android:layout_height="@dimen/px_to_dip_82"
                 android:layout_gravity="right"
+                app:shape="square"
                 android:layout_marginLeft="@dimen/px_to_dip_16"
                 android:layout_marginRight="@dimen/px_to_dip_16"
-                app:shape="square" />
+                 />
         </LinearLayout>
     </LinearLayout>
 

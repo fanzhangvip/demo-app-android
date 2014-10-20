@@ -145,5 +145,6 @@
 	    android:id="@+id/mask_layout" 
 	    android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#88000000"/>
+        android:background="#88000000"
+		android:clickable="true"/>
 </RelativeLayout>

@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
+
+import com.umeng.analytics.MobclickAgent;
+
 import java.lang.reflect.Method;
 
 import io.rong.imkit.RongIM;
@@ -68,6 +71,11 @@ public class DemoApplication extends Application {
         } catch (UnsatisfiedLinkError e) {
 //            e.printStackTrace();
         }
+
+
+
+        Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler(this));
+
     }
 
 }

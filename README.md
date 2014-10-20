@@ -43,17 +43,7 @@ imkit.jar中已经集成如下开源库为防重复引用特此提示
 **如需混淆请在混淆脚本中加入如下代码。**
 
 * -keepattributes Exceptions,InnerClasses
-* -keep class io.rong.imkit.RongIM$GetFriendsProvider {*;}
-* -keep class io.rong.imkit.RongIM$GetUserInfoProvider {*;}
-* -keep class io.rong.imkit.RongIM$OnReceiveMessageListener {*;}
-* -keep class io.rong.imkit.RongIM$OnConversationStartedListener {*;}
-* -keep class io.rong.imkit.RongIM$OnConversationListStartedListener {*;}
-
-* -keep class io.rong.imkit.* {*;}
-* -keep class io.rong.imkit.common.** {*;}
-* -keep class io.rong.imlib.RongIMClient$* {*;}
-* -keep class io.rong.imkit.model.** {*;}
-* -keep class io.rong.imkit.libs.pinyin.* {*;}
+* -keep class io.rong.** {*;}
 
 #### 联系我们
 商务合作

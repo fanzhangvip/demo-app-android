@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rc_layout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@android:color/transparent">
@@ -8,6 +9,7 @@
     <io.rong.imkit.veiw.AsyncImageView
         android:id="@android:id/icon"
         app:defDrawable="@drawable/rc_default_portrait"
+        android:src="@drawable/rc_default_portrait"
         app:shape="square"
         android:layout_width="@dimen/px_to_dip_112"
         android:layout_height="@dimen/px_to_dip_112"
@@ -31,9 +33,10 @@
 
     <ImageView
         android:id="@android:id/icon1"
-        android:layout_width="@dimen/px_to_dip_40"
-        android:layout_height="@dimen/px_to_dip_40"
+        android:layout_width="@dimen/px_to_dip_45"
+        android:layout_height="@dimen/px_to_dip_45"
         android:contentDescription="@string/content_description"
+        android:padding="@dimen/px_to_dip_5"
         android:src="@drawable/rc_mebmer_delete" />
 
 </RelativeLayout>

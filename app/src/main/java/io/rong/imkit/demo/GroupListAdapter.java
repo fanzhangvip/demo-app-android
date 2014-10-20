@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import io.rong.imkit.utils.ResourceUtils;
 import io.rong.imlib.RongIMClient;
 
 
@@ -48,7 +47,7 @@ public class GroupListAdapter extends BaseAdapter {
 
         if (convertView == null || convertView.getTag() == null) {
 
-            convertView = mLayoutInflater.inflate(ResourceUtils.getLayoutResourceId(mContext, "rc_item_group_list"), null);
+            convertView = mLayoutInflater.inflate(R.layout.rc_item_group_list, null);
             viewHolder = new ViewHolder();
             viewHolder.titleTextView = (TextView) convertView.findViewById(android.R.id.text1);
             convertView.setTag(viewHolder);
