@@ -112,6 +112,15 @@
     <string name="default_name">"用户名"</string>
     <string name="alter_dialog_confirm">"确定"</string>
     <string name="alter_dialog_cancel">"取消"</string>
+    <!-- notification message -->
+    <string name="notification_message_discussion_rename">"%1$s修改讨论组名称为%2$s"</string>
+    <string name="notification_message_discussion_added">"%1$s邀请%2$s加入了讨论组"</string>
+    <string name="notification_message_discussion_add">"%1$s邀请了%2$s位成员加入了讨论组"</string>
+    <string name="notification_message_discussion_exit">"%1$s退出了讨论组"</string>
+    <string name="notification_message_discussion_removed">"你被%1$s移出了讨论组"</string>
+    <string name="notification_message_discussion_who_removed">"%1$s被%2$s 移出了讨论组"</string>
+    <string name="notification_message_discussion_is_open_invite">"%1$s%2$s了成员邀请"</string>
+    <!--<string name="notification_message_discussion_n_add">"%1$s位成员被 %2$s 加入了讨论组"</string>-->
 
 
 </resources>

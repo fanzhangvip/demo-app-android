@@ -14,8 +14,7 @@
         android:id="@+id/rc_image_text_title_left"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:lines="2"
-        android:ellipsize="end"
+        android:maxLines="2"
         android:textColor="#000000"
         android:lineSpacingExtra="@dimen/px_to_dip_4"
         android:textSize="@dimen/px_to_dip_32" />

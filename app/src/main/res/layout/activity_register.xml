@@ -32,6 +32,16 @@
             android:singleLine="true" />
 
         <EditText
+            android:id="@+id/nick_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/px_to_dip_45"
+            android:background="@drawable/edit_bg"
+            android:hint="@string/register_input_nickname"
+            android:padding="@dimen/px_to_dip_10"
+            android:singleLine="true" />
+
+        <EditText
             android:id="@android:id/text2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,16 +49,6 @@
             android:background="@drawable/edit_bg"
             android:hint="@string/register_input_password"
             android:inputType="textPassword"
-            android:padding="@dimen/px_to_dip_10"
-            android:singleLine="true" />
-
-        <EditText
-            android:id="@+id/nick_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/px_to_dip_45"
-            android:background="@drawable/edit_bg"
-            android:hint="@string/register_input_nickname"
             android:padding="@dimen/px_to_dip_10"
             android:singleLine="true" />
 

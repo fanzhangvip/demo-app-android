@@ -23,6 +23,7 @@ public class DemoApplication extends Application {
     //    public static final String APP_KEY = "e0x9wycfx7flq";
     public static final String APP_KEY = "z3v5yqkbv8v30";
 
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -66,7 +67,7 @@ public class DemoApplication extends Application {
             e.printStackTrace();
         }
 
-        try {
+       try {
             System.loadLibrary("imdemo");
         } catch (UnsatisfiedLinkError e) {
 //            e.printStackTrace();

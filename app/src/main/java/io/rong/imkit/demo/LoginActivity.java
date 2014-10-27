@@ -109,7 +109,6 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
 
         //打开注册页面
         if (v == mRegisterBtn) {
-
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivityForResult(intent, REQUEST_CODE_REGISTER);
         } else if (v == mLoginBtn) {
@@ -209,7 +208,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
         ArrayList<UserInfo> friends = new ArrayList<UserInfo>();
 
         for (User user : users) {
-            UserInfo info = new UserInfo(String.valueOf(user.getId()),user.getUsername(),user.getPortrait());
+            UserInfo info = new UserInfo(String.valueOf(user.getId()), user.getUsername(), user.getPortrait());
             friends.add(info);
         }
 
@@ -256,31 +255,31 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
         return false;
     }
 
-    private void initGroupInfo(){
+    private void initGroupInfo() {
 
-        Log.e("syncGroup","======enter=======syncGroup===============");
-
-        RongIMClient.Group group1=new RongIMClient.Group("group001","群组一","http://www.yjz9.com/uploadfile/2014/0807/20140807114030812.jpg");
-        RongIMClient.Group group2=new RongIMClient.Group("group002","群组二","http://www.yjz9.com/uploadfile/2014/0330/20140330023925331.jpg");
-        RongIMClient.Group group3=new RongIMClient.Group("group003","群组三","http://www.yjz9.com/uploadfile/2014/0921/20140921013004454.jpg");
-        List<RongIMClient.Group> groups=new ArrayList<RongIMClient.Group>();
+        RongIMClient.Group group1 = new RongIMClient.Group("group001", "群组一", "http://www.yjz9.com/uploadfile/2014/0807/20140807114030812.jpg");
+        RongIMClient.Group group2 = new RongIMClient.Group("group002", "群组二", "http://www.yjz9.com/uploadfile/2014/0330/20140330023925331.jpg");
+        RongIMClient.Group group3 = new RongIMClient.Group("group003", "群组三", "http://www.yjz9.com/uploadfile/2014/0921/20140921013004454.jpg");
+        List<RongIMClient.Group> groups = new ArrayList<RongIMClient.Group>();
         groups.add(group1);
         groups.add(group2);
         groups.add(group3);
 
-        HashMap<String,RongIMClient.Group> groupM = new HashMap<String,RongIMClient.Group>();
-        groupM.put("group001",group1);
-        groupM.put("group002",group2);
-        groupM.put("group003",group3);
+        HashMap<String, RongIMClient.Group> groupM = new HashMap<String, RongIMClient.Group>();
+        groupM.put("group001", group1);
+        groupM.put("group002", group2);
+        groupM.put("group003", group3);
 
 
-
-        RCloudContext.getInstance().getRongIMClient().syncGroup(groups, new OperationCallback(){
-            public void onSuccess(){
-                Log.e("syncGroup","=============syncGroup====onSuccess===========");
+        RongIM.getInstance().syncGroup(groups, new RongIM.OperationCallback() {
+            @Override
+            public void onSuccess() {
+                Log.d("RONG_SDK", "GROUP_SYNC_SUCCESS");
             }
-            public void onError(ErrorCode errorCode){
-                Log.e("syncGroup","=============syncGroup====onError==========="+errorCode);
+
+            @Override
+            public void onError(ErrorCode errorCode) {
+                Log.d("RONG_SDK", "GROUP_SYNC_FAIL:" + errorCode.getMessage());
             }
         });
 
