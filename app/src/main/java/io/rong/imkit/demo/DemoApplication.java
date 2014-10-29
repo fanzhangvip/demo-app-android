@@ -40,17 +40,11 @@ public class DemoApplication extends Application {
             @Override
             public void onClickUserPortrait(Context context, RongIMClient.ConversationType conversationType, RongIMClient.UserInfo user) {
                 Log.d("Begavior", conversationType.getName() + ":" + user.getName() + " context:" + context);
-
-                Uri uri = Uri.parse("rong://" + context.getApplicationInfo().packageName).buildUpon()
-                        .appendPath("conversationsetting").appendPath(conversationType.getName().toLowerCase())
-                        .appendQueryParameter("targetId", user.getUserId()).build();
-                context.startActivity(new Intent(Intent.ACTION_VIEW, uri));
             }
 
             @Override
             public void onClickMessage(Context context, RongIMClient.Message message) {
                 Log.d("Begavior", message.getObjectName() + ":" + message.getMessageId() + " context:" + context);
-
             }
         });
 
