@@ -3,6 +3,7 @@ package io.rong.imkit.demo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import io.rong.imkit.veiw.ActionBar;
@@ -28,5 +29,9 @@ public class TestFragment2Activity extends FragmentActivity{
                 finish();
             }
         });
+
+        LayoutInflater inflater = LayoutInflater.from(this);
+        mActionBar.addView(inflater.inflate(R.layout.ui_action_btn,mActionBar,false));
+
     }
 }
