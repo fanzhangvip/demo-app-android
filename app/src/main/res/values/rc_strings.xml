@@ -31,6 +31,7 @@
     <string name="message_type_image_text_content">"[图文]"</string>
     <string name="message_type_draft_content">"[草稿]"</string>
     <string name="tag_id">tagId</string>
+    <string name="message_image_send_fail">图片发送失败，请重试。</string>
 
     <!-- conversationSeting -->
     <string name="conversation_setting_title">"聊天设置"</string>
@@ -98,6 +99,9 @@
     <string name="conntect_state_prompt_network_unavailable">"当前网络不可用"</string>
     <string name="conntect_state_prompt_service_unavailable">"当前服务不可用"</string>
     <string name="conntect_state_prompt_auth_unavailable">"验证失败"</string>
+    <string name="connect_auto_reconnect">自动连接中...</string>
+    <string name="connect_auto_success">自动重连成功</string>
+    <string name="connect_auto_fail">自动重连失败</string>
 
     <!-- notification  -->
     <string name="notification_new_message">"您有了一条新消息"</string>

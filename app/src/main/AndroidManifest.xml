@@ -54,9 +54,11 @@
             android:screenOrientation="portrait"/>
         <!-- Begin Rong Cloud -->
 
+        <activity android:name="io.rong.imkit.RongActivity"
+            android:screenOrientation="portrait"/>
 
         <activity
-            android:name="io.rong.imkit.RongActivity"
+            android:name="io.rong.imkit.demo.DemoActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -81,12 +83,6 @@
                     android:path="/conversationgrouplist"
                     android:scheme="rong" />
             </intent-filter>
-        </activity>
-
-        <activity
-            android:name="io.rong.imkit.RongSingleActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -95,12 +91,6 @@
                     android:path="/conversationlist"
                     android:scheme="rong" />
             </intent-filter>
-        </activity>
-
-        <activity
-            android:name="io.rong.imkit.RongSecActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -110,6 +100,7 @@
                     android:scheme="rong" />
             </intent-filter>
         </activity>
+
 
         <activity
             android:name="io.rong.voipkit.activity.CallSideActivity"

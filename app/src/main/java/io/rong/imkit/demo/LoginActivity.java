@@ -109,6 +109,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
 
         //打开注册页面
         if (v == mRegisterBtn) {
+
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivityForResult(intent, REQUEST_CODE_REGISTER);
         } else if (v == mLoginBtn) {
@@ -171,7 +172,8 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
 
 
                 //发起获取好友列表的http请求  (注：非融云SDK接口，是demo接口)
-                getFriendsHttpRequest = DemoContext.getInstance().getDemoApi().getFriends(user.getCookie(), this);
+                getFriendsHttpRequest = DemoContext.getInstance().getDemoApi().getFriends(mUserNameEditText.getText().toString(), this);
+
 
                 DemoContext.getInstance().setCurrentUser(user);
 
@@ -190,6 +192,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
             final ArrayList<UserInfo> friends = (ArrayList<UserInfo>) getFriends((ArrayList<User>) obj);
 
             DemoContext.getInstance().setFriends(friends);
+
         }
 
     }
@@ -257,9 +260,9 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
 
     private void initGroupInfo() {
 
-        RongIMClient.Group group1 = new RongIMClient.Group("group001", "群组一", "http://www.yjz9.com/uploadfile/2014/0807/20140807114030812.jpg");
-        RongIMClient.Group group2 = new RongIMClient.Group("group002", "群组二", "http://www.yjz9.com/uploadfile/2014/0330/20140330023925331.jpg");
-        RongIMClient.Group group3 = new RongIMClient.Group("group003", "群组三", "http://www.yjz9.com/uploadfile/2014/0921/20140921013004454.jpg");
+        RongIMClient.Group group1 = new RongIMClient.Group("group001", "群组一", "http://docs.rongcloud.cn/assets/img/logo@2x.png");
+        RongIMClient.Group group2 = new RongIMClient.Group("group002", "群组二", "http://cn.bing.com/fd/s/a/k_zh_cn_s2.png");
+        RongIMClient.Group group3 = new RongIMClient.Group("group003", "群组三", "http://www.baidu.com/img/bdlogo.png");
         List<RongIMClient.Group> groups = new ArrayList<RongIMClient.Group>();
         groups.add(group1);
         groups.add(group2);

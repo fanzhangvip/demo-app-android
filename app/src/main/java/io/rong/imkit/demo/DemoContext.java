@@ -56,7 +56,7 @@ public class DemoContext {
     private static HttpHandler mHttpHandler;
     private IResourceCompressHandler mCompressHandler;
 
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences mPreferences;
 
     public Context mContext;
 
@@ -76,6 +76,26 @@ public class DemoContext {
         return self;
     }
 
+
+
+    void setUsername(String username){
+
+        if(mPreferences == null)
+            mPreferences = mContext.getSharedPreferences("RONG_DEMO", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putString("USERNAME", username);
+        editor.commit();
+    }
+
+    String getUsername(){
+        if(mPreferences == null)
+            mPreferences = mContext.getSharedPreferences("RONG_DEMO", Context.MODE_PRIVATE);
+
+        return mPreferences.getString("USERNAME",null);
+    }
+
+
     public DemoContext() {
     }
 
@@ -90,7 +110,7 @@ public class DemoContext {
         //http初始化 用于登录、注册使用
         initHttp();
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         mDemoApi = new DemoApi(mHttpHandler, context);
 
         initGroupInfo();
@@ -299,11 +319,11 @@ public class DemoContext {
     }
 
     public SharedPreferences getSharedPreferences() {
-        return sharedPreferences;
+        return mPreferences;
     }
 
     public void setSharedPreferences(SharedPreferences sharedPreferences) {
-        this.sharedPreferences = sharedPreferences;
+        this.mPreferences = sharedPreferences;
     }
 
 

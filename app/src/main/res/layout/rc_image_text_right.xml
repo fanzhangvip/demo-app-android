@@ -31,7 +31,7 @@
             android:layout_gravity="center_vertical"
             android:src="@drawable/rc_default_img_text"
             app:shape="square"
-
+            app:defDrawable="@drawable/rc_default_img_text"
             />
 
         <TextView

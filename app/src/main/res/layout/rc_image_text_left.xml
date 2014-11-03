@@ -30,6 +30,7 @@
             android:layout_height="@dimen/px_to_dip_120"
             android:layout_gravity="center_vertical"
             android:src="@drawable/rc_default_img_text"
+            app:defDrawable="@drawable/rc_default_img_text"
             app:shape="square"
 
             />
