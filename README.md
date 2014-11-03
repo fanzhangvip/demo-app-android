@@ -35,7 +35,7 @@
 
 imkit.jar中已经集成如下开源库为防重复引用特此提示
 
-* com.sea_monster:core_jar:0.0.19
+* com.sea_monster:core_jar:0.0.29
 * com.github.chrisbanes.bitmapcache:library:2.3@jar
 * com.jakewharton:disklrucache:2.0.2@jar
 
