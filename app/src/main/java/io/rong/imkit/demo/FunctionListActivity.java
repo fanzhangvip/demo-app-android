@@ -1,6 +1,8 @@
 package io.rong.imkit.demo;
 
 import android.content.Intent;
+import android.os.*;
+import android.os.Process;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -146,6 +148,7 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
                 @Override
                 public void onClick(View v) {
                     RongIM.getInstance().disconnect(true);
+                    android.os.Process.killProcess(Process.myPid());
                 }
             });
 
