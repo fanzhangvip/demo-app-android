@@ -53,20 +53,18 @@
         <activity android:name=".TestFragment2Activity"
             android:screenOrientation="portrait"/>
         <!-- Begin Rong Cloud -->
-
-        <activity android:name="io.rong.imkit.RongActivity"
-            android:screenOrientation="portrait"/>
-
         <activity
-            android:name="io.rong.imkit.demo.DemoActivity"
+            android:name="io.rong.imkit.RongActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <data android:host="io.rong.imkit.demo"
+                <data
+                    android:host="io.rong.imkit.demo"
                     android:pathPrefix="/conversationsetting/"
-                    android:scheme="rong"/>
+                    android:scheme="rong" />
             </intent-filter>
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -75,6 +73,7 @@
                     android:path="/grouplist"
                     android:scheme="rong" />
             </intent-filter>
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -83,6 +82,12 @@
                     android:path="/conversationgrouplist"
                     android:scheme="rong" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name="io.rong.imkit.RongSingleActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -91,6 +96,12 @@
                     android:path="/conversationlist"
                     android:scheme="rong" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name="io.rong.imkit.RongSecActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -100,7 +111,6 @@
                     android:scheme="rong" />
             </intent-filter>
         </activity>
-
 
         <activity
             android:name="io.rong.voipkit.activity.CallSideActivity"
@@ -113,13 +123,17 @@
             <intent-filter>
                 <action android:name="io.rong.voipkit.calledSideActivity.action" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <data android:host="io.rong.imkit.demo"
+                    android:path="/calledsideactivity"
+                    android:scheme="rong" />
             </intent-filter>
         </activity>
 
         <service
             android:name="io.rong.imkit.service.RongIMService"
             android:enabled="true"
-            android:exported="false" />
+            android:exported="false"
+            android:priority="1000"></service>
 
         <service
             android:name="io.rong.imlib.PushService"
@@ -127,7 +141,8 @@
 
         <service android:name="io.rong.imlib.RongService" />
 
-        <receiver android:name="io.rong.imlib.PushReceiver">
+        <receiver android:name="io.rong.imlib.PushReceiver"
+            android:process="io.rong.push.service">
             <intent-filter>
                 <action android:name="io.rong.imlib.action.push.heartbeat" />
             </intent-filter>
@@ -138,6 +153,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>

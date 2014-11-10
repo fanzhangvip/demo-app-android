@@ -60,6 +60,9 @@
     <string name="discussion_remove_member_failure">"删除成员失败"</string>
     <string name="default_discussion_name">"讨论组"</string>
 
+    <!-- chatroom -->
+    <string name="rc_create_chatroom_notice">"正在进入聊天室"</string>
+    <string name="rc_create_chatroom_fail">"进入聊天室失败，请重试"</string>
     <!-- item message -->
     <string name="voice_length">"%1$s''"</string>
 
@@ -72,6 +75,8 @@
     <string name="dialog_converastion_delete_message">"删除消息"</string>
     <string name="dialog_converastion_remove">"从会话列表中移除"</string>
     <string name="converastion_list_notify_load_data">"正在初始化数据...."</string>
+    <string name="conversation_list_set_top_cancel">取消置顶</string>
+    <string name="conversation_list_set_top">已置顶</string>
     <!-- group -->
     <string name="rc_group_conversation_list_name">"我的群组"</string>
 
@@ -94,11 +99,13 @@
     <string name="voice_dialog_time_short">"说话时间太短"</string>
 
     <!-- connect state -->
+    <string name="conntect_state_prompt_disconnect">"服务尚未连接"</string>
     <string name="conntect_state_prompt_other_device_login">"该用户在其他设备上登录"</string>
-    <string name="conntect_state_prompt_unknow_error">"未知错误"</string>
+    <string name="conntect_state_prompt_unknow_error">"服务尚未连接"</string>
     <string name="conntect_state_prompt_network_unavailable">"当前网络不可用"</string>
     <string name="conntect_state_prompt_service_unavailable">"当前服务不可用"</string>
     <string name="conntect_state_prompt_auth_unavailable">"验证失败"</string>
+
     <string name="connect_auto_reconnect">自动连接中...</string>
     <string name="connect_auto_success">自动重连成功</string>
     <string name="connect_auto_fail">自动重连失败</string>

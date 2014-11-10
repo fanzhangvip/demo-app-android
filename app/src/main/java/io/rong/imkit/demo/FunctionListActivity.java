@@ -98,6 +98,11 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
                         public void onError(ErrorCode errorCode) {
 
                         }
+
+                        @Override
+                        public void onProgress(int i) {
+
+                        }
                     }
             );
 
@@ -114,6 +119,9 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
             startActivity(new Intent(this, TestFragmentActivity.class));
         } else if (position == 6) {
             startActivity(new Intent(this, TestFragment2Activity.class));
+        }else if(position == 7){
+            RongIM.getInstance().startChatroom(this, "chatroom002", "聊天室");
+
         }
     }
 

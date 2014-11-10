@@ -71,7 +71,7 @@ public class DemoActivity extends RongActivity {
 
         return friends;
     }
-
+    HashMap<String, RongIMClient.Group> groupM;
     private void initGroupInfo() {
 
         RongIMClient.Group group1 = new RongIMClient.Group("group001", "群组一", "http://docs.rongcloud.cn/assets/img/logo@2x.png");
@@ -82,12 +82,13 @@ public class DemoActivity extends RongActivity {
         groups.add(group2);
         groups.add(group3);
 
-        HashMap<String, RongIMClient.Group> groupM = new HashMap<String, RongIMClient.Group>();
+        groupM = new HashMap<String, RongIMClient.Group>();
         groupM.put("group001", group1);
         groupM.put("group002", group2);
         groupM.put("group003", group3);
 
         DemoContext.getInstance().setGroupMap(groupM);
+        DemoContext.getInstance().setGroupInfoProvider();
     }
 
 }

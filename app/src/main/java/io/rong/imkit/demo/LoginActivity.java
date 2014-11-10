@@ -287,6 +287,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
         });
 
         DemoContext.getInstance().setGroupMap(groupM);
+        DemoContext.getInstance().setGroupInfoProvider();
     }
 
     @Override
