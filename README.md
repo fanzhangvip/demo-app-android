@@ -29,7 +29,7 @@
 
 *在DemoContext中init方法中填入申请的APP_Key测试，并在DemoApi中配置HOST指向到自己的auth服务上*
 
-*如适用Eclipse开发请Import路径app/src/main
+*如适用Eclipse开发请Import路径app/src/main，编码请选择为 UTF-8。
 
 #### 注意事项：
 
