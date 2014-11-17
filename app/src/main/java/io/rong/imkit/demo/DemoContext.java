@@ -1,11 +1,18 @@
 package io.rong.imkit.demo;
 
-import io.rong.imkit.RongIM;
-import io.rong.imkit.RongIM.GetUserInfoProvider;
-import io.rong.imkit.demo.common.DemoApi;
-import io.rong.imkit.demo.model.User;
-import io.rong.imlib.RongIMClient;
-import io.rong.imlib.RongIMClient.UserInfo;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Environment;
+import android.preference.PreferenceManager;
+import android.text.TextUtils;
+import android.util.Log;
+
+import com.sea_monster.core.common.Const;
+import com.sea_monster.core.network.DefaultHttpHandler;
+import com.sea_monster.core.network.HttpHandler;
+import com.sea_monster.core.resource.compress.IResourceCompressHandler;
+import com.sea_monster.core.resource.io.FileSysHandler;
+import com.sea_monster.core.resource.io.IFileSysHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,26 +26,12 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import uk.co.senab.bitmapcache.BitmapLruCache;
-
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.os.Environment;
-import android.preference.PreferenceManager;
-import android.text.TextUtils;
-import android.util.Log;
-
-import com.sea_monster.core.common.Const;
-import com.sea_monster.core.network.DefaultHttpHandler;
-import com.sea_monster.core.network.HttpHandler;
-import com.sea_monster.core.resource.ResourceManager;
-import com.sea_monster.core.resource.cache.ResourceCacheWrapper;
-import com.sea_monster.core.resource.compress.IResourceCompressHandler;
-import com.sea_monster.core.resource.compress.ResourceCompressHandler;
-import com.sea_monster.core.resource.io.FileSysHandler;
-import com.sea_monster.core.resource.io.IFileSysHandler;
-import com.sea_monster.core.resource.io.ResourceRemoteWrapper;
-import com.sea_monster.core.utils.FileUtils;
+import io.rong.imkit.RongIM;
+import io.rong.imkit.RongIM.GetUserInfoProvider;
+import io.rong.imkit.demo.common.DemoApi;
+import io.rong.imkit.demo.model.User;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.RongIMClient.UserInfo;
 
 public class DemoContext {
 
