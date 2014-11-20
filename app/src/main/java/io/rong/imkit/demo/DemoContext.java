@@ -70,10 +70,9 @@ public class DemoContext {
     }
 
 
+    void setUsername(String username) {
 
-    void setUsername(String username){
-
-        if(mPreferences == null)
+        if (mPreferences == null)
             mPreferences = mContext.getSharedPreferences("RONG_DEMO", Context.MODE_PRIVATE);
 
         SharedPreferences.Editor editor = mPreferences.edit();
@@ -81,11 +80,11 @@ public class DemoContext {
         editor.commit();
     }
 
-    String getUsername(){
-        if(mPreferences == null)
+    String getUsername() {
+        if (mPreferences == null)
             mPreferences = mContext.getSharedPreferences("RONG_DEMO", Context.MODE_PRIVATE);
 
-        return mPreferences.getString("USERNAME",null);
+        return mPreferences.getString("USERNAME", null);
     }
 
 
@@ -138,7 +137,7 @@ public class DemoContext {
     }
 
 
-    public void receviceMessage() {
+    public void receiveMessage() {
 
         RongIM.getInstance().setReceiveMessageListener(new RongIM.OnReceiveMessageListener() {
 
@@ -218,6 +217,8 @@ public class DemoContext {
     public UserInfo getUserInfoById(String userId) {
 
         UserInfo userInfoReturn = null;
+        Log.d("getUserInfoById", "userId:" + userId);
+
 
         if (!TextUtils.isEmpty(userId) && mUserInfos != null) {
             for (UserInfo userInfo : mUserInfos) {

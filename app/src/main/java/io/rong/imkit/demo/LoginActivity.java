@@ -60,6 +60,9 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
     private AbstractHttpRequest<User> loginHttpRequest;
     private AbstractHttpRequest<ArrayList<User>> getFriendsHttpRequest;
 
+//    private String TOKEN = "RuACSZPS74egcJxn+MXTRI3fTYO0jxKK7OHt2oe2xpWLmhNdYLVSzrKfdo+MMmMloPbZeGWzw+xpjtTUHzPlig==";
+    private String TOKEN = "3L59A0dH5Ozk8y8w7gjAkNN4LMRSh1gB1ieQZHrmluavn7s/gi5gQXUSppkb8/RXe1et6qJbxPzC+FKwTMubhA==";//p5tvi9dstypd4
+
     @Override
     protected int setContentViewResId() {
         return R.layout.activity_login;
@@ -71,7 +74,6 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
         mUserNameEditText = getViewById(android.R.id.text1);
         mPasswordEditText = getViewById(android.R.id.text2);
         mRegisterBtn = getViewById(android.R.id.button1);
-        mLoginBtn = getViewById(android.R.id.button2);
         mLoginBtn = getViewById(android.R.id.button2);
         mVersionTextView = getViewById(R.id.version_code);
         mBuildTextView = getViewById(R.id.build_code);
@@ -151,10 +153,13 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
                  * http://docs.rongcloud.cn/api/android/imkit/index.html
                  */
                 RongIM.connect(user.getToken(), new ConnectCallback() {
+//                RongIM.connect(TOKEN, new ConnectCallback() {
 
                     @Override
                     public void onSuccess(String userId) {
                         Log.d("LoginActivity", "---------userId----------:" + userId);
+                        user.setUserId(userId);
+                        DemoContext.getInstance().setCurrentUser(user);
                         mHandler.obtainMessage(HANDLER_LOGIN_SUCCESS).sendToTarget();
                     }
 
@@ -175,7 +180,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
                 getFriendsHttpRequest = DemoContext.getInstance().getDemoApi().getFriends(mUserNameEditText.getText().toString(), this);
 
 
-                DemoContext.getInstance().setCurrentUser(user);
+//                DemoContext.getInstance().setCurrentUser(user);
 
 
             } else {
@@ -244,7 +249,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
         } else if (msg.what == HANDLER_LOGIN_SUCCESS) {
 
             DemoContext.getInstance().setGroupInfoProvider();
-            DemoContext.getInstance().receviceMessage();
+            DemoContext.getInstance().receiveMessage();
 
             WinToast.toast(LoginActivity.this, R.string.login_success);
 
