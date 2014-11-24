@@ -1,18 +1,11 @@
 package io.rong.imkit.demo;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.os.Environment;
-import android.preference.PreferenceManager;
-import android.text.TextUtils;
-import android.util.Log;
-
-import com.sea_monster.core.common.Const;
-import com.sea_monster.core.network.DefaultHttpHandler;
-import com.sea_monster.core.network.HttpHandler;
-import com.sea_monster.core.resource.compress.IResourceCompressHandler;
-import com.sea_monster.core.resource.io.FileSysHandler;
-import com.sea_monster.core.resource.io.IFileSysHandler;
+import io.rong.imkit.RongIM;
+import io.rong.imkit.RongIM.GetUserInfoProvider;
+import io.rong.imkit.demo.common.DemoApi;
+import io.rong.imkit.demo.model.User;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.RongIMClient.UserInfo;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,12 +19,27 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import io.rong.imkit.RongIM;
-import io.rong.imkit.RongIM.GetUserInfoProvider;
-import io.rong.imkit.demo.common.DemoApi;
-import io.rong.imkit.demo.model.User;
-import io.rong.imlib.RongIMClient;
-import io.rong.imlib.RongIMClient.UserInfo;
+import uk.co.senab.bitmapcache.BitmapLruCache;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Environment;
+import android.preference.PreferenceManager;
+import android.text.TextUtils;
+import android.util.Log;
+
+import com.sea_monster.core.common.Const;
+import com.sea_monster.core.network.DefaultHttpHandler;
+import com.sea_monster.core.network.HttpHandler;
+import com.sea_monster.core.resource.ResourceManager;
+import com.sea_monster.core.resource.cache.ResourceCacheWrapper;
+import com.sea_monster.core.resource.compress.IResourceCompressHandler;
+import com.sea_monster.core.resource.compress.ResourceCompressHandler;
+import com.sea_monster.core.resource.io.FileSysHandler;
+import com.sea_monster.core.resource.io.IFileSysHandler;
+import com.sea_monster.core.resource.io.ResourceRemoteWrapper;
+import com.sea_monster.core.utils.FileUtils;
 
 public class DemoContext {
 
@@ -60,6 +68,8 @@ public class DemoContext {
 
     private HashMap<String, RongIMClient.Group> groupMap;
 
+    private RongIM.LocationProvider.LocationCallback mLastLocationCallback;
+
     public static DemoContext getInstance() {
 
         if (self == null) {
@@ -69,7 +79,8 @@ public class DemoContext {
         return self;
     }
 
-
+    public DemoContext() {
+    }
 
     void setUsername(String username){
 
@@ -89,8 +100,6 @@ public class DemoContext {
     }
 
 
-    public DemoContext() {
-    }
 
     public DemoContext(Context context) {
         self = this;
@@ -107,6 +116,14 @@ public class DemoContext {
         mDemoApi = new DemoApi(mHttpHandler, context);
 
         initGroupInfo();
+    }
+
+    public RongIM.LocationProvider.LocationCallback getLastLocationCallback() {
+        return mLastLocationCallback;
+    }
+
+    public void setLastLocationCallback(RongIM.LocationProvider.LocationCallback lastLocationCallback) {
+        this.mLastLocationCallback = lastLocationCallback;
     }
 
     void initHttp() {
@@ -138,16 +155,26 @@ public class DemoContext {
     }
 
 
-    public void receviceMessage() {
+    public void receiveMessage() {
+        if(RongIM.getInstance() == null) {
+            throw new RuntimeException("初始化异常");
+        }else {
+            RongIM.getInstance().setReceiveMessageListener(new RongIM.OnReceiveMessageListener() {
 
-        RongIM.getInstance().setReceiveMessageListener(new RongIM.OnReceiveMessageListener() {
+                @Override
+                public void onReceived(RongIMClient.Message message, int left) {
+                    Log.d("DemoContext", "receviceMessage------------>:" + message.getObjectName());
+                    int count = RongIM.getInstance().getTotalUnreadCount();
+                    Log.d("DemoContext", "receviceMessage-----------getTotalUnreadCount->:" + count);
 
-            @Override
-            public void onReceived(RongIMClient.Message message, int left) {
-                Log.d("DemoContext", "receviceMessage------------>:" + message.getObjectName());
-            }
+                    Intent in = new Intent();
+                    in.setAction("send_noread_message");
+                    in.putExtra("rongCloud",RongIM.getInstance().getTotalUnreadCount() );
+                    mContext.sendBroadcast(in);
+                }
 
-        });
+            });
+        }
     }
 
     /**
@@ -194,19 +221,23 @@ public class DemoContext {
      */
     public void setGroupInfoProvider() {
 
-        RongIM.getInstance().setGetGroupInfoProvider(new RongIM.GetGroupInfoProvider() {
+        if(RongIM.getInstance() == null){
+            throw new RuntimeException("初始化异常");
+        }else {
+            RongIM.getInstance().setGetGroupInfoProvider(new RongIM.GetGroupInfoProvider() {
 
-            @Override
-            public RongIMClient.Group getGroupInfo(String groupId) {
+                @Override
+                public RongIMClient.Group getGroupInfo(String groupId) {
 
-                if (groupMap != null && !groupMap.isEmpty()) {
-                    return groupMap.get(groupId);
-                } else {
-                    return null;
+                    if (groupMap != null && !groupMap.isEmpty()) {
+                        return groupMap.get(groupId);
+                    } else {
+                        return null;
+                    }
+
                 }
-
-            }
-        });
+            });
+        }
     }
 
     /**
@@ -331,7 +362,6 @@ public class DemoContext {
 
     private void initGroupInfo() {
 
-        Log.e("syncGroup", "======enter=======syncGroup===============");
 
 
         RongIMClient.Group group1 = new RongIMClient.Group("group001", "群组一", "http://www.yjz9.com/uploadfile/2014/0807/20140807114030812.jpg");
@@ -347,7 +377,10 @@ public class DemoContext {
         groupM.put("group002", group2);
         groupM.put("group003", group3);
 
-        DemoContext.getInstance().setGroupMap(groupM);
+        if(DemoContext.getInstance()!=null)
+            DemoContext.getInstance().setGroupMap(groupM);
+        else
+            throw new RuntimeException("同步群组异常");
     }
 
 }

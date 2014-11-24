@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.sea_monster.core.exception.BaseException;
+import com.sea_monster.core.exception.InternalException;
 import com.sea_monster.core.network.AbstractHttpRequest;
 
 import java.util.regex.Matcher;
@@ -20,109 +21,120 @@ import io.rong.imkit.demo.ui.WinToast;
 import io.rong.imkit.veiw.ActionBar;
 
 public class RegisterActivity extends BaseApiActivity implements OnClickListener {
-	private static final String TAG = "RegisterActivity";
+    private static final String TAG = "RegisterActivity";
 
-	private EditText mEmailEditText;
-	private EditText mPasswordEditText;
-	private EditText mNickNameEditText;
-	private Button mRegisterButton;
+    private EditText mEmailEditText;
+    private EditText mPasswordEditText;
+    private EditText mNickNameEditText;
+    private Button mRegisterButton;
 
-	private AbstractHttpRequest<Status> httpRequest;
+    private AbstractHttpRequest<Status> httpRequest;
 
-	private ActionBar actionBar;
+    private ActionBar actionBar;
 
-	@Override
-	protected int setContentViewResId() {
-		return R.layout.activity_register;
-	}
+    @Override
+    protected int setContentViewResId() {
+        return R.layout.activity_register;
+    }
 
-	@Override
-	protected void initView() {
-		mEmailEditText = getViewById(android.R.id.text1);
-		mPasswordEditText = getViewById(android.R.id.text2);
-		mNickNameEditText = getViewById(R.id.nick_name);
-		mRegisterButton = getViewById(android.R.id.button1);
-		actionBar = getViewById(R.id.mutil_user_select_action_bar);
+    @Override
+    protected void initView() {
+        mEmailEditText = getViewById(android.R.id.text1);
+        mPasswordEditText = getViewById(android.R.id.text2);
+        mNickNameEditText = getViewById(R.id.nick_name);
+        mRegisterButton = getViewById(android.R.id.button1);
+        actionBar = getViewById(R.id.mutil_user_select_action_bar);
 
-	}
+    }
 
-	@Override
-	protected void initData() {
-		mRegisterButton.setOnClickListener(this);
-		actionBar.setOnBackClick(new OnClickListener() {
+    @Override
+    protected void initData() {
+        mRegisterButton.setOnClickListener(this);
+        actionBar.setOnBackClick(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-	}
+    }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public void onClick(View v) {
+    @SuppressWarnings("unchecked")
+    @Override
+    public void onClick(View v) {
 
-		String email = mEmailEditText.getText().toString();
-		String password = mPasswordEditText.getText().toString();
-		String nickname = mNickNameEditText.getText().toString();
+        String email = mEmailEditText.getText().toString();
+        String password = mPasswordEditText.getText().toString();
+        String nickname = mNickNameEditText.getText().toString();
 
-		if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(nickname)) {
-			WinToast.toast(this, R.string.register_is_null);
-			return;
-		} else if (!isEmail(email)) {
-			WinToast.toast(this, R.string.register_email_error);
-			return;
-		}
+        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(nickname)) {
+            WinToast.toast(this, R.string.register_is_null);
+            return;
+        } else if (!isEmail(email)) {
+            WinToast.toast(this, R.string.register_email_error);
+            return;
+        }
+        if (DemoContext.getInstance()!=null)
+            httpRequest = DemoContext.getInstance().getDemoApi().register(email, nickname, password, this);
 
-		httpRequest = DemoContext.getInstance().getDemoApi().register(email, nickname, password, this);
+    }
 
-	}
+    @Override
+    public void onCallApiSuccess(AbstractHttpRequest request, Object obj) {
 
-	@Override
-	public void onCallApiSuccess(AbstractHttpRequest request, Object obj) {
+        if (httpRequest == request) {
 
-		if (httpRequest == request) {
+            if (obj instanceof Status) {
+                Status status = (Status) obj;
 
-			if (obj instanceof Status) {
-				Status status = (Status) obj;
+                Log.d(TAG + "--onCallApiSuccess--code:", "" + status.getCode());
 
-				Log.d(TAG + "--onCallApiSuccess--code:", "" + status.getCode());
+                if (status.getCode() == 200) {
+                    WinToast.toast(this, R.string.register_success);
 
-				if (status.getCode() == 200) {
-					WinToast.toast(this, R.string.register_success);
+                    Intent intent = new Intent();
+                    intent.putExtra(LoginActivity.INTENT_EMAIL, mEmailEditText.getText().toString());
+                    intent.putExtra(LoginActivity.INTENT_PASSWORD, mPasswordEditText.getText().toString());
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
+                } else {
+                    WinToast.toast(this, R.string.register_failure);
+                }
+            }
+        }
+    }
 
-					Intent intent = new Intent();
-					intent.putExtra(LoginActivity.INTENT_EMAIL, mEmailEditText.getText().toString());
-					intent.putExtra(LoginActivity.INTENT_PASSWORD, mPasswordEditText.getText().toString());
-					setResult(Activity.RESULT_OK, intent);
-					finish();
-				} else {
-					WinToast.toast(this, R.string.register_failure);
-				}
-			}
-		}
-	}
+    @Override
+    public void onCallApiFailure(AbstractHttpRequest request, BaseException e) {
+        Log.d(TAG + "--onCallApiFailure:", "onCallApiFailure");
 
-	@Override
-	public void onCallApiFailure(AbstractHttpRequest request, BaseException e) {
-		Log.d(TAG + "--onCallApiFailure:", "onCallApiFailure");
-	}
+        if (httpRequest == request) {
 
-	public static boolean isEmail(String email) {
+            if (e instanceof InternalException) {
+                InternalException ie = (InternalException) e;
 
-		if (TextUtils.isEmpty(email))
-			return false;
+                if (ie.getCode() == 403) {
+                    WinToast.toast(this, R.string.register_user_exits);
+                }
+            }
+        }
+    }
 
-		String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+    public static boolean isEmail(String email) {
 
-		Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-		Matcher matcher = pattern.matcher(email);
+        if (TextUtils.isEmpty(email))
+            return false;
 
-		if (matcher.matches())
-			return true;
-		else
-			return false;
+        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
 
-	}
+        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(email);
+
+        if (matcher.matches())
+            return true;
+        else
+            return false;
+
+    }
 
 }

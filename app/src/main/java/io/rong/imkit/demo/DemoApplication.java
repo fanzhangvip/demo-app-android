@@ -12,6 +12,7 @@ import java.lang.reflect.Method;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
+import io.rong.message.LocationMessage;
 
 /**
  * Created by zhjchen on 14-3-20.
@@ -37,16 +38,37 @@ public class DemoApplication extends Application {
          */
         RongIM.init(this, APP_KEY, R.drawable.ic_launcher);
         RongIM.setConversationBehaviorListener(new RongIM.ConversationBehaviorListener() {
+
             @Override
-            public void onClickUserPortrait(Context context, RongIMClient.ConversationType conversationType, RongIMClient.UserInfo user) {
-                Log.d("Begavior", conversationType.getName() + ":" + user.getName() + " context:" + context);
+            public boolean onClickUserPortrait(Context context, RongIMClient.ConversationType conversationType, RongIMClient.UserInfo user) {
+                Log.d("Begavior", conversationType.getName() + ":" + user.getName());
+                return true;
             }
 
             @Override
-            public void onClickMessage(Context context, RongIMClient.Message message) {
-                Log.d("Begavior", message.getObjectName() + ":" + message.getMessageId() + " context:" + context);
+            public boolean onClickMessage(Context context, RongIMClient.Message message) {
+
+                if(message.getContent() instanceof LocationMessage){
+                    Intent intent = new Intent(context, LocationActivity.class);
+                    intent.putExtra("location", message.getContent());
+                    context.startActivity(intent);
+
+                }
+
+                Log.d("Begavior", message.getObjectName() + ":" + message.getMessageId());
+                return false;
             }
         });
+
+
+        RongIM.setLocationProvider(new RongIM.LocationProvider() {
+            @Override
+            public void onStartLocation(final Context context, final LocationCallback callback) {
+                DemoContext.getInstance().setLastLocationCallback(callback);
+                context.startActivity(new Intent(context, LocationActivity.class));
+            }
+        });
+
 
         mContext = DemoContext.getInstance();
         mContext.init(this);

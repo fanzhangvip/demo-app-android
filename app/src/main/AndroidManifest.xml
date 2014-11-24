@@ -1,7 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="io.rong.imkit.demo"
-    android:installLocation="auto"
-    >
+    android:installLocation="auto">
 
     <uses-sdk
         android:minSdkVersion="9"
@@ -18,19 +17,19 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".DemoApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/RcTheme" >
+        android:theme="@style/RcTheme">
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,18 +39,19 @@
         <activity
             android:name=".RegisterActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".FunctionListActivity"
-            android:screenOrientation="portrait" />
 
         <activity
             android:name=".GroupListActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".TestFragmentActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".TestFragment2Activity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".TestFragmentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TestFragment2Activity"
+            android:screenOrientation="portrait" />
         <!-- Begin Rong Cloud -->
         <activity
             android:name="io.rong.imkit.RongActivity"
@@ -123,7 +123,8 @@
             <intent-filter>
                 <action android:name="io.rong.voipkit.calledSideActivity.action" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <data android:host="io.rong.imkit.demo"
+                <data
+                    android:host="io.rong.imkit.demo"
                     android:path="/calledsideactivity"
                     android:scheme="rong" />
             </intent-filter>
@@ -141,7 +142,8 @@
 
         <service android:name="io.rong.imlib.RongService" />
 
-        <receiver android:name="io.rong.imlib.PushReceiver"
+        <receiver
+            android:name="io.rong.imlib.PushReceiver"
             android:process="io.rong.push.service">
             <intent-filter>
                 <action android:name="io.rong.imlib.action.push.heartbeat" />
@@ -161,12 +163,15 @@
 
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="5445066cfd98c5e32d007a8f" >
-        </meta-data>
+            android:value="5445066cfd98c5e32d007a8f"></meta-data>
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="DEMO_GITHUB" >
-        </meta-data>
+            android:value="DEMO_GITHUB"></meta-data>
+
+        <activity android:name=".LocationActivity" />
+        <meta-data
+            android:name="TencentMapSDK"
+            android:value="7JYBZ-4Y3W4-JMUU7-DJHQU-NOYH7-SRBBU" />
 
     </application>
 

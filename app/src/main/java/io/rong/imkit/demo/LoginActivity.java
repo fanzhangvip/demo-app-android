@@ -20,20 +20,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.sea_monster.core.exception.BaseException;
+import com.sea_monster.core.exception.InternalException;
 import com.sea_monster.core.network.AbstractHttpRequest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
-import io.rong.imkit.RCloudContext;
 import io.rong.imkit.RongIM;
 import io.rong.imkit.demo.model.User;
 import io.rong.imkit.demo.ui.LoadingDialog;
 import io.rong.imkit.demo.ui.WinToast;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.RongIMClient.ConnectCallback;
-import io.rong.imlib.RongIMClient.OperationCallback;
 import io.rong.imlib.RongIMClient.UserInfo;
 
 public class LoginActivity extends BaseApiActivity implements OnClickListener, Callback {
@@ -60,9 +60,20 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
     private AbstractHttpRequest<User> loginHttpRequest;
     private AbstractHttpRequest<ArrayList<User>> getFriendsHttpRequest;
 
+    private boolean mIsLoginSuccess = false;
+
+    private String TOKEN="G70KaAQEQKdshvFLyTrzd2AyPi+6iLIgiLy3HWTcWxfOcwi4gxEouZUHULeDXfngV0qi2dU+p+Jp8GKvY1FHG4ypcbP4WNdO";
+
     @Override
     protected int setContentViewResId() {
         return R.layout.activity_login;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        MobclickAgent.onPageStart("SplashScreen"); //统计页面
+//        MobclickAgent.onResume(this);          //统计时长
     }
 
     @Override
@@ -72,7 +83,6 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
         mPasswordEditText = getViewById(android.R.id.text2);
         mRegisterBtn = getViewById(android.R.id.button1);
         mLoginBtn = getViewById(android.R.id.button2);
-        mLoginBtn = getViewById(android.R.id.button2);
         mVersionTextView = getViewById(R.id.version_code);
         mBuildTextView = getViewById(R.id.build_code);
 
@@ -80,13 +90,12 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
 
     @Override
     protected void initData() {
-
-        String email = DemoContext.getInstance().getSharedPreferences().getString(INTENT_EMAIL, "");
-        String password = DemoContext.getInstance().getSharedPreferences().getString(INTENT_PASSWORD, "");
-
-        mUserNameEditText.setText(email);
-        mPasswordEditText.setText(password);
-
+        if(DemoContext.getInstance()!=null) {
+            String email = DemoContext.getInstance().getSharedPreferences().getString(INTENT_EMAIL, "");
+            String password = DemoContext.getInstance().getSharedPreferences().getString(INTENT_PASSWORD, "");
+            mUserNameEditText.setText(email);
+            mPasswordEditText.setText(password);
+        }
         mRegisterBtn.setOnClickListener(this);
         mLoginBtn.setOnClickListener(this);
 
@@ -125,7 +134,8 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
                 mDialog.show();
 
             //发起登录 http请求 (注：非融云SDK接口，是demo接口)
-            loginHttpRequest = DemoContext.getInstance().getDemoApi().login(username, password, mDeviceId, this);
+            if(DemoContext.getInstance()!=null)
+                loginHttpRequest = DemoContext.getInstance().getDemoApi().login(username, password, mDeviceId, this);
 
         }
 
@@ -151,11 +161,13 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
                  * http://docs.rongcloud.cn/api/android/imkit/index.html
                  */
                 RongIM.connect(user.getToken(), new ConnectCallback() {
+//                RongIM.connect(TOKEN, new ConnectCallback() {
 
                     @Override
                     public void onSuccess(String userId) {
                         Log.d("LoginActivity", "---------userId----------:" + userId);
                         mHandler.obtainMessage(HANDLER_LOGIN_SUCCESS).sendToTarget();
+                        mIsLoginSuccess = true;
                     }
 
                     @Override
@@ -164,22 +176,24 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
                     }
 
                 });
-
-                Editor editor = DemoContext.getInstance().getSharedPreferences().edit();
-                editor.putString(INTENT_PASSWORD, mPasswordEditText.getText().toString());
-                editor.putString(INTENT_EMAIL, mUserNameEditText.getText().toString());
-                editor.commit();
+                if (DemoContext.getInstance() != null) {
+                    Editor editor = DemoContext.getInstance().getSharedPreferences().edit();
+                    editor.putString(INTENT_PASSWORD, mPasswordEditText.getText().toString());
+                    editor.putString(INTENT_EMAIL, mUserNameEditText.getText().toString());
+                    editor.commit();
+                }
 
 
                 //发起获取好友列表的http请求  (注：非融云SDK接口，是demo接口)
-                getFriendsHttpRequest = DemoContext.getInstance().getDemoApi().getFriends(mUserNameEditText.getText().toString(), this);
-
-
-                DemoContext.getInstance().setCurrentUser(user);
+                if (DemoContext.getInstance() != null){
+                    getFriendsHttpRequest = DemoContext.getInstance().getDemoApi().getFriends(user.getCookie(), this);
+                    DemoContext.getInstance().setCurrentUser(user);
+                }
 
 
             } else {
                 WinToast.toast(this, R.string.login_failure);
+
 
                 if (mDialog != null)
                     mDialog.dismiss();
@@ -190,9 +204,8 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
 
             @SuppressWarnings("unchecked")
             final ArrayList<UserInfo> friends = (ArrayList<UserInfo>) getFriends((ArrayList<User>) obj);
-
-            DemoContext.getInstance().setFriends(friends);
-
+            if(DemoContext.getInstance()!=null)
+                DemoContext.getInstance().setFriends(friends);
         }
 
     }
@@ -222,11 +235,16 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
     public void onCallApiFailure(AbstractHttpRequest request, BaseException e) {
 
         if (loginHttpRequest == request) {
+            if (e instanceof InternalException) {
 
-            WinToast.toast(this, R.string.login_failure);
+                InternalException ie = (InternalException) e;
+                if (ie.getCode() == 401) {
+                    WinToast.toast(this, R.string.login_pass_error);
+                }
 
-            if (mDialog != null)
-                mDialog.dismiss();
+                if (mDialog != null)
+                    mDialog.dismiss();
+            }
         }
 
     }
@@ -242,52 +260,62 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
                 mDialog.dismiss();
 
         } else if (msg.what == HANDLER_LOGIN_SUCCESS) {
-
-            DemoContext.getInstance().setGroupInfoProvider();
-            DemoContext.getInstance().receviceMessage();
+            if(DemoContext.getInstance()!=null) {
+                DemoContext.getInstance().setGroupInfoProvider();
+                DemoContext.getInstance().receiveMessage();
+            }
 
             WinToast.toast(LoginActivity.this, R.string.login_success);
 
             if (mDialog != null)
                 mDialog.dismiss();
 
-            startActivity(new Intent(this, FunctionListActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
 
             initGroupInfo();
+
+
         }
         return false;
     }
 
     private void initGroupInfo() {
 
-        RongIMClient.Group group1 = new RongIMClient.Group("group001", "群组一", "http://docs.rongcloud.cn/assets/img/logo@2x.png");
-        RongIMClient.Group group2 = new RongIMClient.Group("group002", "群组二", "http://cn.bing.com/fd/s/a/k_zh_cn_s2.png");
-        RongIMClient.Group group3 = new RongIMClient.Group("group003", "群组三", "http://www.baidu.com/img/bdlogo.png");
-        List<RongIMClient.Group> groups = new ArrayList<RongIMClient.Group>();
-        groups.add(group1);
-        groups.add(group2);
-        groups.add(group3);
+        if(DemoContext.getInstance()!=null) {
+            HashMap<String, RongIMClient.Group> groupM = DemoContext.getInstance().getGroupMap();
 
-        HashMap<String, RongIMClient.Group> groupM = new HashMap<String, RongIMClient.Group>();
-        groupM.put("group001", group1);
-        groupM.put("group002", group2);
-        groupM.put("group003", group3);
+            List<RongIMClient.Group> groups = new ArrayList<RongIMClient.Group>();
 
+            Iterator iterator = groupM.values().iterator();
 
-        RongIM.getInstance().syncGroup(groups, new RongIM.OperationCallback() {
-            @Override
-            public void onSuccess() {
-                Log.d("RONG_SDK", "GROUP_SYNC_SUCCESS");
+            while (iterator.hasNext()) {
+                groups.add((RongIMClient.Group) iterator.next());
             }
 
-            @Override
-            public void onError(ErrorCode errorCode) {
-                Log.d("RONG_SDK", "GROUP_SYNC_FAIL:" + errorCode.getMessage());
-            }
-        });
 
-        DemoContext.getInstance().setGroupMap(groupM);
-        DemoContext.getInstance().setGroupInfoProvider();
+            if (RongIM.getInstance() != null) {
+                RongIM.getInstance().syncGroup(groups, new RongIM.OperationCallback() {
+
+                    @Override
+                    public void onSuccess() {
+                        Log.e("syncGroup", "=============syncGroup====onSuccess===========");
+                    }
+
+                    @Override
+                    public void onError(ErrorCode errorCode) {
+                        Log.e("syncGroup", "=============syncGroup====onError===========" + errorCode);
+                    }
+                });
+            }
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (mIsLoginSuccess)
+            finish();
     }
 
     @Override
