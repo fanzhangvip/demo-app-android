@@ -1,6 +1,7 @@
 package io.rong.imkit.demo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Environment;
 import android.preference.PreferenceManager;
@@ -144,6 +145,10 @@ public class DemoContext {
             @Override
             public void onReceived(RongIMClient.Message message, int left) {
                 Log.d("DemoContext", "receviceMessage------------>:" + message.getObjectName());
+                Intent in = new Intent();
+                in.setAction("send_noread_message");
+                in.putExtra("rongCloud",RongIM.getInstance().getTotalUnreadCount() );
+                mContext.sendBroadcast(in);
             }
 
         });

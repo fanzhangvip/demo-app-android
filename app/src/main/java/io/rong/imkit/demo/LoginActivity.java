@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.sea_monster.core.exception.BaseException;
+import com.sea_monster.core.exception.InternalException;
 import com.sea_monster.core.network.AbstractHttpRequest;
 
 import java.util.ArrayList;
@@ -227,11 +228,16 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
     public void onCallApiFailure(AbstractHttpRequest request, BaseException e) {
 
         if (loginHttpRequest == request) {
+            if (e instanceof InternalException) {
 
-            WinToast.toast(this, R.string.login_failure);
+                InternalException ie = (InternalException) e;
+                if (ie.getCode() == 401) {
+                    WinToast.toast(this, R.string.login_pass_error);
+                }
 
-            if (mDialog != null)
-                mDialog.dismiss();
+                if (mDialog != null)
+                    mDialog.dismiss();
+            }
         }
 
     }

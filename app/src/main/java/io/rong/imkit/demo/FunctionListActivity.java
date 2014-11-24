@@ -1,6 +1,9 @@
 package io.rong.imkit.demo;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.*;
 import android.os.Process;
 import android.util.Log;
@@ -19,11 +22,12 @@ import io.rong.imlib.RongIMClient;
 
 public class FunctionListActivity extends BaseActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
 
+    private static final String TAG = "FunctionListActivity";
     private ListView mListView;
     private FunctionListAdapter mFunctionListAdapter;
     private Button mLogout;
     private ActionBar mAction;
-
+    private int numbermessage = 0;
 
     @Override
     protected int setContentViewResId() {
@@ -32,22 +36,51 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
 
     @Override
     protected void initView() {
+        numbermessage = RongIM.getInstance().getTotalUnreadCount();
+        DemoContext.getInstance().receiveMessage();
 
         mListView = getViewById(android.R.id.list);
-        View headerView = LayoutInflater.from(this).inflate(R.layout.view_list_header, null);
+        View headerView = LayoutInflater.from(this).inflate(
+                R.layout.view_list_header, null);
         mListView.addHeaderView(headerView);
         mLogout = getViewById(android.R.id.button1);
         mLogout.setOnClickListener(this);
         mAction = getViewById(R.id.action_bar);
+
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("send_noread_message");
+        this.registerReceiver(new MyBroadcastReciver(), intentFilter);
+
+        numbermessage = RongIM.getInstance().getTotalUnreadCount();
+        initData();
+    }
+
+    private class MyBroadcastReciver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("send_noread_message")) {
+                numbermessage =	intent.getIntExtra("rongCloud", -1);
+                initData();
+            }
+        }
+
     }
 
     @Override
     protected void initData() {
 
-        String[] titleNameArray = this.getResources().getStringArray(R.array.function_list);
-        mFunctionListAdapter = new FunctionListAdapter(this, titleNameArray);
+        String[] titleNameArray = this.getResources().getStringArray(
+                R.array.function_list);
+        mFunctionListAdapter = new FunctionListAdapter(this, titleNameArray,
+                numbermessage);
         mListView.setAdapter(mFunctionListAdapter);
         mFunctionListAdapter.notifyDataSetChanged();
+
         mListView.setOnItemClickListener(this);
         mAction.setOnBackClick(new View.OnClickListener() {
             @Override

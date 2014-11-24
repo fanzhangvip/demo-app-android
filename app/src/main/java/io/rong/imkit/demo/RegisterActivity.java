@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.sea_monster.core.exception.BaseException;
+import com.sea_monster.core.exception.InternalException;
 import com.sea_monster.core.network.AbstractHttpRequest;
 
 import java.util.regex.Matcher;
@@ -106,7 +107,16 @@ public class RegisterActivity extends BaseApiActivity implements OnClickListener
 	@Override
 	public void onCallApiFailure(AbstractHttpRequest request, BaseException e) {
 		Log.d(TAG + "--onCallApiFailure:", "onCallApiFailure");
-	}
+        if (httpRequest == request) {
+            if (e instanceof InternalException) {
+                InternalException ie = (InternalException) e;
+                if (ie.getCode() == 403) {
+                    WinToast.toast(this, R.string.register_user_exits);
+                }
+            }
+        }
+
+    }
 
 	public static boolean isEmail(String email) {
 
