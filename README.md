@@ -44,6 +44,7 @@ imkit.jar中已经集成如下开源库为防重复引用特此提示
 
 * -keepattributes Exceptions,InnerClasses
 * -keep class io.rong.** {*;}
+* -keep class **.R$* { *; }
 
 #### 联系我们
 商务合作
