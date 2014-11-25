@@ -33,7 +33,7 @@
 
 #### 注意事项：
 
-Rong_IMKit_vx_x_x.jar中已经集成如下开源库为防重复引用特此提示
+Rong_IMKit_vx_x_x.jar 中已经集成如下开源库为防重复引用特此提示
 
 * com.sea_monster:core_jar:0.0.29
 * com.github.chrisbanes.bitmapcache:library:2.3@jar
