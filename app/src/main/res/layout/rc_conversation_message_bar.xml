@@ -54,6 +54,13 @@
             android:layout_marginLeft="@dimen/px_to_dip_50"
             android:layout_toRightOf="@id/camertRichIcon" />
 
+        <io.rong.imkit.veiw.RichIconTextView
+            android:id="@+id/locationRichIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_to_dip_50"
+            android:layout_toRightOf="@id/voipRichIcon" />
+
     </RelativeLayout>
 
 </LinearLayout>

@@ -133,6 +133,7 @@
                     android:src="@drawable/rc_ic_warning" />
 
                 <LinearLayout
+                    android:id="@+id/conversation_right_bubble"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|center_vertical"

@@ -29,6 +29,7 @@
     <string name="message_type_voice_content">"[语音]"</string>
     <string name="message_type_video_content">"[视频]"</string>
     <string name="message_type_image_text_content">"[图文]"</string>
+    <string name="message_type_location_content">"[位置]"</string>
     <string name="message_type_draft_content">"[草稿]"</string>
     <string name="tag_id">tagId</string>
     <string name="message_image_send_fail">图片发送失败，请重试。</string>
@@ -115,6 +116,7 @@
     <string name="notification_new_message_one_p">"发来了%1$s条消息"</string>
     <string name="notification_new_message_mang_p">"%1$s个联系人发来%2$s条消息"</string>
     <string name="notification_new_message_one_p_one">"%1$s发来一条消息"</string>
+    <string name="notification_custom_service">"客服"</string>
     <string name="new_message_more">"···"</string>
 
 
@@ -133,5 +135,8 @@
     <string name="notification_message_discussion_is_open_invite">"%1$s%2$s了成员邀请"</string>
     <!--<string name="notification_message_discussion_n_add">"%1$s位成员被 %2$s 加入了讨论组"</string>-->
 
+    <!-- location handler -->
+    <string name="rc_location_handler">"处理中"</string>
+    <string name="rc_location_fail">"处理失败"</string>
 
 </resources>

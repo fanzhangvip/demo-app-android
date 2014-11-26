@@ -28,4 +28,7 @@
     <string name="custom_service_get_list_failure">"获取客服失改"</string>
     <string name="custom_service_people_list">"客服人员列表"</string>
 
+    <string name="register_user_exits">"该邮箱已注册"</string>
+    <string name="login_pass_error">"账号或密码错误 "</string>
+
 </resources>

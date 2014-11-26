@@ -1,9 +1,10 @@
 package io.rong.imkit.demo;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
-import android.os.*;
+import android.content.IntentFilter;
 import android.os.Process;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,18 +13,19 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import io.rong.imkit.RongIM;
-import io.rong.imkit.model.RichContentMessage;
 import io.rong.imkit.veiw.ActionBar;
 import io.rong.imkit.veiw.AlterDialog;
 import io.rong.imlib.RongIMClient;
+import io.rong.message.RichContentMessage;
 
-public class FunctionListActivity extends BaseActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
+public class MainActivity extends BaseActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
 
+    private static final String TAG = "FunctionListActivity";
     private ListView mListView;
     private FunctionListAdapter mFunctionListAdapter;
     private Button mLogout;
     private ActionBar mAction;
-
+    private int numbermessage = 0;
 
     @Override
     protected int setContentViewResId() {
@@ -32,9 +34,12 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
 
     @Override
     protected void initView() {
+        numbermessage = RongIM.getInstance().getTotalUnreadCount();
+        DemoContext.getInstance().receiveMessage();
 
         mListView = getViewById(android.R.id.list);
-        View headerView = LayoutInflater.from(this).inflate(R.layout.view_list_header, null);
+        View headerView = LayoutInflater.from(this).inflate(
+                R.layout.view_list_header, null);
         mListView.addHeaderView(headerView);
         mLogout = getViewById(android.R.id.button1);
         mLogout.setOnClickListener(this);
@@ -42,12 +47,37 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("send_noread_message");
+        this.registerReceiver(new MyBroadcastReciver(), intentFilter);
+
+        numbermessage = RongIM.getInstance().getTotalUnreadCount();
+        initData();
+    }
+
+    private class MyBroadcastReciver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("send_noread_message")) {
+                numbermessage = intent.getIntExtra("rongCloud", -1);
+                initData();
+            }
+        }
+
+    }
+
+    @Override
     protected void initData() {
 
-        String[] titleNameArray = this.getResources().getStringArray(R.array.function_list);
-        mFunctionListAdapter = new FunctionListAdapter(this, titleNameArray);
+        String[] titleNameArray = this.getResources().getStringArray(
+                R.array.function_list);
+        mFunctionListAdapter = new FunctionListAdapter(this, titleNameArray,
+                numbermessage);
         mListView.setAdapter(mFunctionListAdapter);
         mFunctionListAdapter.notifyDataSetChanged();
+
         mListView.setOnItemClickListener(this);
         mAction.setOnBackClick(new View.OnClickListener() {
             @Override
@@ -71,13 +101,13 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
              *
              * API详见 http://docs.rongcloud.cn/android.html
              */
-            RongIM.getInstance().startConversationList(this);
+            if (RongIM.getInstance() != null) {
+                RongIM.getInstance().startConversationList(this);
+            }
 
         } else if (position == 2) {
-            /**
-             * 打开客服会话
-             */
             RongIM.getInstance().startCustomerServiceChat(this, "kefu114", "客服");
+
         } else if (position == 3) {
 
 
@@ -87,41 +117,62 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
             RichContentMessage imageTextMessage = new RichContentMessage(title, content, url);
             imageTextMessage.setExtra("可以存放的网址，商品编号或URI,在点击消息时你可以取到进入你的商品页面");
 
-            RongIM.getInstance().sendMessage(RongIMClient.ConversationType.PRIVATE, DemoContext.getInstance().getCurrentUser().getUserId(), imageTextMessage, new RongIMClient.SendMessageCallback() {
+            RongIM.getInstance().sendMessage(RongIMClient.ConversationType.PRIVATE, "11", imageTextMessage, new RongIMClient.SendMessageCallback() {
 
                         @Override
-                        public void onSuccess() {
+                        public void onSuccess(int messageId) {
 
                         }
 
                         @Override
-                        public void onError(ErrorCode errorCode) {
+                        public void onError(int messageId, ErrorCode errorCode) {
 
                         }
 
                         @Override
-                        public void onProgress(int i) {
+                        public void onProgress(int messageId, int percent) {
 
                         }
                     }
             );
 
+            RongIM.getInstance().sendMessage(RongIMClient.ConversationType.CUSTOMER_SERVICE, "kefu114", imageTextMessage, new RongIMClient.SendMessageCallback() {
 
+                        @Override
+                        public void onSuccess(int messageId) {
+
+                        }
+
+                        @Override
+                        public void onError(int messageId, ErrorCode errorCode) {
+
+                        }
+
+                        @Override
+                        public void onProgress(int messageId, int percent) {
+
+                        }
+                    }
+            );
+
+            RongIM.getInstance().startCustomerServiceChat(this, "kefu114", "客服");
+
+        } else if (position == 4) {
             /**
              * 打开二人会话页面
              *
              * API详见 http://docs.rongcloud.cn/android.html
              */
             RongIM.getInstance().startPrivateChat(this, DemoContext.getInstance().getCurrentUser().getUserId(), "光头强");
-        } else if (position == 4) {
-            startActivity(new Intent(this, GroupListActivity.class));
-        } else if (position == 5) {
-            startActivity(new Intent(this, TestFragmentActivity.class));
-        } else if (position == 6) {
-            startActivity(new Intent(this, TestFragment2Activity.class));
-        }else if(position == 7){
-            RongIM.getInstance().startChatroom(this, "chatroom002", "聊天室");
 
+        } else if (position == 5) {
+            startActivity(new Intent(this, GroupListActivity.class));
+        } else if (position == 6) {
+            RongIM.getInstance().startConversation(this, RongIMClient.ConversationType.CHATROOM, "chatroom002", "聊天室");
+        } else if(position == 7){
+            startActivity(new Intent(this, TestFragmentActivity.class));
+        }else if(position == 8){
+            startActivity(new Intent(this, TestFragment2Activity.class));
         }
     }
 
@@ -135,13 +186,15 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
              *
              * API详见 http://docs.rongcloud.cn/android.html
              */
-            RongIM.getInstance().disconnect(false);
 
+            if (RongIM.getInstance() != null)
+                RongIM.getInstance().disconnect(false);
 
             finish();
         }
 
     }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -155,8 +208,8 @@ public class FunctionListActivity extends BaseActivity implements AdapterView.On
 
                 @Override
                 public void onClick(View v) {
-                    RongIM.getInstance().disconnect(true);
-                    android.os.Process.killProcess(Process.myPid());
+                    if (RongIM.getInstance() != null) RongIM.getInstance().disconnect(true);
+                    Process.killProcess(Process.myPid());
                 }
             });
 
