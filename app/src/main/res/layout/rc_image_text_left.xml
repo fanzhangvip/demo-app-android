@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <io.rong.imkit.veiw.AsyncImageView
+        <io.rong.imkit.view.AsyncImageView
             android:id="@+id/rc_image_text_content_image_left"
             android:layout_width="@dimen/px_to_dip_120"
             android:layout_height="@dimen/px_to_dip_120"

@@ -10,11 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import io.rong.imkit.RongIM;
-import io.rong.imkit.veiw.ActionBar;
-import io.rong.imkit.veiw.AlterDialog;
+import io.rong.imkit.view.ActionBar;
+import io.rong.imkit.view.AlterDialog;
 import io.rong.imlib.RongIMClient;
 import io.rong.message.RichContentMessage;
 
@@ -26,6 +27,7 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
     private Button mLogout;
     private ActionBar mAction;
     private int numbermessage = 0;
+    private ImageView mImageView;
 
     @Override
     protected int setContentViewResId() {
@@ -44,6 +46,9 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
         mLogout = getViewById(android.R.id.button1);
         mLogout.setOnClickListener(this);
         mAction = getViewById(R.id.action_bar);
+        mImageView = mAction.getBackView();
+        mImageView.setVisibility(View.GONE);
+
     }
 
     @Override
@@ -82,7 +87,7 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
         mAction.setOnBackClick(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+
             }
         });
 

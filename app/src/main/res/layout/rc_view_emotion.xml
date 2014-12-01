@@ -14,7 +14,7 @@
         android:background="#ffdee0e2"
         android:isScrollContainer="false" />
 
-    <io.rong.imkit.veiw.CirclePageIndicator
+    <io.rong.imkit.view.CirclePageIndicator
         android:id="@+id/radio_group"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

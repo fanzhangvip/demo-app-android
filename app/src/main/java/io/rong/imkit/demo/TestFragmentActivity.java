@@ -4,7 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
-import io.rong.imkit.veiw.ActionBar;
+import io.rong.imkit.view.ActionBar;
+
 
 /**
  * Created by DragonJ on 14-9-15.

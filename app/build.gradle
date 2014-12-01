@@ -9,8 +9,8 @@ android {
         applicationId "io.rong.imkit.demo"
         minSdkVersion 10
         targetSdkVersion 19
-        versionCode 2014112517
-        versionName "1.2.3"
+        versionCode 2014120123
+        versionName "1.2.4"
     }
 
     signingConfigs {
@@ -47,4 +47,5 @@ dependencies {
     compile 'com.android.support:support-v4:19.0.0'
     compile 'com.google.code.gson:gson:2.2.+'
     compile files('libs/umeng-anasendMessagelytics-v5.2.4.jar')
+    compile files('libs/Rong_IMKit_v1_2_4.jar')
 }

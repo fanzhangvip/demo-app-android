@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 
 import io.rong.imkit.demo.model.Status;
 import io.rong.imkit.demo.ui.WinToast;
-import io.rong.imkit.veiw.ActionBar;
+import io.rong.imkit.view.ActionBar;
 
 public class RegisterActivity extends BaseApiActivity implements OnClickListener {
     private static final String TAG = "RegisterActivity";

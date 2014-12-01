@@ -68,14 +68,14 @@ public class LocationActivity extends MapActivity implements TencentLocationList
         GeoPoint point = new GeoPoint((int) (39.90923 * 1E6), (int) (116.397428 * 1E6)); // 用给定的经纬度构造一个GeoPoint，单位是微度
 
         mMapView.getController().setCenter(point);
-        mMapView.getController().setZoom(14);
+        mMapView.getController().setZoom(18);
         TencentLocationRequest request = TencentLocationRequest.create();
         TencentLocationManager.getInstance(this).requestLocationUpdates(request,this);}
         else {
             GeoPoint point = new GeoPoint((int) (mMsg.getLat() * 1E6), (int) (mMsg.getLng() * 1E6)); // 用给定的经纬度构造一个GeoPoint，单位是微度
 
             mMapView.getController().setCenter(point);
-            mMapView.getController().setZoom(14);
+            mMapView.getController().setZoom(18);
         }
 
     }

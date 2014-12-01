@@ -35,7 +35,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <io.rong.imkit.veiw.AsyncImageView
+        <io.rong.imkit.view.AsyncImageView
             android:id="@+id/conversation_message_other_portrait"
             app:defDrawable="@drawable/rc_default_portrait"
             android:src="@drawable/rc_default_portrait"
@@ -191,7 +191,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <io.rong.imkit.veiw.AsyncImageView
+        <io.rong.imkit.view.AsyncImageView
             android:id="@+id/conversation_message_self_portrait"
             app:defDrawable="@drawable/rc_default_portrait"
             android:src="@drawable/rc_default_portrait"

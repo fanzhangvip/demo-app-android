@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <io.rong.imkit.veiw.ActionBar
+    <io.rong.imkit.view.ActionBar
         android:id="@+id/action_bar"
         android:background="@color/title_bg"
         android:layout_width="match_parent"

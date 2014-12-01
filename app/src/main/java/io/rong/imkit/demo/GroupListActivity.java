@@ -9,7 +9,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import io.rong.imkit.veiw.ActionBar;
+import io.rong.imkit.view.ActionBar;
 import io.rong.imlib.RongIMClient;
 
 /**

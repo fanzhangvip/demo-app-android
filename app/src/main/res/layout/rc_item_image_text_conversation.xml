@@ -41,7 +41,7 @@
             android:background="#EBEBEB"
             android:orientation="horizontal">
 
-            <io.rong.imkit.veiw.AsyncImageView
+            <io.rong.imkit.view.AsyncImageView
                 android:id="@+id/conversation_message_other_portrait"
                 app:defDrawable="@drawable/rc_default_portrait"
                 android:src="@drawable/rc_default_portrait"
@@ -82,7 +82,7 @@
 
                         <include layout="@layout/rc_image_text_left"/>
 
-                        <!--<io.rong.imkit.veiw.AsyncImageView-->
+                        <!--<AsyncImageView-->
                             <!--android:id="@+id/conversation_message_left_tv"-->
                             <!--android:layout_width="wrap_content"-->
                             <!--android:layout_height="wrap_content"-->
@@ -157,7 +157,7 @@
 
                         <include layout="@layout/rc_image_text_right"/>
 
-                        <!--<io.rong.imkit.veiw.AsyncImageView-->
+                        <!--<AsyncImageView-->
                             <!--android:id="@+id/conversation_message_right_tv"-->
                             <!--android:layout_width="wrap_content"-->
                             <!--android:layout_height="wrap_content"-->
@@ -177,7 +177,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <io.rong.imkit.veiw.AsyncImageView
+            <io.rong.imkit.view.AsyncImageView
                 android:id="@+id/conversation_message_self_portrait"
                 app:defDrawable="@drawable/rc_default_portrait"
                 android:src="@drawable/rc_default_portrait"
