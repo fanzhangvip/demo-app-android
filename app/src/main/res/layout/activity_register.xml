@@ -5,7 +5,7 @@
     android:background="#EBEBEB"
     android:orientation="vertical" >
 
-    <io.rong.imkit.veiw.ActionBar
+    <io.rong.imkit.view.ActionBar
         android:background="@color/rc_title_bg"
         android:id="@+id/mutil_user_select_action_bar"
         android:layout_width="match_parent"
