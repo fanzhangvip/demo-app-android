@@ -67,36 +67,35 @@
                     android:visibility="gone" />
 
                 <!--<LinearLayout-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:gravity="left|center_vertical"-->
-                    <!--android:orientation="horizontal">-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:gravity="left|center_vertical"-->
+                <!--android:orientation="horizontal">-->
 
-                    <FrameLayout
-                        android:layout_width="170dp"
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rc_conversation_bubble_white">
+
+                    <io.rong.imkit.view.AsyncImageView
+                        android:id="@+id/conversation_message_left_tv"
+                        android:layout_width="140dp"
+                        android:layout_height="81dp"
+                        android:layout_gravity="left"
+                        android:contentDescription="@string/content_description"
+                        android:scaleType="centerCrop" />
+
+                    <TextView
+                        android:textColor="@android:color/white"
+                        android:background="#7F000000"
+                        android:layout_width="140dp"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/rc_conversation_bubble_white">
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:id="@id/rc_item0"/>
 
-                        <io.rong.imkit.view.AsyncImageView
-                            android:id="@+id/conversation_message_left_tv"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="left"
-                            android:contentDescription="@string/content_description"
-                            android:scaleType="centerCrop" />
-
-                        <TextView
-                            android:textColor="@android:color/white"
-                            android:background="#7F000000"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:maxWidth="170dp"
-                            android:layout_gravity="bottom"
-                            android:gravity="center"
-                            android:id="@id/rc_item0"/>
-
-                    </FrameLayout>
+                </FrameLayout>
                 <!--</LinearLayout>-->
 
 
@@ -155,13 +154,13 @@
 
                     <FrameLayout
                         android:background="@drawable/rc_conversation_bubble_blue"
-                        android:layout_width="170dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
                         <io.rong.imkit.view.AsyncImageView
                             android:id="@+id/conversation_message_right_tv"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_width="140dp"
+                            android:layout_height="81dp"
                             android:layout_gravity="left"
                             android:contentDescription="@string/content_description"
                             android:scaleType="centerCrop" />
@@ -169,10 +168,9 @@
                         <TextView
                             android:textColor="@android:color/white"
                             android:background="#7F000000"
-                            android:layout_width="match_parent"
+                            android:layout_width="140dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom"
-                            android:maxWidth="170dp"
                             android:gravity="center"
                             android:id="@id/rc_item1"/>
                     </FrameLayout>

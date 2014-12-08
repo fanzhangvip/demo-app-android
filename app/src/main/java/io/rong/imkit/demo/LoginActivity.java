@@ -160,22 +160,26 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
                  * 详见API
                  * http://docs.rongcloud.cn/api/android/imkit/index.html
                  */
-                RongIM.connect(user.getToken(), new ConnectCallback() {
-//                RongIM.connect(TOKEN, new ConnectCallback() {
+                try {
+                    RongIM.connect(user.getToken(), new ConnectCallback() {
+    //                RongIM.connect(TOKEN, new ConnectCallback() {
 
-                    @Override
-                    public void onSuccess(String userId) {
-                        Log.d("LoginActivity", "---------userId----------:" + userId);
-                        mHandler.obtainMessage(HANDLER_LOGIN_SUCCESS).sendToTarget();
-                        mIsLoginSuccess = true;
-                    }
+                        @Override
+                        public void onSuccess(String userId) {
+                            Log.d("LoginActivity", "---------userId----------:" + userId);
+                            mHandler.obtainMessage(HANDLER_LOGIN_SUCCESS).sendToTarget();
+                            mIsLoginSuccess = true;
+                        }
 
-                    @Override
-                    public void onError(ErrorCode errorCode) {
-                        mHandler.obtainMessage(HANDLER_LOGIN_FAILURE).sendToTarget();
-                    }
+                        @Override
+                        public void onError(ErrorCode errorCode) {
+                            mHandler.obtainMessage(HANDLER_LOGIN_FAILURE).sendToTarget();
+                        }
 
-                });
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 if (DemoContext.getInstance() != null) {
                     Editor editor = DemoContext.getInstance().getSharedPreferences().edit();
                     editor.putString(INTENT_PASSWORD, mPasswordEditText.getText().toString());
