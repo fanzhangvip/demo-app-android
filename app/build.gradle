@@ -9,14 +9,13 @@ android {
         applicationId "io.rong.imkit.demo"
         minSdkVersion 10
         targetSdkVersion 19
-        versionCode 2014120123
-        versionName "1.2.4"
+        versionCode 2014120823
+        versionName "1.2.5"
     }
 
     signingConfigs {
         config {
-            storeFile file("../rong." +
-                    "key")
+            storeFile file("../rong.key")
             storePassword "Amigo123"
             keyAlias "RongCloud"
             keyPassword "Amigo123"
