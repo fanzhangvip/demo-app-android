@@ -21,7 +21,6 @@ public class DemoApplication extends Application {
 
     private static final String IS_FIRST = "is_first";
     DemoContext mContext;
-    //    public static final String APP_KEY = "e0x9wycfx7flq";
     public static final String APP_KEY = "z3v5yqkbv8v30";
 
 

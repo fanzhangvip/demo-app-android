@@ -364,8 +364,7 @@ public class DemoContext {
 
 
 
-        RongIMClient.Group group1 = new RongIMClient.Group("group001", "群组一", "http://rongcloud.cn/images/logo.png" +
-                "");
+        RongIMClient.Group group1 = new RongIMClient.Group("group001", "群组一", "http://rongcloud.cn/images/logo.png");
         RongIMClient.Group group2 = new RongIMClient.Group("group002", "群组二", "http://rongcloud.cn/images/logo.png");
         RongIMClient.Group group3 = new RongIMClient.Group("group003", "群组三", "http://rongcloud.cn/images/logo.png");
         List<RongIMClient.Group> groups = new ArrayList<RongIMClient.Group>();
