@@ -89,7 +89,7 @@
     <string name="show_download_image_loading">"图片加载中...."</string>
 
     <!--  FriendMultiChoiceFragment -->
-     <string name="friend_multi_choice_people_max_prompt">"讨论组人数上限为50人"</string>
+     <string name="friend_multi_choice_people_max_prompt">"讨论组人数上限为%1$d人"</string>
 
     <!--publishShowImage-->
     <string name="rc_image_load_fail">图片加载失败</string>
