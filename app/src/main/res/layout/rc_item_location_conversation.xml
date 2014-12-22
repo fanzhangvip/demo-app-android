@@ -165,6 +165,16 @@
                             android:contentDescription="@string/content_description"
                             android:scaleType="centerCrop" />
 
+
+                        <TextView
+                            android:id="@+id/progress_textview"
+                            android:layout_width="140dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:textColor="@android:color/white"
+                            android:visibility="gone" />
+
                         <TextView
                             android:textColor="@android:color/white"
                             android:background="#7F000000"

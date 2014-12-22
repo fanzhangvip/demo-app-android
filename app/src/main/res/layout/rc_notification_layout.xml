@@ -8,7 +8,7 @@
     <ImageView
         android:id="@android:id/icon"
         android:layout_width="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:scaleType="fitCenter"
         android:layout_centerVertical="true"
         android:padding="5dp"
         android:layout_height="wrap_content" />
