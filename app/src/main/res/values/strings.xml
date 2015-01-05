@@ -30,5 +30,7 @@
 
     <string name="register_user_exits">"该邮箱已注册"</string>
     <string name="login_pass_error">"登录帐号不存在请注册"</string>
+    <string name="no_read_message">"···"</string>
+
 
 </resources>
