@@ -1,6 +1,7 @@
 package io.rong.imkit.demo;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,12 +63,11 @@ public class FunctionListAdapter extends BaseAdapter {
             viewHolder.showNumberImg = (TextView) convertView
                     .findViewById(R.id.show_num);
             if (position == 0 && numbermessage > 0&&numbermessage <100) {
-                // TODO
                 viewHolder.showNumberImg.setText("" + numbermessage);
                 viewHolder.showNumberImg.setVisibility(View.VISIBLE);
             } else if (position == 0 && numbermessage > 99) {
                 viewHolder.showNumberImg.setVisibility(View.VISIBLE);
-                viewHolder.showNumberImg.setText("...");
+                viewHolder.showNumberImg.setText(R.string.no_read_message);
             }
 
             convertView.setTag(viewHolder);

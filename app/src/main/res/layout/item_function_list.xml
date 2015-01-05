@@ -23,13 +23,12 @@
 
         <TextView
             android:id="@+id/show_num"
-            android:layout_width="18dip"
-            android:layout_height="18dip"
+            android:layout_width="20dip"
+            android:layout_height="20dip"
             android:layout_marginTop="13dip"
             android:layout_toRightOf="@android:id/text1"
             android:background="@drawable/rc_new_message"
             android:gravity="center"
-            android:scaleType="center"
             android:textColor="@color/rc_text_color_secondary_inverse"
             android:textSize="12sp"
             android:visibility="gone" />
