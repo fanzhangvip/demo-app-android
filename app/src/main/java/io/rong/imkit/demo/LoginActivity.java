@@ -70,7 +70,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 //        MobclickAgent.onPageStart("SplashScreen"); //统计页面
 //        MobclickAgent.onResume(this);          //统计时长
@@ -315,7 +315,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
 
         if (mIsLoginSuccess)

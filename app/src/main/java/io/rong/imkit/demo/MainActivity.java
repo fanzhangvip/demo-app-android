@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Handler;
 import android.os.Process;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+
 
 import io.rong.imkit.RongIM;
 import io.rong.imkit.view.ActionBar;
@@ -52,8 +54,9 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();        IntentFilter intentFilter = new IntentFilter();
+    public void onResume() {
+        super.onResume();
+        IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("send_noread_message");
         this.registerReceiver(new MyBroadcastReciver(), intentFilter);
 
@@ -174,9 +177,9 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
             startActivity(new Intent(this, GroupListActivity.class));
         } else if (position == 6) {
             RongIM.getInstance().startConversation(this, RongIMClient.ConversationType.CHATROOM, "chatroom002", "聊天室");
-        } else if(position == 7){
+        } else if (position == 7) {
             startActivity(new Intent(this, TestFragmentActivity.class));
-        }else if(position == 8){
+        } else if (position == 8) {
             startActivity(new Intent(this, TestFragment2Activity.class));
         }
     }
@@ -230,4 +233,7 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
 
         return false;
     }
+
+
+
 }
