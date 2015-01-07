@@ -23,8 +23,6 @@
 
 -keep class io.rong.** {*;}
 
-
--keep class io.rong.imkit.demo.model.** {*;}
 ##---------------Begin: proguard configuration for Gson  ----------
 # Gson uses generic type information stored in a class file when working with fields. Proguard
 # removes such information by default, so configure it to keep all of it.
@@ -42,3 +40,8 @@
 
 ##---------------End: proguard configuration for Gson  ----------
 
+-keepclassmembers class * extends de.greenrobot.dao.AbstractDao {
+    public static java.lang.String TABLENAME;
+}
+-keep class **$Properties
+-dontwarn  org.eclipse.jdt.annotation.**
