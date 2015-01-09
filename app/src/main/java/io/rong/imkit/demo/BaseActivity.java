@@ -2,7 +2,7 @@ package io.rong.imkit.demo;
 
 import java.io.Serializable;
 
-import com.sea_monster.core.network.AbstractHttpRequest;
+//import com.sea_monster.core.network.AbstractHttpRequest;
 import com.umeng.analytics.MobclickAgent;
 
 import android.app.Activity;

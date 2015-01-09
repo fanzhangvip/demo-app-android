@@ -63,7 +63,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
     private boolean mIsLoginSuccess = false;
 
     private String TOKEN="G70KaAQEQKdshvFLyTrzd2AyPi+6iLIgiLy3HWTcWxfOcwi4gxEouZUHULeDXfngV0qi2dU+p+Jp8GKvY1FHG4ypcbP4WNdO";
-
+    public static String mUserID =null;
     @Override
     protected int setContentViewResId() {
         return R.layout.activity_login;
@@ -169,6 +169,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
                             Log.d("LoginActivity", "---------userId----------:" + userId);
                             mHandler.obtainMessage(HANDLER_LOGIN_SUCCESS).sendToTarget();
                             mIsLoginSuccess = true;
+                            mUserID = userId;
                         }
 
                         @Override

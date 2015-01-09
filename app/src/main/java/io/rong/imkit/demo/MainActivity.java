@@ -181,6 +181,8 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
             startActivity(new Intent(this, TestFragmentActivity.class));
         } else if (position == 8) {
             startActivity(new Intent(this, TestFragment2Activity.class));
+        }else if(position == 9){
+            startActivity(new Intent(this, BlackListActivity.class));
         }
     }
 

@@ -32,5 +32,6 @@
     <string name="login_pass_error">"登录帐号不存在请注册"</string>
     <string name="no_read_message">"···"</string>
 
-
+    <string name="delete_from_balck">删除黑名单</string>
+    <string name="cancle_black">取消</string>
 </resources>

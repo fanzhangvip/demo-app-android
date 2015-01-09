@@ -262,6 +262,27 @@ public class DemoContext {
         }
         return userInfoReturn;
     }
+    /**
+     * 获取用户信息列表
+     *
+     * @param userIds
+     * @return
+     */
+    public List<UserInfo> getUserInfoByIds(String[] userIds) {
+
+        List<UserInfo> userInfoList = new ArrayList<UserInfo>();
+
+        if ( userIds != null && userIds.length > 0) {
+            for (String userId : userIds) {
+                for (UserInfo userInfo : mUserInfos) {
+                    if (userId.equals(userInfo.getUserId())) {
+                        userInfoList.add(userInfo);
+                    }
+                }
+            }
+        }
+        return userInfoList;
+    }
 
     public DemoApi getDemoApi() {
         return mDemoApi;

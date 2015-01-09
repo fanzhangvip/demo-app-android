@@ -3,10 +3,7 @@ package io.rong.imkit.demo;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.util.Log;
-
-import com.umeng.analytics.MobclickAgent;
 
 import java.lang.reflect.Method;
 
@@ -41,13 +38,17 @@ public class DemoApplication extends Application {
             @Override
             public boolean onClickUserPortrait(Context context, RongIMClient.ConversationType conversationType, RongIMClient.UserInfo user) {
                 Log.d("Begavior", conversationType.getName() + ":" + user.getName());
-                return true;
+                Intent in = new Intent(context, UserInfoActivity.class);
+                in.putExtra("user_name", user.getName());
+                in.putExtra("user_id", user.getUserId());
+                context.startActivity(in);
+                return false;
             }
 
             @Override
             public boolean onClickMessage(Context context, RongIMClient.Message message) {
 
-                if(message.getContent() instanceof LocationMessage){
+                if (message.getContent() instanceof LocationMessage) {
                     Intent intent = new Intent(context, LocationActivity.class);
                     intent.putExtra("location", message.getContent());
                     context.startActivity(intent);
