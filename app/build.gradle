@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'newlens'
 
 android {
     compileSdkVersion 19
@@ -25,7 +24,7 @@ android {
 
     buildTypes {
         release {
-            runProguard false
+            minifyEnabled false
             signingConfig signingConfigs.config
         }
     }
@@ -44,6 +43,5 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:support-v4:19.0.0'
     compile 'com.google.code.gson:gson:2.2.+'
-    compile files('libs/umeng-anasendMessagelytics-v5.2.4.jar')
     compile files('libs/Rong_IMKit_v1_2_4.jar')
 }

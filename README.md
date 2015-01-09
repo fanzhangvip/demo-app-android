@@ -8,9 +8,9 @@
 
 #### 运行条件
 
-**AndroidStudio 0.6+**
+**AndroidStudio 1.0+**
 
-**Gradle 1.11+**
+**Gradle 2.2.1+**
 
 **RongIMSDK**
 
@@ -35,7 +35,7 @@
 
 Rong_IMKit_vx_x_x.jar 中已经集成如下开源库为防重复引用特此提示
 
-* com.sea_monster:core_jar:0.0.29
+* com.sea_monster:core_jar:0.0.33
 * com.github.chrisbanes.bitmapcache:library:2.3@jar
 * com.jakewharton:disklrucache:2.0.2@jar
 
