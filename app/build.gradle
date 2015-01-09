@@ -43,5 +43,4 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:support-v4:19.0.0'
     compile 'com.google.code.gson:gson:2.2.+'
-    compile files('src/main/libs/Rong_IMKit_v1_3_1.jar')
 }

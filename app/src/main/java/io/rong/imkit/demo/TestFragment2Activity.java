@@ -17,7 +17,7 @@ import io.rong.message.RichContentMessage;
 /**
  * Created by DragonJ on 14-9-15.
  */
-public class TestFragment2Activity extends BaseActivity {
+public class TestFragment2Activity extends FragmentActivity {
 
     ActionBar mActionBar;
 
@@ -42,21 +42,6 @@ public class TestFragment2Activity extends BaseActivity {
 //        button.setOnClickListener();
 
         mActionBar.addView(button);
-
-    }
-
-    @Override
-    protected int setContentViewResId() {
-        return 0;
-    }
-
-    @Override
-    protected void initView() {
-
-    }
-
-    @Override
-    protected void initData() {
 
     }
 
