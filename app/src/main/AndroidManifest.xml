@@ -172,6 +172,7 @@
         </receiver>
         <!-- End Rong Cloud -->
 
+
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="543c86c5fd98c507d001cb71"></meta-data>
