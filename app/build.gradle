@@ -8,7 +8,7 @@ android {
         applicationId "io.rong.imkit.demo"
         minSdkVersion 10
         targetSdkVersion 19
-        versionCode 2015011217
+        versionCode 2015011223
         versionName "1.3.2.stable"
     }
 
