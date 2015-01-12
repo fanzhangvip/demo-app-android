@@ -141,5 +141,8 @@
 
     <string name="rc_default_group_name">群组</string>
     <string name="rc_default_discussion_name">讨论组</string>
+    <string name="rc_rejected_by_blacklist_prompt">您的消息已经发出，但被对方拒收</string>
+    <string name="rc_rejected_by_blacklist_voice_prompt">对方已把你加入黑名单，不能语音通话</string>
+
 
 </resources>

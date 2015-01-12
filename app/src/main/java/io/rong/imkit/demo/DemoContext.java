@@ -262,6 +262,27 @@ public class DemoContext {
         }
         return userInfoReturn;
     }
+    /**
+     * 获取用户信息列表
+     *
+     * @param userIds
+     * @return
+     */
+    public List<UserInfo> getUserInfoByIds(String[] userIds) {
+
+        List<UserInfo> userInfoList = new ArrayList<UserInfo>();
+
+        if ( userIds != null && userIds.length > 0) {
+            for (String userId : userIds) {
+                for (UserInfo userInfo : mUserInfos) {
+                    if (userId.equals(userInfo.getUserId())) {
+                        userInfoList.add(userInfo);
+                    }
+                }
+            }
+        }
+        return userInfoList;
+    }
 
     public DemoApi getDemoApi() {
         return mDemoApi;
@@ -364,8 +385,7 @@ public class DemoContext {
 
 
 
-        RongIMClient.Group group1 = new RongIMClient.Group("group001", "群组一", "http://rongcloud.cn/images/logo.png" +
-                "");
+        RongIMClient.Group group1 = new RongIMClient.Group("group001", "群组一", "http://rongcloud.cn/images/logo.png");
         RongIMClient.Group group2 = new RongIMClient.Group("group002", "群组二", "http://rongcloud.cn/images/logo.png");
         RongIMClient.Group group3 = new RongIMClient.Group("group003", "群组三", "http://rongcloud.cn/images/logo.png");
         List<RongIMClient.Group> groups = new ArrayList<RongIMClient.Group>();

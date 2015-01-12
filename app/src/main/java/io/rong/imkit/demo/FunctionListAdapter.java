@@ -62,19 +62,21 @@ public class FunctionListAdapter extends BaseAdapter {
                     .findViewById(android.R.id.text1);
             viewHolder.showNumberImg = (TextView) convertView
                     .findViewById(R.id.show_num);
-            if (position == 0 && numbermessage > 0&&numbermessage <100) {
-                viewHolder.showNumberImg.setText("" + numbermessage);
-                viewHolder.showNumberImg.setVisibility(View.VISIBLE);
-            } else if (position == 0 && numbermessage > 99) {
-                viewHolder.showNumberImg.setVisibility(View.VISIBLE);
-                viewHolder.showNumberImg.setText(R.string.no_read_message);
-            }
 
             convertView.setTag(viewHolder);
 
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+            if (position == 0 && numbermessage > 0&&numbermessage <100) {
+                viewHolder.showNumberImg.setText("" + numbermessage);
+                viewHolder.showNumberImg.setVisibility(View.VISIBLE);
+            } else if (position == 0 && numbermessage > 99) {
+                viewHolder.showNumberImg.setVisibility(View.VISIBLE);
+                viewHolder.showNumberImg.setText(R.string.no_read_message);
+            }else if(position !=0){
+                viewHolder.showNumberImg.setVisibility(View.GONE);
+            }
 
         viewHolder.titleTextView.setText(mNameArray[position]);
 
