@@ -268,6 +268,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
             if(DemoContext.getInstance()!=null) {
                 DemoContext.getInstance().setGroupInfoProvider();
                 DemoContext.getInstance().receiveMessage();
+                DemoContext.getInstance().setLocationProvider();
             }
 
             WinToast.toast(LoginActivity.this, R.string.login_success);

@@ -192,30 +192,26 @@ public class DemoContext {
          * RongIM 将调用此 Provider 获取好友列表信息
          *
          */
-        RongIM.setGetFriendsProvider(new RongIM.GetFriendsProvider() {
-
-            @Override
-            public List<UserInfo> getFriends() {
-                return mUserInfos;
-            }
-        });
+        RongIM.setGetFriendsProvider(mGetFriendsProvider);
 
         /**
          * 用户信息的提供者。 如果在聊天中遇到的聊天对象是没有登录过的用户（即没有通过融云服务器鉴权过的），
          * RongIM 是不知道用户信息的，RongIM 将调用此 Provider 获取用户信息
          */
-        RongIM.setGetUserInfoProvider(new GetUserInfoProvider() {
-
-            @Override
-            public UserInfo getUserInfo(String userId) {
-                return getUserInfoById(userId);
-            }
-
-        }, false);
-
-
+        RongIM.setGetUserInfoProvider(mGetUserInfoProvider, false);
     }
-
+    private RongIM.GetFriendsProvider mGetFriendsProvider = new RongIM.GetFriendsProvider() {
+        @Override
+        public List<UserInfo> getFriends() {
+            return mUserInfos;
+        }
+    };
+    private  GetUserInfoProvider mGetUserInfoProvider = new GetUserInfoProvider() {
+        @Override
+        public UserInfo getUserInfo(String userId) {
+            return getUserInfoById(userId);
+        }
+    };
     /**
      * 设置群组信息提供者
      */
@@ -224,21 +220,20 @@ public class DemoContext {
         if(RongIM.getInstance() == null){
             throw new RuntimeException("初始化异常");
         }else {
-            RongIM.getInstance().setGetGroupInfoProvider(new RongIM.GetGroupInfoProvider() {
-
-                @Override
-                public RongIMClient.Group getGroupInfo(String groupId) {
-
-                    if (groupMap != null && !groupMap.isEmpty()) {
-                        return groupMap.get(groupId);
-                    } else {
-                        return null;
-                    }
-
-                }
-            });
+            RongIM.getInstance().setGetGroupInfoProvider(mGetGroupInfoProvider);
         }
     }
+    private RongIM.GetGroupInfoProvider mGetGroupInfoProvider = new RongIM.GetGroupInfoProvider(){
+
+        @Override
+        public RongIMClient.Group getGroupInfo(String groupId) {
+            if (groupMap != null && !groupMap.isEmpty()) {
+                return groupMap.get(groupId);
+            } else {
+                return null;
+            }
+        }
+    };
 
     /**
      * 获取用户信息
@@ -403,5 +398,19 @@ public class DemoContext {
         else
             throw new RuntimeException("同步群组异常");
     }
+    /**
+     * 设置地图provider
+     */
+    public void setLocationProvider() {
+
+        RongIM.setLocationProvider(mLocationProvider);
+    }
+    private RongIM.LocationProvider mLocationProvider = new RongIM.LocationProvider() {
+        @Override
+        public void onStartLocation(Context context, LocationCallback callback) {
+            DemoContext.getInstance().setLastLocationCallback(callback);
+            context.startActivity(new Intent(context, LocationActivity.class));
+        }
+    };
 
 }

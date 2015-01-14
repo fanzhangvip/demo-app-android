@@ -60,19 +60,11 @@ public class DemoApplication extends Application {
             }
         });
 
-
-        RongIM.setLocationProvider(new RongIM.LocationProvider() {
-            @Override
-            public void onStartLocation(final Context context, final LocationCallback callback) {
-                DemoContext.getInstance().setLastLocationCallback(callback);
-                context.startActivity(new Intent(context, LocationActivity.class));
-            }
-        });
-
-
         mContext = DemoContext.getInstance();
-        mContext.init(this);
-
+        if(mContext != null)
+            mContext.init(this);
+        else
+            throw new RuntimeException("初始化异常");
         try {
             Class c;
             c = Class.forName("com.networkbench.agent.impl.NBSAppAgent");
