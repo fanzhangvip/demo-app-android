@@ -8,6 +8,8 @@ import android.widget.ListView;
 import java.util.List;
 
 import io.rong.imkit.RongIM;
+import io.rong.imkit.demo.ui.WinToast;
+import io.rong.imkit.utils.Util;
 import io.rong.imkit.view.ActionBar;
 import io.rong.imkit.view.SelectDialog;
 import io.rong.imlib.RongIMClient;
@@ -16,7 +18,7 @@ import io.rong.imlib.RongIMClient;
  * Created by bob on 15-1-7.
  */
 public class BlackListActivity extends BaseActivity implements AdapterView.OnItemClickListener {
-	private String TAG = "UserInfoActivity";
+	private String TAG = "BlackListActivity";
 	ActionBar mActionBar;
 	private ListView mBlackList;
 	private BlackListAdapter mBlackListAdapter;
@@ -42,7 +44,7 @@ public class BlackListActivity extends BaseActivity implements AdapterView.OnIte
 	@Override
 	protected void initData() {
 
-		if (RongIM.getInstance() != null) {
+		if (RongIM.getInstance() != null &&  Util.getNetWorkType(this) != -1) {
 
 
 			RongIM.getInstance().getBlacklist(
@@ -67,7 +69,9 @@ public class BlackListActivity extends BaseActivity implements AdapterView.OnIte
                             mBlackListAdapter.notifyDataSetChanged();
 						}
 					});
-		}
+		}else{
+            WinToast.toast(this,R.string.network_not);
+        }
         mBlackList.setOnItemClickListener(this);
 	}
 
@@ -75,42 +79,43 @@ public class BlackListActivity extends BaseActivity implements AdapterView.OnIte
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         final String userId =  mUserInfoList.get(position).getUserId();
-        Log.e(TAG,
-                "------- removeFromBlacklist userId-------:"
-                        + userId);
-        String titleName =  DemoContext.getInstance().getUserInfoById(userId).getName();
+        String titleName =  mUserInfoList.get(position).getName();
         final SelectDialog selectDialog = new SelectDialog(this);
         selectDialog.setTitle(titleName,true);
-
         selectDialog.setFristLineContent("delete_from_balck");
         selectDialog.setSecondLineContent("cancle_black");
-        selectDialog.setOnDialogItemViewListener(new SelectDialog.OnDialogItemViewListener() {
-            @Override
-            public void OnDialogItemViewClick(View view, int position) {
-          if(position == 0) {
-              if (RongIM.getInstance() != null) {
-                  RongIM.getInstance().removeFromBlacklist(userId,
-                          new RongIM.OperationCallback() {
+        if(Util.getNetWorkType(BlackListActivity.this) != -1) {
+            selectDialog.setOnDialogItemViewListener(new SelectDialog.OnDialogItemViewListener() {
+                @Override
+                public void OnDialogItemViewClick(View view, int position) {
+                    if (position == 0) {
+                        if (RongIM.getInstance() != null) {
+                            RongIM.getInstance().removeFromBlacklist(userId,
+                                    new RongIM.OperationCallback() {
 
-                              @Override
-                              public void onError(ErrorCode errorCode) {
-                                  Log.e(TAG,
-                                          "------- removeFromBlacklist onError-------:"
-                                                  + errorCode);
-                              }
-                              @Override
-                              public void onSuccess() {
-                                  Log.e(TAG, "-------被移除黑名单-------:");
-                                  initData();
-                              }
-                          });
-              }
-          }else if (position == 1) {
+                                        @Override
+                                        public void onError(ErrorCode errorCode) {
+                                            Log.e(TAG,
+                                                    "------- removeFromBlacklist onError-------:"
+                                                            + errorCode);
+                                        }
 
-          }
-            selectDialog.dismiss();
-            }
-        });
+                                        @Override
+                                        public void onSuccess() {
+                                            Log.e(TAG, "-------被移除黑名单-------:");
+                                            initData();
+                                        }
+                                    });
+                        }
+                    } else if (position == 1) {
+
+                    }
+                    selectDialog.dismiss();
+                }
+            });
         selectDialog.show();
+        }else{
+            WinToast.toast(this,R.string.network_not);
+        }
     }
 }

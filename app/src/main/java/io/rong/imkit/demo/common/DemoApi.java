@@ -25,7 +25,6 @@ public class DemoApi extends BaseApi {
 
 	private final static String HOST = "http://119.254.110.79:8080/";
 
-
     //客服
 	private final static String DEMO_REG = "reg";
 	private final static String DEMO_LOGIN = "login";

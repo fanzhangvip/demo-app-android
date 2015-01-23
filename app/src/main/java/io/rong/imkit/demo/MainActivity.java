@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Handler;
+import android.content.SharedPreferences;
 import android.os.Process;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-
 
 import io.rong.imkit.RongIM;
 import io.rong.imkit.view.ActionBar;
@@ -30,7 +29,7 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
     private ActionBar mAction;
     private int numbermessage = 0;
     private ImageView mImageView;
-
+    private String TOKEN="gFmGqvAPhTq2uxb/fkc1XEmcbyeYIrXSDa0nFvL2mH9L+lkk8QPOVwUG8elRuUE0K8PSxWsB1ksrqWKM/Q8rHA==";
     @Override
     protected int setContentViewResId() {
         return R.layout.activity_functioan_list;
@@ -58,7 +57,7 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
         super.onResume();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("send_noread_message");
-        this.registerReceiver(new MyBroadcastReciver(), intentFilter);
+        registerReceiver(new MyBroadcastReciver(), intentFilter);
 
         numbermessage = RongIM.getInstance().getTotalUnreadCount();
         initData();
@@ -171,6 +170,7 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
              *
              * API详见 http://docs.rongcloud.cn/android.html
              */
+        if(RongIM.getInstance() != null)
             RongIM.getInstance().startPrivateChat(this, DemoContext.getInstance().getCurrentUser().getUserId(), "光头强");
 
         } else if (position == 5) {
@@ -199,6 +199,11 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
 
             if (RongIM.getInstance() != null)
                 RongIM.getInstance().disconnect(false);
+
+            SharedPreferences.Editor editor = DemoContext.getInstance().getSharedPreferences().edit();
+            editor.remove("LOGIN_TOKEN");
+            editor.commit();
+
 
             finish();
         }

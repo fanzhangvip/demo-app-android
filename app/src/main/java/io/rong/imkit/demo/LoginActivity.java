@@ -109,6 +109,33 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
         mBuildTextView.setText(String.format(getResources().getString(R.string.login_version_date), versionInfo[0]));
         mVersionTextView.setText(String.format(getResources().getString(R.string.login_version_code), versionInfo[1]));
 
+        String token = DemoContext.getInstance().getSharedPreferences().getString("LOGIN_TOKEN",null);
+        Log.e("LoginActivity", "---------userId token---------:" + token);
+        if(!TextUtils.isEmpty(token)){
+            try {
+            if (mDialog != null && !mDialog.isShowing())
+                mDialog.show();
+                RongIM.connect(token, new ConnectCallback() {
+                    @Override
+                    public void onSuccess(String userId) {
+
+                        Log.e("LoginActivity", "---------userId---------:" + userId);
+
+                        mHandler.obtainMessage(HANDLER_LOGIN_SUCCESS).sendToTarget();
+                        mIsLoginSuccess = true;
+                        mUserID = userId;
+                    }
+
+                    @Override
+                    public void onError(ErrorCode errorCode) {
+                        mHandler.obtainMessage(HANDLER_LOGIN_FAILURE).sendToTarget();
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
 
@@ -167,9 +194,15 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
                         @Override
                         public void onSuccess(String userId) {
                             Log.d("LoginActivity", "---------userId----------:" + userId);
+                            Log.e("LoginActivity", "---------user.getToken()----------:" + user.getToken());
                             mHandler.obtainMessage(HANDLER_LOGIN_SUCCESS).sendToTarget();
                             mIsLoginSuccess = true;
                             mUserID = userId;
+
+                            Editor editor = DemoContext.getInstance().getSharedPreferences().edit();
+                            editor.putString("LOGIN_TOKEN", user.getToken());
+                            editor.commit();
+
                         }
 
                         @Override
@@ -215,6 +248,26 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
 
     }
 
+    @Override
+    public void onCallApiFailure(AbstractHttpRequest request, BaseException e) {
+        Log.e("TAG","-------------request:---------");
+        if (loginHttpRequest == request) {
+            if (e instanceof InternalException) {
+
+                InternalException ie = (InternalException) e;
+                Log.e("TAG","-------------getCode:---------"+ie.getCode());
+                if (ie.getCode() == 401) {
+                    WinToast.toast(this,R.string.login_pass_error);
+                }else if(ie.getCode() == 403){
+                    WinToast.toast(this, R.string.login_username_error);
+                }
+
+                if (mDialog != null)
+                    mDialog.dismiss();
+            }
+        }
+
+    }
     /**
      * 把自己系统中的用户对象转换成融云中的用户对象
      *
@@ -236,24 +289,6 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
         return friends;
     }
 
-    @Override
-    public void onCallApiFailure(AbstractHttpRequest request, BaseException e) {
-
-        if (loginHttpRequest == request) {
-            if (e instanceof InternalException) {
-
-                InternalException ie = (InternalException) e;
-                if (ie.getCode() == 401) {
-                    WinToast.toast(this, R.string.login_pass_error);
-                }
-
-                if (mDialog != null)
-                    mDialog.dismiss();
-            }
-        }
-
-    }
-
 
     @Override
     public boolean handleMessage(Message msg) {
@@ -268,6 +303,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
             if(DemoContext.getInstance()!=null) {
                 DemoContext.getInstance().setGroupInfoProvider();
                 DemoContext.getInstance().receiveMessage();
+                DemoContext.getInstance().setLocationProvider();
             }
 
             WinToast.toast(LoginActivity.this, R.string.login_success);
