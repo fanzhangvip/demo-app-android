@@ -5,11 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import java.lang.reflect.Method;
-
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 import io.rong.message.LocationMessage;
+import io.rong.message.RichContentMessage;
 
 /**
  * Created by zhjchen on 14-3-20.
@@ -19,7 +18,6 @@ public class DemoApplication extends Application {
     private static final String IS_FIRST = "is_first";
     DemoContext mContext;
     public static final String APP_KEY = "z3v5yqkbv8v30";
-
 
     @Override
     public void onCreate() {
@@ -43,7 +41,9 @@ public class DemoApplication extends Application {
                 in.putExtra("user_id", user.getUserId());
                 context.startActivity(in);
                 return false;
+
             }
+
 
             @Override
             public boolean onClickMessage(Context context, RongIMClient.Message message) {
@@ -53,9 +53,14 @@ public class DemoApplication extends Application {
                     intent.putExtra("location", message.getContent());
                     context.startActivity(intent);
 
+                }else  if(message.getContent() instanceof RichContentMessage){
+                    RichContentMessage  mRichContentMessage = (RichContentMessage) message.getContent();
+                    Log.d("Begavior",  "extra:"+mRichContentMessage.getExtra());
+
                 }
 
-                Log.d("Begavior", message.getObjectName() + ":" + message.getMessageId());
+                 Log.d("Begavior", message.getObjectName() + ":" + message.getMessageId());
+
                 return false;
             }
         });
@@ -66,17 +71,17 @@ public class DemoApplication extends Application {
         else
             throw new RuntimeException("初始化异常");
         try {
-            Class c;
-            c = Class.forName("com.networkbench.agent.impl.NBSAppAgent");
-            Method m = c.getMethod("setLicenseKey", new Class[]{String.class});
-            m.invoke(c, new Object[]{"a546c342ba704acf91b27e9603b6860d"});
+//            Class c;
+//            c = Class.forName("com.networkbench.agent.impl.NBSAppAgent");
+//            Method m = c.getMethod("setLicenseKey", new Class[]{String.class});
+//            m.invoke(c, new Object[]{"a546c342ba704acf91b27e9603b6860d"});
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
        try {
-            System.loadLibrary("imdemo");
+//            System.loadLibrary("imdemo");
         } catch (UnsatisfiedLinkError e) {
 //            e.printStackTrace();
         }

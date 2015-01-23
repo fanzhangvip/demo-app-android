@@ -12,7 +12,6 @@ import io.rong.imkit.view.ActionBar;
  */
 public class TestFragmentActivity extends FragmentActivity {
 
-    //io.rong.imkit.veiw.ActionBar
     ActionBar mActionBar;
 
     @Override
@@ -30,6 +29,5 @@ public class TestFragmentActivity extends FragmentActivity {
 
         mActionBar.getTitleTextView().setText("Fragment 自定义");
     }
-
 
 }

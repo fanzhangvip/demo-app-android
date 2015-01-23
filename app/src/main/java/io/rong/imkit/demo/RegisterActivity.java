@@ -113,6 +113,7 @@ public class RegisterActivity extends BaseApiActivity implements OnClickListener
             if (e instanceof InternalException) {
                 InternalException ie = (InternalException) e;
 
+                Log.e(TAG,"------------------ RegisterActivity---------------:"+ie.getMessage());
                 if (ie.getCode() == 403) {
                     WinToast.toast(this, R.string.register_user_exits);
                 }
