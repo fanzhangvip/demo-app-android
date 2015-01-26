@@ -17,7 +17,6 @@ public class DemoApplication extends Application {
 
     private static final String IS_FIRST = "is_first";
     DemoContext mContext;
-    public static final String APP_KEY = "z3v5yqkbv8v30";
 
     @Override
     public void onCreate() {
@@ -30,7 +29,7 @@ public class DemoApplication extends Application {
          * 第三个参数，push消息通知所要打个的action页面
          * 第四个参数，push消息中可以自定义push图标
          */
-        RongIM.init(this, APP_KEY, R.drawable.ic_launcher);
+        RongIM.init(this);
         RongIM.setConversationBehaviorListener(new RongIM.ConversationBehaviorListener() {
 
             @Override

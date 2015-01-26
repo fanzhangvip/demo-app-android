@@ -128,6 +128,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
 
                     @Override
                     public void onError(ErrorCode errorCode) {
+                        Log.e("LoginActivity", "---------errorCode---------:" + errorCode);
                         mHandler.obtainMessage(HANDLER_LOGIN_FAILURE).sendToTarget();
                     }
                 });
