@@ -118,6 +118,7 @@
                     android:scheme="rong" />
             </intent-filter>
         </activity>
+        <service android:name="io.rong.imlib.RongService"/>
 
         <activity
             android:name="io.rong.imkit.RongSecActivity"
