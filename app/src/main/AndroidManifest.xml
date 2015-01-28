@@ -194,7 +194,6 @@
                 <action android:name="io.rong.push.message" />
             </intent-filter>
         </receiver>
-
         <service android:name="io.rong.imlib.RongService"/>
         <!-- End Rong Cloud -->
 
