@@ -1,7 +1,6 @@
 package io.rong.imkit.demo;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Environment;
 import android.preference.PreferenceManager;
@@ -11,7 +10,6 @@ import android.util.Log;
 import com.sea_monster.core.common.Const;
 import com.sea_monster.core.network.DefaultHttpHandler;
 import com.sea_monster.core.network.HttpHandler;
-import com.sea_monster.core.resource.compress.IResourceCompressHandler;
 import com.sea_monster.core.resource.io.FileSysHandler;
 import com.sea_monster.core.resource.io.IFileSysHandler;
 
@@ -28,13 +26,12 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import io.rong.imkit.RongIM;
-import io.rong.imkit.RongIM.GetUserInfoProvider;
 import io.rong.imkit.demo.common.DemoApi;
 import io.rong.imkit.demo.model.User;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.RongIMClient.UserInfo;
 
-public class DemoContext {
+public final class DemoContext {
 
     private static final String TAG = "DemoContext";
     private static final String NOMEDIA = ".nomedia";
@@ -48,7 +45,6 @@ public class DemoContext {
 
     private IFileSysHandler mFileSysHandler;
     private static HttpHandler mHttpHandler;
-    private IResourceCompressHandler mCompressHandler;
 
     private SharedPreferences mPreferences;
 
@@ -65,42 +61,16 @@ public class DemoContext {
 
     public static DemoContext getInstance() {
 
-        if (self == null) {
-            self = new DemoContext();
-        }
-
         return self;
     }
 
-    public DemoContext() {
-    }
-
-    void setUsername(String username){
-
-        if(mPreferences == null)
-            mPreferences = mContext.getSharedPreferences("RONG_DEMO", Context.MODE_PRIVATE);
-
-        SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putString("USERNAME", username);
-        editor.commit();
-    }
-
-    String getUsername(){
-        if(mPreferences == null)
-            mPreferences = mContext.getSharedPreferences("RONG_DEMO", Context.MODE_PRIVATE);
-
-        return mPreferences.getString("USERNAME",null);
+    private DemoContext() {
     }
 
 
-
-    public DemoContext(Context context) {
+    private DemoContext(Context context) {
+        mContext=context;
         self = this;
-    }
-
-    public void init(Context context) {
-
-        mContext = context;
 
         //http初始化 用于登录、注册使用
         initHttp();
@@ -109,6 +79,10 @@ public class DemoContext {
         mDemoApi = new DemoApi(mHttpHandler, context);
 
         initGroupInfo();
+    }
+
+    public static void init(Context context) {
+        self = new DemoContext(context);
     }
 
     public RongIM.LocationProvider.LocationCallback getLastLocationCallback() {
@@ -148,28 +122,6 @@ public class DemoContext {
     }
 
 
-    public void receiveMessage() {
-        if(RongIM.getInstance() == null) {
-            throw new RuntimeException("初始化异常");
-        }else {
-            RongIM.getInstance().setReceiveMessageListener(new RongIM.OnReceiveMessageListener() {
-
-                @Override
-                public void onReceived(RongIMClient.Message message, int left) {
-                    Log.d("DemoContext", "receviceMessage------------>:" + message.getObjectName());
-                    int count = RongIM.getInstance().getTotalUnreadCount();
-                    Log.d("DemoContext", "receviceMessage-----------getTotalUnreadCount->:" + count);
-
-                    Intent in = new Intent();
-                    in.setAction("send_noread_message");
-                    in.putExtra("rongCloud",RongIM.getInstance().getTotalUnreadCount() );
-                    mContext.sendBroadcast(in);
-                }
-
-            });
-        }
-    }
-
     /**
      * 临时存放用户数据
      *
@@ -178,55 +130,8 @@ public class DemoContext {
     public void setFriends(ArrayList<UserInfo> userInfos) {
 
         this.mUserInfos = userInfos;
-
-        /**
-         * 好友列表的提供者。 RongIM 本身不保存 App 的好友关系，
-         * 如果在聊天中需要使用好友关系时（如：需要选择好友加入群聊），
-         * RongIM 将调用此 Provider 获取好友列表信息
-         *
-         */
-        RongIM.setGetFriendsProvider(mGetFriendsProvider);
-
-        /**
-         * 用户信息的提供者。 如果在聊天中遇到的聊天对象是没有登录过的用户（即没有通过融云服务器鉴权过的），
-         * RongIM 是不知道用户信息的，RongIM 将调用此 Provider 获取用户信息
-         */
-        RongIM.setGetUserInfoProvider(mGetUserInfoProvider, true);
     }
-    private RongIM.GetFriendsProvider mGetFriendsProvider = new RongIM.GetFriendsProvider() {
-        @Override
-        public List<UserInfo> getFriends() {
-            return mUserInfos;
-        }
-    };
-    private  GetUserInfoProvider mGetUserInfoProvider = new GetUserInfoProvider() {
-        @Override
-        public UserInfo getUserInfo(String userId) {
-            return getUserInfoById(userId);
-        }
-    };
-    /**
-     * 设置群组信息提供者
-     */
-    public void setGroupInfoProvider() {
 
-        if(RongIM.getInstance() == null){
-            throw new RuntimeException("初始化异常");
-        }else {
-            RongIM.getInstance().setGetGroupInfoProvider(mGetGroupInfoProvider);
-        }
-    }
-    private RongIM.GetGroupInfoProvider mGetGroupInfoProvider = new RongIM.GetGroupInfoProvider(){
-
-        @Override
-        public RongIMClient.Group getGroupInfo(String groupId) {
-            if (groupMap != null && !groupMap.isEmpty()) {
-                return groupMap.get(groupId);
-            } else {
-                return null;
-            }
-        }
-    };
 
     /**
      * 获取用户信息
@@ -250,6 +155,7 @@ public class DemoContext {
         }
         return userInfoReturn;
     }
+
     /**
      * 获取用户信息列表
      *
@@ -260,7 +166,7 @@ public class DemoContext {
 
         List<UserInfo> userInfoList = new ArrayList<UserInfo>();
 
-        if ( userIds != null && userIds.length > 0 && mUserInfos != null) {
+        if (userIds != null && userIds.length > 0) {
             for (String userId : userIds) {
                 for (UserInfo userInfo : mUserInfos) {
                     if (userId.equals(userInfo.getUserId())) {
@@ -353,7 +259,6 @@ public class DemoContext {
 
     public SharedPreferences getSharedPreferences() {
         return mPreferences;
-
     }
 
     public void setSharedPreferences(SharedPreferences sharedPreferences) {
@@ -373,10 +278,9 @@ public class DemoContext {
     private void initGroupInfo() {
 
 
-
-        RongIMClient.Group group1 = new RongIMClient.Group("group001", "群组一", "http://rongcloud.cn/images/logo.png");
-        RongIMClient.Group group2 = new RongIMClient.Group("group002", "群组二", "http://rongcloud.cn/images/logo.png");
-        RongIMClient.Group group3 = new RongIMClient.Group("group003", "群组三", "http://rongcloud.cn/images/logo.png");
+        RongIMClient.Group group1 = new RongIMClient.Group("group001", "群组一", "http://www.yjz9.com/uploadfile/2014/0807/20140807114030812.jpg");
+        RongIMClient.Group group2 = new RongIMClient.Group("group002", "群组二", "http://www.yjz9.com/uploadfile/2014/0330/20140330023925331.jpg");
+        RongIMClient.Group group3 = new RongIMClient.Group("group003", "群组三", "http://www.yjz9.com/uploadfile/2014/0921/20140921013004454.jpg");
         List<RongIMClient.Group> groups = new ArrayList<RongIMClient.Group>();
         groups.add(group1);
         groups.add(group2);
@@ -387,24 +291,17 @@ public class DemoContext {
         groupM.put("group002", group2);
         groupM.put("group003", group3);
 
-        if(DemoContext.getInstance()!=null)
+        if (DemoContext.getInstance() != null)
             DemoContext.getInstance().setGroupMap(groupM);
         else
             throw new RuntimeException("同步群组异常");
     }
-    /**
-     * 设置地图provider
-     */
-    public void setLocationProvider() {
 
-        RongIM.setLocationProvider(mLocationProvider);
+    public ArrayList<UserInfo> getUserInfos() {
+        return mUserInfos;
     }
-    private RongIM.LocationProvider mLocationProvider = new RongIM.LocationProvider() {
-        @Override
-        public void onStartLocation(Context context, LocationCallback callback) {
-            DemoContext.getInstance().setLastLocationCallback(callback);
-            context.startActivity(new Intent(context, LocationActivity.class));
-        }
-    };
 
+    public void setUserInfos(ArrayList<UserInfo> userInfos) {
+        mUserInfos = userInfos;
+    }
 }

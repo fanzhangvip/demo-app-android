@@ -36,6 +36,7 @@
     <string name="delete_from_balck">删除黑名单</string>
     <string name="cancle_black">取消</string>
     <string name="network_not">当前网络不可用</string>
+    <string name="connect_fail">连接失败,将离线登陆</string>
 
 
 </resources>

@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.sea_monster.core.exception.BaseException;
 import com.sea_monster.core.exception.InternalException;
 import com.sea_monster.core.network.AbstractHttpRequest;
@@ -124,6 +125,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
                         mHandler.obtainMessage(HANDLER_LOGIN_SUCCESS).sendToTarget();
                         mIsLoginSuccess = true;
                         mUserID = userId;
+                        RongCloudEvent.getInstance().setOtherListener();
                     }
 
                     @Override
@@ -138,7 +140,6 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
         }
 
     }
-
 
     @SuppressWarnings("unchecked")
     @Override
@@ -168,7 +169,69 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
         }
 
     }
+    private void httpLoginSuccess(User user, boolean isFirst) {
 
+        if (isFirst) {
+            Gson gson = new Gson();
+            String userJson = gson.toJson(user);
+
+            DemoContext.getInstance().getSharedPreferences().edit().putString("LONGIN_USER", userJson).commit();
+        }
+
+        /**
+         * IMKit SDK调用第二步
+         *
+         * 建立与服务器的连接
+         *
+         * 详见API
+         * http://docs.rongcloud.cn/api/android/imkit/index.html
+         */
+        try {
+            RongIM.connect(user.getToken(), new ConnectCallback() {
+
+                @Override
+                public void onSuccess(String userId) {
+                    Log.d("LoginActivity", "--------- onSuccess userId----------:" + userId);
+                    mHandler.obtainMessage(HANDLER_LOGIN_SUCCESS).sendToTarget();
+                    mIsLoginSuccess = true;
+                    mUserID = userId;
+                    RongCloudEvent.getInstance().setOtherListener();
+                }
+
+                @Override
+                public void onError(ErrorCode errorCode) {
+//                            mHandler.obtainMessage(HANDLER_LOGIN_FAILURE).sendToTarget();
+                    Log.d("LoginActivity", "---------onError ----------:" + errorCode);
+                    mHandler.obtainMessage(HANDLER_LOGIN_SUCCESS).sendToTarget();
+                    LoginActivity.this.runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            WinToast.toast(LoginActivity.this, R.string.connect_fail);
+                        }
+                    });
+                }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (DemoContext.getInstance() != null) {
+            Editor editor = DemoContext.getInstance().getSharedPreferences().edit();
+            editor.putString(INTENT_PASSWORD, mPasswordEditText.getText().toString());
+            editor.putString(INTENT_EMAIL, mUserNameEditText.getText().toString());
+            editor.commit();
+        }
+
+
+        //发起获取好友列表的http请求  (注：非融云SDK接口，是demo接口)
+        if (DemoContext.getInstance() != null) {
+            getFriendsHttpRequest = DemoContext.getInstance().getDemoApi().getFriends(user.getCookie(), this);
+            DemoContext.getInstance().setCurrentUser(user);
+        }
+
+    }
 
     @SuppressWarnings("unchecked")
     @Override
@@ -178,66 +241,10 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
         if (loginHttpRequest == request) {
 
             if (obj instanceof User) {
+
                 final User user = (User) obj;
-
-                /**
-                 * IMKit SDK调用第二步
-                 *
-                 * 建立与服务器的连接
-                 *
-                 * 详见API
-                 * http://docs.rongcloud.cn/api/android/imkit/index.html
-                 */
-                try {
-                    RongIM.connect(user.getToken(), new ConnectCallback() {
-    //                RongIM.connect(TOKEN, new ConnectCallback() {
-
-                        @Override
-                        public void onSuccess(String userId) {
-                            Log.d("LoginActivity", "---------userId----------:" + userId);
-                            Log.e("LoginActivity", "---------user.getToken()----------:" + user.getToken());
-                            mHandler.obtainMessage(HANDLER_LOGIN_SUCCESS).sendToTarget();
-                            mIsLoginSuccess = true;
-                            mUserID = userId;
-
-                            Editor editor = DemoContext.getInstance().getSharedPreferences().edit();
-                            editor.putString("LOGIN_TOKEN", user.getToken());
-                            editor.commit();
-
-                        }
-
-                        @Override
-                        public void onError(ErrorCode errorCode) {
-                            mHandler.obtainMessage(HANDLER_LOGIN_FAILURE).sendToTarget();
-                        }
-
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                if (DemoContext.getInstance() != null) {
-                    Editor editor = DemoContext.getInstance().getSharedPreferences().edit();
-                    editor.putString(INTENT_PASSWORD, mPasswordEditText.getText().toString());
-                    editor.putString(INTENT_EMAIL, mUserNameEditText.getText().toString());
-                    editor.commit();
-                }
-
-
-                //发起获取好友列表的http请求  (注：非融云SDK接口，是demo接口)
-                if (DemoContext.getInstance() != null){
-                    getFriendsHttpRequest = DemoContext.getInstance().getDemoApi().getFriends(user.getCookie(), this);
-                    DemoContext.getInstance().setCurrentUser(user);
-                }
-
-
-            } else {
-                WinToast.toast(this, R.string.login_failure);
-
-
-                if (mDialog != null)
-                    mDialog.dismiss();
+                httpLoginSuccess(user, true);
             }
-
             //获取好友列表接口  返回好友数据  (注：非融云SDK接口，是demo接口)
         } else if (getFriendsHttpRequest == request) {
 
@@ -301,12 +308,6 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
                 mDialog.dismiss();
 
         } else if (msg.what == HANDLER_LOGIN_SUCCESS) {
-            if(DemoContext.getInstance()!=null) {
-                DemoContext.getInstance().setGroupInfoProvider();
-                DemoContext.getInstance().receiveMessage();
-                DemoContext.getInstance().setLocationProvider();
-            }
-
             WinToast.toast(LoginActivity.this, R.string.login_success);
 
             if (mDialog != null)
@@ -315,8 +316,6 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
             startActivity(new Intent(this, MainActivity.class));
 
             initGroupInfo();
-
-
         }
         return false;
     }
@@ -333,7 +332,6 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
             while (iterator.hasNext()) {
                 groups.add((RongIMClient.Group) iterator.next());
             }
-
 
             if (RongIM.getInstance() != null) {
                 RongIM.getInstance().syncGroup(groups, new RongIM.OperationCallback() {

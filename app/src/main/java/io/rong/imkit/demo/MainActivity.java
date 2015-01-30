@@ -22,6 +22,7 @@ import io.rong.message.RichContentMessage;
 
 public class MainActivity extends BaseActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
 
+    public static final String ACTION_DMEO_RECEIVE_MESSAGE = "action_demo_receive_message";
     private static final String TAG = "FunctionListActivity";
     private ListView mListView;
     private FunctionListAdapter mFunctionListAdapter;
@@ -30,6 +31,7 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
     private int numbermessage = 0;
     private ImageView mImageView;
     private String TOKEN="gFmGqvAPhTq2uxb/fkc1XEmcbyeYIrXSDa0nFvL2mH9L+lkk8QPOVwUG8elRuUE0K8PSxWsB1ksrqWKM/Q8rHA==";
+    private ReceiveMessageBroadcastReciver mBroadcastReciver;
     @Override
     protected int setContentViewResId() {
         return R.layout.activity_functioan_list;
@@ -37,8 +39,6 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
 
     @Override
     protected void initView() {
-        numbermessage = RongIM.getInstance().getTotalUnreadCount();
-        DemoContext.getInstance().receiveMessage();
 
         mListView = getViewById(android.R.id.list);
         View headerView = LayoutInflater.from(this).inflate(
@@ -50,24 +50,26 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
         mImageView = mAction.getBackView();
         mImageView.setVisibility(View.GONE);
 
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ACTION_DMEO_RECEIVE_MESSAGE);
+        if (mBroadcastReciver == null) {
+            mBroadcastReciver = new ReceiveMessageBroadcastReciver();
+        }
+        this.registerReceiver(mBroadcastReciver, intentFilter);
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("send_noread_message");
-        registerReceiver(new MyBroadcastReciver(), intentFilter);
-
-        numbermessage = RongIM.getInstance().getTotalUnreadCount();
         initData();
     }
 
-    private class MyBroadcastReciver extends BroadcastReceiver {
+    private class ReceiveMessageBroadcastReciver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action.equals("send_noread_message")) {
+            if (action.equals(ACTION_DMEO_RECEIVE_MESSAGE)) {
                 numbermessage = intent.getIntExtra("rongCloud", -1);
                 initData();
             }
@@ -77,7 +79,13 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
 
     @Override
     protected void initData() {
-
+        if (RongIM.getInstance() != null) {
+            try {
+                numbermessage = RongIM.getInstance().getTotalUnreadCount();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         String[] titleNameArray = this.getResources().getStringArray(
                 R.array.function_list);
         mFunctionListAdapter = new FunctionListAdapter(this, titleNameArray,
@@ -242,5 +250,12 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
     }
 
 
+    @Override
+    protected void onDestroy() {
+        if (mBroadcastReciver != null) {
+            this.unregisterReceiver(mBroadcastReciver);
+        }
+        super.onDestroy();
+    }
 
 }
