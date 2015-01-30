@@ -169,7 +169,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
         }
 
     }
-    private void httpLoginSuccess(User user, boolean isFirst) {
+    private void httpLoginSuccess(final User user, boolean isFirst) {
 
         if (isFirst) {
             Gson gson = new Gson();
@@ -196,6 +196,10 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
                     mIsLoginSuccess = true;
                     mUserID = userId;
                     RongCloudEvent.getInstance().setOtherListener();
+
+                    Editor editor = DemoContext.getInstance().getSharedPreferences().edit();
+                    editor.putString("LOGIN_TOKEN", user.getToken());
+                    editor.commit();
                 }
 
                 @Override
