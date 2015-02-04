@@ -7,6 +7,7 @@ import android.util.Log;
 import java.util.List;
 
 import io.rong.imkit.RongIM;
+import io.rong.imkit.demo.message.GroupInvitationNotification;
 import io.rong.imlib.RongIMClient;
 import io.rong.message.ImageMessage;
 import io.rong.message.LocationMessage;
@@ -113,6 +114,8 @@ public final class RongCloudEvent implements RongIM.OnReceiveMessageListener, Ro
         if (messageContent instanceof TextMessage) {//文本消息
             TextMessage textMessage = (TextMessage) messageContent;
             Log.d(TAG, "onReceived-TextMessage:" + textMessage.getContent());
+            Log.d(TAG, "onReceived-TextMessage:" + textMessage.getPushContent());
+
         } else if (messageContent instanceof ImageMessage) {//图片消息
             ImageMessage imageMessage = (ImageMessage) messageContent;
             Log.d(TAG, "onReceived-ImageMessage:" + imageMessage.getRemoteUri());
@@ -122,7 +125,10 @@ public final class RongCloudEvent implements RongIM.OnReceiveMessageListener, Ro
         } else if (messageContent instanceof RichContentMessage) {//图文消息
             RichContentMessage richContentMessage = (RichContentMessage) messageContent;
             Log.d(TAG, "onReceived-RichContentMessage:" + richContentMessage.getContent());
-        } else {
+        }else if (messageContent instanceof GroupInvitationNotification) {//图文消息
+            GroupInvitationNotification groupContentMessage = (GroupInvitationNotification) messageContent;
+            Log.d(TAG, "onReceived-GroupInvitationNotification:" + groupContentMessage.getMessage());
+        }else {
             Log.d(TAG, "onReceived-其他消息，自己来判断处理");
         }
 
