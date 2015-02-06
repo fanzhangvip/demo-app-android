@@ -116,12 +116,13 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
              *
              * API详见 http://docs.rongcloud.cn/android.html
              */
-            if (RongIM.getInstance() != null) {
+            if (RongIM.getInstance() != null)
                 RongIM.getInstance().startConversationList(this);
-            }
+
 
         } else if (position == 2) {
-            RongIM.getInstance().startCustomerServiceChat(this, "kefu114", "客服");
+            if (RongIM.getInstance() != null)
+                RongIM.getInstance().startCustomerServiceChat(this, "kefu114", "客服");
 
         } else if (position == 3) {
 
@@ -131,46 +132,47 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
             String url = "http://img2.cache.netease.com/photo/0003/2014-10-15/900x600_A8J6CVA400AJ0003.jpg";
             RichContentMessage imageTextMessage = new RichContentMessage(title, content, url);
             imageTextMessage.setExtra("可以存放的网址，商品编号或URI,在点击消息时你可以取到进入你的商品页面");
+            if(RongIM.getInstance() != null) {
+                RongIM.getInstance().sendMessage(RongIMClient.ConversationType.PRIVATE, "11", imageTextMessage, new RongIMClient.SendMessageCallback() {
 
-            RongIM.getInstance().sendMessage(RongIMClient.ConversationType.PRIVATE, "11", imageTextMessage, new RongIMClient.SendMessageCallback() {
+                            @Override
+                            public void onSuccess(int messageId) {
 
-                        @Override
-                        public void onSuccess(int messageId) {
+                            }
 
+                            @Override
+                            public void onError(int messageId, ErrorCode errorCode) {
+
+                            }
+
+                            @Override
+                            public void onProgress(int messageId, int percent) {
+
+                            }
                         }
+                );
 
-                        @Override
-                        public void onError(int messageId, ErrorCode errorCode) {
+                RongIM.getInstance().sendMessage(RongIMClient.ConversationType.CUSTOMER_SERVICE, "kefu114", imageTextMessage, new RongIMClient.SendMessageCallback() {
 
+                            @Override
+                            public void onSuccess(int messageId) {
+
+                            }
+
+                            @Override
+                            public void onError(int messageId, ErrorCode errorCode) {
+
+                            }
+
+                            @Override
+                            public void onProgress(int messageId, int percent) {
+
+                            }
                         }
+                );
 
-                        @Override
-                        public void onProgress(int messageId, int percent) {
-
-                        }
-                    }
-            );
-
-            RongIM.getInstance().sendMessage(RongIMClient.ConversationType.CUSTOMER_SERVICE, "kefu114", imageTextMessage, new RongIMClient.SendMessageCallback() {
-
-                        @Override
-                        public void onSuccess(int messageId) {
-
-                        }
-
-                        @Override
-                        public void onError(int messageId, ErrorCode errorCode) {
-
-                        }
-
-                        @Override
-                        public void onProgress(int messageId, int percent) {
-
-                        }
-                    }
-            );
-
-            RongIM.getInstance().startCustomerServiceChat(this, "kefu114", "客服");
+                RongIM.getInstance().startCustomerServiceChat(this, "kefu114", "客服");
+            }
 
         } else if (position == 4) {
             /**
@@ -184,6 +186,7 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
         } else if (position == 5) {
             startActivity(new Intent(this, GroupListActivity.class));
         } else if (position == 6) {
+            if (RongIM.getInstance() != null)
             RongIM.getInstance().startConversation(this, RongIMClient.ConversationType.CHATROOM, "chatroom002", "聊天室");
         } else if (position == 7) {
             startActivity(new Intent(this, TestFragmentActivity.class));
