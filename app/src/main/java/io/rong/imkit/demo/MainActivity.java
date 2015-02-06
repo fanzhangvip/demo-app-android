@@ -121,7 +121,6 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
 
 
         } else if (position == 2) {
-            if (RongIM.getInstance() != null)
                 RongIM.getInstance().startCustomerServiceChat(this, "kefu114", "客服");
 
         } else if (position == 3) {
@@ -132,7 +131,7 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
             String url = "http://img2.cache.netease.com/photo/0003/2014-10-15/900x600_A8J6CVA400AJ0003.jpg";
             RichContentMessage imageTextMessage = new RichContentMessage(title, content, url);
             imageTextMessage.setExtra("可以存放的网址，商品编号或URI,在点击消息时你可以取到进入你的商品页面");
-            if(RongIM.getInstance() != null) {
+
                 RongIM.getInstance().sendMessage(RongIMClient.ConversationType.PRIVATE, "11", imageTextMessage, new RongIMClient.SendMessageCallback() {
 
                             @Override
@@ -172,7 +171,7 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
                 );
 
                 RongIM.getInstance().startCustomerServiceChat(this, "kefu114", "客服");
-            }
+
 
         } else if (position == 4) {
             /**
@@ -180,7 +179,6 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
              *
              * API详见 http://docs.rongcloud.cn/android.html
              */
-        if(RongIM.getInstance() != null)
             RongIM.getInstance().startPrivateChat(this, DemoContext.getInstance().getCurrentUser().getUserId(), "光头强");
 
         } else if (position == 5) {
