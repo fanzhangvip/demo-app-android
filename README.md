@@ -42,9 +42,19 @@ Rong_IMKit_vx_x_x.jar 中已经集成如下开源库为防重复引用特此提�
 
 **如需混淆请在混淆脚本中加入如下代码。**
 
-* -keepattributes Exceptions,InnerClasses
-* -keep class io.rong.** {*;}
-* -keep class **.R$* { *; }
+-keepattributes Exceptions,InnerClasses
+
+-keep class io.rong.** {*;}
+
+-keepattributes Signature
+
+-keepattributes *Annotation*
+
+-keepclassmembers class * extends de.greenrobot.dao.AbstractDao {
+    public static java.lang.String TABLENAME;
+}
+-keep class **$Properties
+-dontwarn  org.eclipse.jdt.annotation.**
 
 #### 联系我们
 商务合作
