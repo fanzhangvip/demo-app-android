@@ -149,7 +149,7 @@ public final class RongCloudEvent implements RongIM.OnReceiveMessageListener, Ro
      * @param message 消息。
      */
     @Override
-    public void onSent(RongIMClient.Message message) {
+    public RongIMClient.Message onSent(RongIMClient.Message message) {
 
         RongIMClient.MessageContent messageContent = message.getContent();
 
@@ -168,6 +168,7 @@ public final class RongCloudEvent implements RongIM.OnReceiveMessageListener, Ro
         } else {
             Log.d(TAG, "onSent-其他消息，自己来判断处理");
         }
+        return  message;
     }
 
     /**

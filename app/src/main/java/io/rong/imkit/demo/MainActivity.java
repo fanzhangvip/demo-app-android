@@ -132,6 +132,7 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
             RichContentMessage imageTextMessage = new RichContentMessage(title, content, url);
             imageTextMessage.setExtra("可以存放的网址，商品编号或URI,在点击消息时你可以取到进入你的商品页面");
 
+            if(RongIM.getInstance()!=null) {
                 RongIM.getInstance().sendMessage(RongIMClient.ConversationType.PRIVATE, "11", imageTextMessage, new RongIMClient.SendMessageCallback() {
 
                             @Override
@@ -169,7 +170,7 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
                             }
                         }
                 );
-
+            }
                 RongIM.getInstance().startCustomerServiceChat(this, "kefu114", "客服");
 
 
