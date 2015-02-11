@@ -53,6 +53,7 @@ Rong_IMKit_vx_x_x.jar 中已经集成如下开源库为防重复引用特此提�
 -keepclassmembers class * extends de.greenrobot.dao.AbstractDao {
     public static java.lang.String TABLENAME;
 }
+
 -keep class **$Properties
 -dontwarn  org.eclipse.jdt.annotation.**
 
