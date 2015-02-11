@@ -9,8 +9,12 @@ import java.util.List;
 import io.rong.imkit.RongIM;
 import io.rong.imkit.demo.message.GroupInvitationNotification;
 import io.rong.imlib.RongIMClient;
+import io.rong.message.CommandNotificationMessage;
+import io.rong.message.ContactNotificationMessage;
 import io.rong.message.ImageMessage;
+import io.rong.message.InformationNotificationMessage;
 import io.rong.message.LocationMessage;
+import io.rong.message.ProfileNotificationMessage;
 import io.rong.message.RichContentMessage;
 import io.rong.message.TextMessage;
 import io.rong.message.VoiceMessage;
@@ -125,9 +129,21 @@ public final class RongCloudEvent implements RongIM.OnReceiveMessageListener, Ro
         } else if (messageContent instanceof RichContentMessage) {//图文消息
             RichContentMessage richContentMessage = (RichContentMessage) messageContent;
             Log.d(TAG, "onReceived-RichContentMessage:" + richContentMessage.getContent());
-        }else if (messageContent instanceof GroupInvitationNotification) {//图文消息
+        }else if (messageContent instanceof GroupInvitationNotification) {//自定义群组消息
             GroupInvitationNotification groupContentMessage = (GroupInvitationNotification) messageContent;
             Log.d(TAG, "onReceived-GroupInvitationNotification:" + groupContentMessage.getMessage());
+        }else if (messageContent instanceof ContactNotificationMessage) {//联系人（好友）操作通知消息
+            ContactNotificationMessage contactMessage = (ContactNotificationMessage) messageContent;
+            Log.d(TAG, "onReceived-ContactNotificationMessage:" + contactMessage.getMessage());
+        }else if (messageContent instanceof ProfileNotificationMessage) {//资料变更通知消息
+            ProfileNotificationMessage profileMessage = (ProfileNotificationMessage) messageContent;
+            Log.d(TAG, "onReceived-ProfileNotificationMessage:" + profileMessage.getExtra());
+        }else if (messageContent instanceof CommandNotificationMessage) {//命令通知消息
+            CommandNotificationMessage commantMessage = (CommandNotificationMessage) messageContent;
+            Log.d(TAG, "onReceived-CommandNotificationMessage:" + commantMessage.getName());
+        }else if (messageContent instanceof InformationNotificationMessage) {//小灰条消息
+            InformationNotificationMessage infoMessage = (InformationNotificationMessage) messageContent;
+            Log.d(TAG, "onReceived-GroupInvitationNotification:" + infoMessage.getMessage());
         }else {
             Log.d(TAG, "onReceived-其他消息，自己来判断处理");
         }

@@ -112,32 +112,39 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
 
         String token = DemoContext.getInstance().getSharedPreferences().getString("LOGIN_TOKEN",null);
         Log.e("LoginActivity", "---------userId token---------:" + token);
-        if(!TextUtils.isEmpty(token)){
-            try {
-            if (mDialog != null && !mDialog.isShowing())
-                mDialog.show();
-                RongIM.connect(token, new ConnectCallback() {
-                    @Override
-                    public void onSuccess(String userId) {
-
-                        Log.e("LoginActivity", "---------userId---------:" + userId);
-
-                        mHandler.obtainMessage(HANDLER_LOGIN_SUCCESS).sendToTarget();
-                        mIsLoginSuccess = true;
-                        mUserID = userId;
-                        RongCloudEvent.getInstance().setOtherListener();
-                    }
-
-                    @Override
-                    public void onError(ErrorCode errorCode) {
-                        Log.e("LoginActivity", "---------errorCode---------:" + errorCode);
-                        mHandler.obtainMessage(HANDLER_LOGIN_FAILURE).sendToTarget();
-                    }
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+//        if(!TextUtils.isEmpty(token)){
+//            try {
+//            if (mDialog != null && !mDialog.isShowing())
+//                mDialog.show();
+//                RongIM.connect(token, new ConnectCallback() {
+//                    @Override
+//                    public void onSuccess(String userId) {
+//
+//                        Log.e("LoginActivity", "---------userId---------:" + userId);
+//
+//                        mHandler.obtainMessage(HANDLER_LOGIN_SUCCESS).sendToTarget();
+//                        mIsLoginSuccess = true;
+//                        mUserID = userId;
+//                        RongCloudEvent.getInstance().setOtherListener();
+//
+//                        if (DemoContext.getInstance() != null) {
+//                            User user = new User();
+//                            getFriendsHttpRequest = DemoContext.getInstance().getDemoApi().getFriends(user.getCookie(), LoginActivity.this);
+//                            DemoContext.getInstance().setCurrentUser(user);
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(ErrorCode errorCode) {
+//                        Log.e("LoginActivity", "---------errorCode---------:" + errorCode);
+//                        mHandler.obtainMessage(HANDLER_LOGIN_FAILURE).sendToTarget();
+//                    }
+//                });
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
 
     }
 
@@ -169,7 +176,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
         }
 
     }
-    private void httpLoginSuccess(User user, boolean isFirst) {
+    private void httpLoginSuccess(final User user, boolean isFirst) {
 
         if (isFirst) {
             Gson gson = new Gson();
@@ -198,6 +205,10 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
                     mIsLoginSuccess = true;
                     mUserID = userId;
                     RongCloudEvent.getInstance().setOtherListener();
+
+                    Editor editor = DemoContext.getInstance().getSharedPreferences().edit();
+                    editor.putString("LOGIN_TOKEN", user.getToken());
+                    editor.commit();
                 }
 
                 @Override
