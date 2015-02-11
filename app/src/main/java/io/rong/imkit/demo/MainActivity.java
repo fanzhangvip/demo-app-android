@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import io.rong.imkit.RongIM;
+import io.rong.imkit.demo.ui.WinToast;
 import io.rong.imkit.view.ActionBar;
 import io.rong.imkit.view.AlterDialog;
 import io.rong.imlib.RongIMClient;
@@ -30,7 +31,7 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
     private ActionBar mAction;
     private int numbermessage = 0;
     private ImageView mImageView;
-    private String TOKEN="gFmGqvAPhTq2uxb/fkc1XEmcbyeYIrXSDa0nFvL2mH9L+lkk8QPOVwUG8elRuUE0K8PSxWsB1ksrqWKM/Q8rHA==";
+    private String TOKEN="6TFD0OUBUvI2LCD68J77icvm/o4XK5QTKgksvmQJQNaM+V+bYwBTgldvROK68J1P8z9Kj2yVRGSIc+V4IbZWKA==";
     private ReceiveMessageBroadcastReciver mBroadcastReciver;
     @Override
     protected int setContentViewResId() {
@@ -116,15 +117,21 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
              *
              * API详见 http://docs.rongcloud.cn/android.html
              */
-            if (RongIM.getInstance() != null)
+            if (RongIM.getInstance() != null) {
                 RongIM.getInstance().startConversationList(this);
-
+            }else {
+                WinToast.toast(this, R.string.conntect_state_prompt_disconnect);
+            }
 
         } else if (position == 2) {
+            if (RongIM.getInstance() != null) {
                 RongIM.getInstance().startCustomerServiceChat(this, "kefu114", "客服");
+            }else {
+                WinToast.toast(this, R.string.conntect_state_prompt_disconnect);
+            }
 
         } else if (position == 3) {
-
+            if(RongIM.getInstance() != null) {
 
             String content = "新华网莫斯科10月14日电 国务院总理李克强14日出席第三届莫斯科国际创新发展论坛并发表题为《以创新实现共同发展包容发展》的演讲。演讲全文如下：创新是人类发展进步的不熄引擎。当今世界正处于大变革、大调整之中，迫切要求更大范围、更深层次的创新。实现这样的创新，墨守成规不行，单打独斗也不行，需要开放、合作与分享。6年前，面对国际金融危机，国际社会同舟共济，避免了危机向纵深蔓延。随着经济全球化、社会信息化的深入推进，更需要各国携起手来，在合作创新中实现知识的倍增、价值的倍增，解决发展的难题，促进共同繁荣。这正是开放式创新的意义所在。";
             String title = "新华网莫斯科10月14日电,李克强在第三届莫斯科国际创新发展论坛上的演讲";
@@ -132,7 +139,7 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
             RichContentMessage imageTextMessage = new RichContentMessage(title, content, url);
             imageTextMessage.setExtra("可以存放的网址，商品编号或URI,在点击消息时你可以取到进入你的商品页面");
 
-            if(RongIM.getInstance()!=null) {
+
                 RongIM.getInstance().sendMessage(RongIMClient.ConversationType.PRIVATE, "11", imageTextMessage, new RongIMClient.SendMessageCallback() {
 
                             @Override
@@ -170,8 +177,10 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
                             }
                         }
                 );
-            }
                 RongIM.getInstance().startCustomerServiceChat(this, "kefu114", "客服");
+            }else{
+                WinToast.toast(this, R.string.conntect_state_prompt_disconnect);
+            }
 
 
         } else if (position == 4) {
@@ -180,13 +189,19 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
              *
              * API详见 http://docs.rongcloud.cn/android.html
              */
-            RongIM.getInstance().startPrivateChat(this, DemoContext.getInstance().getCurrentUser().getUserId(), "光头强");
+            if (RongIM.getInstance() != null && DemoContext.getInstance().getCurrentUser().getUserId() != null)
+                RongIM.getInstance().startPrivateChat(this, DemoContext.getInstance().getCurrentUser().getUserId(), "光头强");
+            else{
+                WinToast.toast(this, R.string.conntect_state_prompt_disconnect);
+            }
 
         } else if (position == 5) {
             startActivity(new Intent(this, GroupListActivity.class));
         } else if (position == 6) {
             if (RongIM.getInstance() != null)
             RongIM.getInstance().startConversation(this, RongIMClient.ConversationType.CHATROOM, "chatroom002", "聊天室");
+            else
+                WinToast.toast(this, R.string.conntect_state_prompt_disconnect);
         } else if (position == 7) {
             startActivity(new Intent(this, TestFragmentActivity.class));
         } else if (position == 8) {

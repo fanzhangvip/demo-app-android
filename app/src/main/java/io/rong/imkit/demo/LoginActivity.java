@@ -63,7 +63,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
 
     private boolean mIsLoginSuccess = false;
 
-    private String TOKEN="6TFD0OUBUvI2LCD68J77icvm/o4XK5QTKgksvmQJQNaM+V+bYwBTgldvROK68J1P8z9Kj2yVRGSIc+V4IbZWKA==";
+    private String TOKEN="ABiJiw9kjm5JNKBqOueR1kmcbyeYIrXSDa0nFvL2mH8ZQAacEOnpq4ALGp+0d44QDl1Qq02s3vO1S9Uvmgoceg==";
     public static String mUserID =null;
     @Override
     protected int setContentViewResId() {
