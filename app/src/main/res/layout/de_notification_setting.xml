@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <io.rong.imkit.view.ActionBar
+        android:id="@+id/action_bar"
+        android:background="@color/title_bg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_to_dip_96" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/de_status"
+        android:layout_margin="10dip"
+        android:textSize="@dimen/px_to_dip_32"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:textColor="@color/welcome_onrange"
+        android:text="@string/de_notification_information"
+        android:textSize="@dimen/px_to_dip_32"
+        />
+
+    <TimePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/de_from_timePicker"
+        android:layout_gravity="center_horizontal" />
+
+    <TimePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/de_to_timePicker"
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal" />
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:id="@+id/de_add_notification"
+        android:text="@string/de_notification_add"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:id="@+id/de_remove_notification"
+        android:text="@string/de_notification_remove"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:id="@+id/de_quary_notification"
+        android:text="@string/de_notification_query"/>
+
+
+
+    </LinearLayout>

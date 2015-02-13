@@ -36,6 +36,12 @@
     <string name="delete_from_balck">删除黑名单</string>
     <string name="cancle_black">取消</string>
     <string name="network_not">当前网络不可用</string>
+    <string name="de_notification_remove">移除设置提醒</string>
+    <string name="de_notification_query">查询设置提醒</string>
+    <string name="de_notification_add">增加设置提醒</string>
+    <string name="de_notification_status_no">当前未设置push屏蔽时间</string>
+    <string name="de_notification_status_yes">当前设置push屏蔽时间为：</string>
+    <string name="de_notification_information">设置屏蔽开始时间，屏蔽时间为5分钟（可随意设置，此处便于测试）</string>
 
 
 </resources>

@@ -25,12 +25,8 @@ public class DemoApplication extends Application {
 
         /**
          * IMKit SDK调用第一步 初始化
-         * 第一个参数，  context上下文
-         * 第二个参数，APPKey换成自己的appkey
-         * 第三个参数，push消息通知所要打个的action页面
-         * 第四个参数，push消息中可以自定义push图标
          */
-        RongIM.init(this, APP_KEY, R.drawable.ic_launcher);
+        RongIM.init(this);
         RongIM.setConversationBehaviorListener(new RongIM.ConversationBehaviorListener() {
 
             @Override
@@ -70,23 +66,45 @@ public class DemoApplication extends Application {
             mContext.init(this);
         else
             throw new RuntimeException("初始化异常");
-        try {
-//            Class c;
-//            c = Class.forName("com.networkbench.agent.impl.NBSAppAgent");
-//            Method m = c.getMethod("setLicenseKey", new Class[]{String.class});
-//            m.invoke(c, new Object[]{"a546c342ba704acf91b27e9603b6860d"});
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
        try {
 //            System.loadLibrary("imdemo");
         } catch (UnsatisfiedLinkError e) {
 //            e.printStackTrace();
         }
+    /* RongIM.getInstance().getRongIMClient().setConversationNotificationCycle("00",20,new RongIMClient.SetConversationNotificationCycleCallback() {
+    @Override
+    public void onSuccess() {
 
+    }
 
+    @Override
+    public void onError(ErrorCode errorCode) {
+
+    }
+    });
+        RongIM.getInstance().getRongIMClient().removeConversationNotificationCycle(new RongIMClient.RemoveConversationNotificationCycleCallback() {
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onError(ErrorCode errorCode) {
+
+            }
+        });
+        RongIM.getInstance().getRongIMClient().getConversationNotificationCycle(new RongIMClient.GetConversationNotificationCycleCallback() {
+            @Override
+            public void onSuccess(String s, int i) {
+
+            }
+
+            @Override
+            public void onError(ErrorCode errorCode) {
+
+            }
+        });*/
 
         Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler(this));
 

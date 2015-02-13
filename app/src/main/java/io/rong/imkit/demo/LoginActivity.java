@@ -62,7 +62,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
 
     private boolean mIsLoginSuccess = false;
 
-    private String TOKEN="G70KaAQEQKdshvFLyTrzd2AyPi+6iLIgiLy3HWTcWxfOcwi4gxEouZUHULeDXfngV0qi2dU+p+Jp8GKvY1FHG4ypcbP4WNdO";
+    private String TOKEN="HtymJWYc8lTwfKgcAN9P57I6ZiT8q7s0UEaMPWY0lMw1SnA9yXU+KsOb5slbLWhxvJ6WgjQYA7h94DvkFpmc5g==";
     public static String mUserID =null;
     @Override
     protected int setContentViewResId() {
@@ -111,7 +111,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
 
         String token = DemoContext.getInstance().getSharedPreferences().getString("LOGIN_TOKEN",null);
         Log.e("LoginActivity", "---------userId token---------:" + token);
-        if(!TextUtils.isEmpty(token)){
+    /*    if(!TextUtils.isEmpty(token)){
             try {
             if (mDialog != null && !mDialog.isShowing())
                 mDialog.show();
@@ -134,7 +134,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
+        }*/
 
     }
 
@@ -189,7 +189,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
                  */
                 try {
                     RongIM.connect(user.getToken(), new ConnectCallback() {
-    //                RongIM.connect(TOKEN, new ConnectCallback() {
+//                    RongIM.connect(TOKEN, new ConnectCallback() {
 
                         @Override
                         public void onSuccess(String userId) {
@@ -207,6 +207,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
 
                         @Override
                         public void onError(ErrorCode errorCode) {
+                            Log.d("LoginActivity", "--------- onError errorCode----------:" + errorCode);
                             mHandler.obtainMessage(HANDLER_LOGIN_FAILURE).sendToTarget();
                         }
 

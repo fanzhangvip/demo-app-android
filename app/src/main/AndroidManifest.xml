@@ -155,23 +155,49 @@
             android:priority="1000"></service>
 
         <service
-            android:name="io.rong.imlib.PushService"
-            android:process="io.rong.push.service" />
+            android:name="io.rong.imlib.push.PushService"
+            android:process=":push">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="io.rong.push" />
+            </intent-filter>
+        </service>
 
-        <service android:name="io.rong.imlib.RongService" />
+        <service
+            android:name="io.rong.imlib.push.CommandService"
+            android:process=":push">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="io.rong.command" />
+            </intent-filter>
+        </service>
 
-        <receiver android:name="io.rong.imlib.PushReceiver"
-            android:process="io.rong.push.service">
+        <receiver
+            android:name="io.rong.imlib.push.PushReceiver"
+            android:process=":push">
             <intent-filter>
                 <action android:name="io.rong.imlib.action.push.heartbeat" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
+        <receiver
+            android:name="io.rong.imlib.push.PushMessageReceiver">
+            <intent-filter>
+                <action android:name="io.rong.push.message" />
+            </intent-filter>
+        </receiver>
+        <service android:name="io.rong.imlib.RongService"/>
         <!-- End Rong Cloud -->
 
+        <meta-data
+            android:name="RONG_CLOUD_APP_KEY"
+            android:value="z3v5yqkbv8v30"></meta-data>
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="543c86c5fd98c507d001cb71"></meta-data>
@@ -180,6 +206,7 @@
             android:value="DEMO_GITHUB"></meta-data>
 
         <activity android:name=".LocationActivity" />
+        <activity android:name=".DemoNotificationCycleSettingActivity" />
         <meta-data
             android:name="TencentMapSDK"
             android:value="7JYBZ-4Y3W4-JMUU7-DJHQU-NOYH7-SRBBU" />
