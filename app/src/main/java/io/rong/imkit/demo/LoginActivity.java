@@ -1,6 +1,7 @@
 package io.rong.imkit.demo;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
@@ -19,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.sea_monster.core.exception.BaseException;
 import com.sea_monster.core.exception.InternalException;
 import com.sea_monster.core.network.AbstractHttpRequest;
@@ -62,7 +64,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
 
     private boolean mIsLoginSuccess = false;
 
-    private String TOKEN="HtymJWYc8lTwfKgcAN9P57I6ZiT8q7s0UEaMPWY0lMw1SnA9yXU+KsOb5slbLWhxvJ6WgjQYA7h94DvkFpmc5g==";
+    private String TOKEN="ABiJiw9kjm5JNKBqOueR1kmcbyeYIrXSDa0nFvL2mH8ZQAacEOnpq4ALGp+0d44QDl1Qq02s3vO1S9Uvmgoceg==";
     public static String mUserID =null;
     @Override
     protected int setContentViewResId() {
@@ -111,33 +113,41 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
 
         String token = DemoContext.getInstance().getSharedPreferences().getString("LOGIN_TOKEN",null);
         Log.e("LoginActivity", "---------userId token---------:" + token);
-    /*    if(!TextUtils.isEmpty(token)){
-            try {
-            if (mDialog != null && !mDialog.isShowing())
-                mDialog.show();
-                RongIM.connect(token, new ConnectCallback() {
-                    @Override
-                    public void onSuccess(String userId) {
-
-                        Log.e("LoginActivity", "---------userId---------:" + userId);
-
-                        mHandler.obtainMessage(HANDLER_LOGIN_SUCCESS).sendToTarget();
-                        mIsLoginSuccess = true;
-                        mUserID = userId;
-                    }
-
-                    @Override
-                    public void onError(ErrorCode errorCode) {
-                        mHandler.obtainMessage(HANDLER_LOGIN_FAILURE).sendToTarget();
-                    }
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }*/
+//        if(!TextUtils.isEmpty(token)){
+//            try {
+//            if (mDialog != null && !mDialog.isShowing())
+//                mDialog.show();
+//                RongIM.connect(token, new ConnectCallback() {
+//                    @Override
+//                    public void onSuccess(String userId) {
+//
+//                        Log.e("LoginActivity", "---------userId---------:" + userId);
+//
+//                        mHandler.obtainMessage(HANDLER_LOGIN_SUCCESS).sendToTarget();
+//                        mIsLoginSuccess = true;
+//                        mUserID = userId;
+//                        RongCloudEvent.getInstance().setOtherListener();
+//
+//                        if (DemoContext.getInstance() != null) {
+//                            User user = new User();
+//                            getFriendsHttpRequest = DemoContext.getInstance().getDemoApi().getFriends(user.getCookie(), LoginActivity.this);
+//                            DemoContext.getInstance().setCurrentUser(user);
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(ErrorCode errorCode) {
+//                        Log.e("LoginActivity", "---------errorCode---------:" + errorCode);
+//                        mHandler.obtainMessage(HANDLER_LOGIN_FAILURE).sendToTarget();
+//                    }
+//                });
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
 
     }
-
 
     @SuppressWarnings("unchecked")
     @Override
@@ -163,11 +173,83 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
             //发起登录 http请求 (注：非融云SDK接口，是demo接口)
             if(DemoContext.getInstance()!=null)
                 loginHttpRequest = DemoContext.getInstance().getDemoApi().login(username, password, mDeviceId, this);
-
         }
 
     }
 
+    private void httpLoginSuccess(final User user, boolean isFirst) {
+
+        if (isFirst) {
+            Gson gson = new Gson();
+            String userJson = gson.toJson(user);
+
+            DemoContext.getInstance().getSharedPreferences().edit().putString("LONGIN_USER", userJson).commit();
+        }
+        Log.d("LoginActivity", "--------- onSuccess userId getToken----------:" + user.getToken());
+
+        /**
+         * IMKit SDK调用第二步
+         *
+         * 建立与服务器的连接
+         *
+         * 详见API
+         * http://docs.rongcloud.cn/api/android/imkit/index.html
+         */
+        try {
+            if ("io.rong.imkit.demo".equals(getCurProcessName(getApplicationContext()))) {
+            RongIM.connect(user.getToken(), new ConnectCallback() {
+
+                @Override
+                public void onSuccess(String userId) {
+                    Log.d("LoginActivity", "--------- onSuccess userId----------:" + userId);
+
+                    mHandler.obtainMessage(HANDLER_LOGIN_SUCCESS).sendToTarget();
+                    mIsLoginSuccess = true;
+                    mUserID = userId;
+                    RongCloudEvent.getInstance().setOtherListener();
+
+                    Editor editor = DemoContext.getInstance().getSharedPreferences().edit();
+                    editor.putString("LOGIN_TOKEN", user.getToken());
+                    editor.commit();
+                }
+
+                @Override
+                public void onError(ErrorCode errorCode) {
+//                            mHandler.obtainMessage(HANDLER_LOGIN_FAILURE).sendToTarget();
+                    Log.d("LoginActivity", "---------onError ----------:" + errorCode);
+                    mHandler.obtainMessage(HANDLER_LOGIN_SUCCESS).sendToTarget();
+                    LoginActivity.this.runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            WinToast.toast(LoginActivity.this, R.string.connect_fail);
+                        }
+                    });
+                }
+
+            });
+        }else{
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (DemoContext.getInstance() != null) {
+            Editor editor = DemoContext.getInstance().getSharedPreferences().edit();
+            editor.putString(INTENT_PASSWORD, mPasswordEditText.getText().toString());
+            editor.putString(INTENT_EMAIL, mUserNameEditText.getText().toString());
+            editor.commit();
+        }
+
+
+        //发起获取好友列表的http请求  (注：非融云SDK接口，是demo接口)
+        if (DemoContext.getInstance() != null) {
+            getFriendsHttpRequest = DemoContext.getInstance().getDemoApi().getFriends(user.getCookie(), this);
+            DemoContext.getInstance().setCurrentUser(user);
+        }
+
+    }
 
     @SuppressWarnings("unchecked")
     @Override
@@ -177,67 +259,10 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
         if (loginHttpRequest == request) {
 
             if (obj instanceof User) {
+
                 final User user = (User) obj;
-
-                /**
-                 * IMKit SDK调用第二步
-                 *
-                 * 建立与服务器的连接
-                 *
-                 * 详见API
-                 * http://docs.rongcloud.cn/api/android/imkit/index.html
-                 */
-                try {
-                    RongIM.connect(user.getToken(), new ConnectCallback() {
-//                    RongIM.connect(TOKEN, new ConnectCallback() {
-
-                        @Override
-                        public void onSuccess(String userId) {
-                            Log.d("LoginActivity", "---------userId----------:" + userId);
-                            Log.e("LoginActivity", "---------user.getToken()----------:" + user.getToken());
-                            mHandler.obtainMessage(HANDLER_LOGIN_SUCCESS).sendToTarget();
-                            mIsLoginSuccess = true;
-                            mUserID = userId;
-
-                            Editor editor = DemoContext.getInstance().getSharedPreferences().edit();
-                            editor.putString("LOGIN_TOKEN", user.getToken());
-                            editor.commit();
-
-                        }
-
-                        @Override
-                        public void onError(ErrorCode errorCode) {
-                            Log.d("LoginActivity", "--------- onError errorCode----------:" + errorCode);
-                            mHandler.obtainMessage(HANDLER_LOGIN_FAILURE).sendToTarget();
-                        }
-
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                if (DemoContext.getInstance() != null) {
-                    Editor editor = DemoContext.getInstance().getSharedPreferences().edit();
-                    editor.putString(INTENT_PASSWORD, mPasswordEditText.getText().toString());
-                    editor.putString(INTENT_EMAIL, mUserNameEditText.getText().toString());
-                    editor.commit();
-                }
-
-
-                //发起获取好友列表的http请求  (注：非融云SDK接口，是demo接口)
-                if (DemoContext.getInstance() != null){
-                    getFriendsHttpRequest = DemoContext.getInstance().getDemoApi().getFriends(user.getCookie(), this);
-                    DemoContext.getInstance().setCurrentUser(user);
-                }
-
-
-            } else {
-                WinToast.toast(this, R.string.login_failure);
-
-
-                if (mDialog != null)
-                    mDialog.dismiss();
+                httpLoginSuccess(user, true);
             }
-
             //获取好友列表接口  返回好友数据  (注：非融云SDK接口，是demo接口)
         } else if (getFriendsHttpRequest == request) {
 
@@ -301,12 +326,6 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
                 mDialog.dismiss();
 
         } else if (msg.what == HANDLER_LOGIN_SUCCESS) {
-            if(DemoContext.getInstance()!=null) {
-                DemoContext.getInstance().setGroupInfoProvider();
-                DemoContext.getInstance().receiveMessage();
-                DemoContext.getInstance().setLocationProvider();
-            }
-
             WinToast.toast(LoginActivity.this, R.string.login_success);
 
             if (mDialog != null)
@@ -315,8 +334,6 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
             startActivity(new Intent(this, MainActivity.class));
 
             initGroupInfo();
-
-
         }
         return false;
     }
@@ -333,7 +350,6 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
             while (iterator.hasNext()) {
                 groups.add((RongIMClient.Group) iterator.next());
             }
-
 
             if (RongIM.getInstance() != null) {
                 RongIM.getInstance().syncGroup(groups, new RongIM.OperationCallback() {
@@ -390,5 +406,17 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
         return version;
     }
 
+    public static String getCurProcessName(Context context) {
+        int pid = android.os.Process.myPid();
+        ActivityManager activityManager = (ActivityManager) context
+                .getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningAppProcessInfo appProcess : activityManager
+                .getRunningAppProcesses()) {
+            if (appProcess.pid == pid) {
+                return appProcess.processName;
+            }
+        }
+        return null;
+    }
 
 }

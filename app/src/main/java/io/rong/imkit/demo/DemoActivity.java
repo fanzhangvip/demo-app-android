@@ -1,7 +1,6 @@
 package io.rong.imkit.demo;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.sea_monster.core.exception.BaseException;
 import com.sea_monster.core.network.AbstractHttpRequest;
@@ -25,7 +24,7 @@ public class DemoActivity extends RongActivity {
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         if(RongIM.getInstance() == null){
-            String userName = DemoContext.getInstance().getUsername();
+            String userName = DemoContext.getInstance().getCurrentUser().getUsername();
             mCallback = new FriendCallback();
             DemoContext.getInstance().getDemoApi().getFriends(userName, mCallback);
             initGroupInfo();
@@ -87,8 +86,7 @@ public class DemoActivity extends RongActivity {
         groupM.put("group002", group2);
         groupM.put("group003", group3);
 
-        DemoContext.getInstance().setGroupMap(groupM);
-        DemoContext.getInstance().setGroupInfoProvider();
+
     }
 
 }

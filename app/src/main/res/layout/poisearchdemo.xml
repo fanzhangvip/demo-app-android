@@ -38,6 +38,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/ic_tencent" />
+            android:background="@drawable/de_tencent" />
     </LinearLayout>
 </FrameLayout>
