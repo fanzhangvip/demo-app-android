@@ -202,7 +202,7 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
             } else if (position == 8) {
                 startActivity(new Intent(this, TestFragment2Activity.class));
             } else if (position == 9) {
-               final  GroupInvitationNotification mGroupInvitationNotification = new GroupInvitationNotification("6878","I'm Bob");
+                final  GroupInvitationNotification mGroupInvitationNotification = new GroupInvitationNotification("6878","I'm Bob");
                 if(RongIM.getInstance() != null){
                     RongIM.getInstance().sendMessage(RongIMClient.ConversationType.PRIVATE,"6878",mGroupInvitationNotification, new RongIMClient.SendMessageCallback()
                             {
