@@ -44,4 +44,5 @@ dependencies {
     compile 'com.android.support:support-v4:19.0.0'
     compile 'com.google.code.gson:gson:2.2.+'
     compile files('libs/Rong_IMKit_v1_4_0.jar')
+    compile files('libs/imkit.jar')
 }
