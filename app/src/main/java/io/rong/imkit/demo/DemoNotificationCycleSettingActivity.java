@@ -277,6 +277,9 @@ public class DemoNotificationCycleSettingActivity extends BaseActivity implement
                                 Date datastart = DateUtils.stringToDate(starttime, mTimeFormat);
                                 Date dataend = DateUtils.stringToDate(mEndTime, mTimeFormat);
                                 long spansTime = DateUtils.compareMin(datastart, dataend);
+                                Log.e("","------结束时间----"+mEndTime);
+                                Log.e("","------开始时间----"+starttime);
+                                Log.e("","------时间间隔----"+spansTime);
 
                                 setConversationTime(mStartTime, (int) Math.abs(spansTime));
                             }
@@ -359,6 +362,7 @@ public class DemoNotificationCycleSettingActivity extends BaseActivity implement
                 @Override
                 public void run() {
                     if (spanMins > 0 && spanMins < 1440) {
+                        Log.e("","----设置勿扰时间startTime；"+startTime+"---spanMins:"+spanMins);
 
                         RongIM.getInstance().getRongIMClient().setConversationNotificationQuietHours(startTime, spanMins, new RongIMClient.SetConversationNotificationQuietHoursCallback() {
                             @Override
