@@ -182,7 +182,7 @@ public class DemoNotificationCycleSettingActivity extends BaseActivity implement
                     mThreadHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            RongIM.getInstance().getRongIMClient().getConversationNotificationQuietHours(new RongIMClient.GetConversationNotificationQuietHoursCallback() {
+                            RongIM.getInstance().getConversationNotificationQuietHours(new RongIMClient.GetConversationNotificationQuietHoursCallback() {
                                 @Override
                                 public void onSuccess(String startTime, int spanMins) {
                                     Log.e(TAG, "----yb----获取会话通知周期-onSuccess起始时间startTime:" + startTime + ",间隔分钟数spanMins:" + spanMins);
@@ -301,7 +301,7 @@ public class DemoNotificationCycleSettingActivity extends BaseActivity implement
                             @Override
                             public void run() {
 
-                                RongIM.getInstance().getRongIMClient().removeConversationNotificationQuietHours(new RongIMClient.RemoveConversationNotificationQuietHoursCallback() {
+                                RongIM.getInstance().removeConversationNotificationQuietHours(new RongIMClient.RemoveConversationNotificationQuietHoursCallback() {
 
                                     @Override
                                     public void onSuccess() {
@@ -364,7 +364,7 @@ public class DemoNotificationCycleSettingActivity extends BaseActivity implement
                     if (spanMins > 0 && spanMins < 1440) {
                         Log.e("","----设置勿扰时间startTime；"+startTime+"---spanMins:"+spanMins);
 
-                        RongIM.getInstance().getRongIMClient().setConversationNotificationQuietHours(startTime, spanMins, new RongIMClient.SetConversationNotificationQuietHoursCallback() {
+                        RongIM.getInstance().setConversationNotificationQuietHours(startTime, spanMins, new RongIMClient.SetConversationNotificationQuietHoursCallback() {
                             @Override
                             public void onSuccess() {
                                 Log.e(TAG, "----yb----设置会话通知周期-onSuccess");

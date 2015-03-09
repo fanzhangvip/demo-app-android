@@ -18,73 +18,76 @@ import io.rong.imlib.RongIMClient;
  * Created by bob on 15-1-7.
  */
 public class BlackListActivity extends BaseActivity implements AdapterView.OnItemClickListener {
-	private String TAG = "BlackListActivity";
-	ActionBar mActionBar;
-	private ListView mBlackList;
-	private BlackListAdapter mBlackListAdapter;
+    private String TAG = "BlackListActivity";
+    ActionBar mActionBar;
+    private ListView mBlackList;
+    private BlackListAdapter mBlackListAdapter;
     private List<RongIMClient.UserInfo> mUserInfoList = null;
-	@Override
-	protected int setContentViewResId() {
-		return R.layout.black_list;
-	}
 
-	@Override
-	protected void initView() {
-		mActionBar = (ActionBar) findViewById(android.R.id.custom);
-		mBlackList = (ListView) findViewById(R.id.black_list);
-		mActionBar.setOnBackClick(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
-		mActionBar.getTitleTextView().setText("黑名单列表");
-	}
+    @Override
+    protected int setContentViewResId() {
+        return R.layout.black_list;
+    }
 
-	@Override
-	protected void initData() {
+    @Override
+    protected void initView() {
+        mActionBar = (ActionBar) findViewById(android.R.id.custom);
+        mBlackList = (ListView) findViewById(R.id.black_list);
+        mActionBar.setOnBackClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        mActionBar.getTitleTextView().setText("黑名单列表");
+    }
 
-		if (RongIM.getInstance() != null &&  Util.getNetWorkType(this) != -1) {
+    @Override
+    protected void initData() {
+
+        if (RongIM.getInstance() != null && Util.getNetWorkType(this) != -1) {
 
 
-			RongIM.getInstance().getBlacklist(
-					new RongIM.GetBlacklistCallback() {
+            RongIM.getInstance().getBlacklist(
+                    new RongIM.GetBlacklistCallback() {
 
-						@Override
-						public void onError(ErrorCode errorCode) {
+                        @Override
+                        public void onError(ErrorCode errorCode) {
 
-							Log.e(TAG,
-									"-------getBlacklist onError--------:"
-											+ errorCode.getMessage());
-						}
+                            Log.e(TAG,
+                                    "-------getBlacklist onError--------:"
+                                            + errorCode.getMessage());
+                        }
 
-						@Override
-						public void onSuccess( String[] userIds) {
-							Log.e(TAG,
-									"-------getBlacklist onSuccess--------:");
-                            mUserInfoList =   DemoContext.getInstance().getUserInfoByIds(userIds);
-							mBlackListAdapter = new BlackListAdapter(
-									BlackListActivity.this, mUserInfoList);
-							mBlackList.setAdapter(mBlackListAdapter);
-                            mBlackListAdapter.notifyDataSetChanged();
-						}
-					});
-		}else{
-            WinToast.toast(this,R.string.network_not);
+                        @Override
+                        public void onSuccess(String[] userIds) {
+                            Log.e(TAG,
+                                    "-------getBlacklist onSuccess--------:");
+                            if (DemoContext.getInstance() != null) {
+                                mUserInfoList = DemoContext.getInstance().getUserInfoByIds(userIds);
+                                mBlackListAdapter = new BlackListAdapter(
+                                        BlackListActivity.this, mUserInfoList);
+                                mBlackList.setAdapter(mBlackListAdapter);
+                                mBlackListAdapter.notifyDataSetChanged();
+                            }
+                        }
+                    });
+        } else {
+            WinToast.toast(this, R.string.network_not);
         }
         mBlackList.setOnItemClickListener(this);
-	}
+    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        final String userId =  mUserInfoList.get(position).getUserId();
-        String titleName =  mUserInfoList.get(position).getName();
+        final String userId = mUserInfoList.get(position).getUserId();
+        String titleName = mUserInfoList.get(position).getName();
         final SelectDialog selectDialog = new SelectDialog(this);
-        selectDialog.setTitle(titleName,true);
+        selectDialog.setTitle(titleName, true);
         selectDialog.setFristLineContent("delete_from_balck");
         selectDialog.setSecondLineContent("cancle_black");
-        if(Util.getNetWorkType(BlackListActivity.this) != -1) {
+        if (Util.getNetWorkType(BlackListActivity.this) != -1) {
             selectDialog.setOnDialogItemViewListener(new SelectDialog.OnDialogItemViewListener() {
                 @Override
                 public void OnDialogItemViewClick(View view, int position) {
@@ -113,9 +116,9 @@ public class BlackListActivity extends BaseActivity implements AdapterView.OnIte
                     selectDialog.dismiss();
                 }
             });
-        selectDialog.show();
-        }else{
-            WinToast.toast(this,R.string.network_not);
+            selectDialog.show();
+        } else {
+            WinToast.toast(this, R.string.network_not);
         }
     }
 }
