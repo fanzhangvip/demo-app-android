@@ -198,6 +198,9 @@ public final class RongCloudEvent implements RongIM.OnReceiveMessageListener, Ro
         /**
          * demo 代码  开发者需替换成自己的代码。
          */
+
+//        return new RongIMClient.UserInfo(userId, "张三", "file:///storage/sdcard0/share.jpg");//测试本地图片
+
         return DemoContext.getInstance().getUserInfoById(userId);
     }
 
@@ -306,4 +309,6 @@ public final class RongCloudEvent implements RongIM.OnReceiveMessageListener, Ro
         DemoContext.getInstance().setLastLocationCallback(callback);
         context.startActivity(new Intent(context, LocationActivity.class));//SOSO地图
     }
+
 }
+

@@ -10,7 +10,9 @@
         <item>"聊天室"</item>
         <item>自定义测试</item>
         <item>自定义测试2</item>
+        <item>发送自定义消息</item>
         <item>"黑名单"</item>
+        <item>"push消息设置"</item>
     </string-array>
 
 

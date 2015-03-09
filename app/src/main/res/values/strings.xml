@@ -39,4 +39,17 @@
     <string name="connect_fail">连接失败,将离线登陆</string>
 
 
+    <string name="de_notification_set">勿扰模式</string>
+    <string name="de_notification_start">开始时间</string>
+    <string name="de_notification_end">结束时间</string>
+    <string name="de_notification_status_no">当前未设置push屏蔽时间</string>
+    <string name="de_notification_status_yes">当前设置push屏蔽时间为：</string>
+    <string name="de_notification_information">开启后，在设定时间段内收到新消息时不会响铃或振动。</string>
+
+    <string name="title_activity_setting">SettingActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+
+
 </resources>

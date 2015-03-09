@@ -97,4 +97,8 @@ public class GroupInvitationNotification extends RongIMClient.MessageContent {
     }
 
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> dev

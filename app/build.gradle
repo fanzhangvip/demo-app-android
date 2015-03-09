@@ -8,8 +8,8 @@ android {
         applicationId "io.rong.imkit.demo"
         minSdkVersion 10
         targetSdkVersion 19
-        versionCode 2015020820
-        versionName "1.3.4.stable"
+        versionName "1.4.1.stable"
+        versionCode 2015030920
     }
 
     signingConfigs {
@@ -44,5 +44,5 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:support-v4:19.0.0'
     compile 'com.google.code.gson:gson:2.2.+'
-
+    compile files('libs/Rong_IMKit_v1_4_0.jar')
 }

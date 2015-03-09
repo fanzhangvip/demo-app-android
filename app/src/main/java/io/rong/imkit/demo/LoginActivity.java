@@ -1,6 +1,7 @@
 package io.rong.imkit.demo;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
@@ -172,10 +173,10 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
             //发起登录 http请求 (注：非融云SDK接口，是demo接口)
             if(DemoContext.getInstance()!=null)
                 loginHttpRequest = DemoContext.getInstance().getDemoApi().login(username, password, mDeviceId, this);
-
         }
 
     }
+
     private void httpLoginSuccess(final User user, boolean isFirst) {
 
         if (isFirst) {
@@ -195,37 +196,41 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
          * http://docs.rongcloud.cn/api/android/imkit/index.html
          */
         try {
-            RongIM.connect(user.getToken(), new ConnectCallback() {
+            if ("io.rong.imkit.demo".equals(getCurProcessName(getApplicationContext()))) {
+                RongIM.connect(user.getToken(), new ConnectCallback() {
 
-                @Override
-                public void onSuccess(String userId) {
-                    Log.d("LoginActivity", "--------- onSuccess userId----------:" + userId);
+                    @Override
+                    public void onSuccess(String userId) {
+                        Log.d("LoginActivity", "--------- onSuccess userId----------:" + userId);
 
-                    mHandler.obtainMessage(HANDLER_LOGIN_SUCCESS).sendToTarget();
-                    mIsLoginSuccess = true;
-                    mUserID = userId;
-                    RongCloudEvent.getInstance().setOtherListener();
+                        mHandler.obtainMessage(HANDLER_LOGIN_SUCCESS).sendToTarget();
+                        mIsLoginSuccess = true;
+                        mUserID = userId;
+                        RongCloudEvent.getInstance().setOtherListener();
 
-                    Editor editor = DemoContext.getInstance().getSharedPreferences().edit();
-                    editor.putString("LOGIN_TOKEN", user.getToken());
-                    editor.commit();
-                }
+                        Editor editor = DemoContext.getInstance().getSharedPreferences().edit();
+                        editor.putString("LOGIN_TOKEN", user.getToken());
+                        editor.commit();
+                    }
 
-                @Override
-                public void onError(ErrorCode errorCode) {
+                    @Override
+                    public void onError(ErrorCode errorCode) {
 //                            mHandler.obtainMessage(HANDLER_LOGIN_FAILURE).sendToTarget();
-                    Log.d("LoginActivity", "---------onError ----------:" + errorCode);
-                    mHandler.obtainMessage(HANDLER_LOGIN_SUCCESS).sendToTarget();
-                    LoginActivity.this.runOnUiThread(new Runnable() {
+                        Log.d("LoginActivity", "---------onError ----------:" + errorCode);
+                        mHandler.obtainMessage(HANDLER_LOGIN_SUCCESS).sendToTarget();
+                        LoginActivity.this.runOnUiThread(new Runnable() {
 
-                        @Override
-                        public void run() {
-                            WinToast.toast(LoginActivity.this, R.string.connect_fail);
-                        }
-                    });
-                }
+                            @Override
+                            public void run() {
+                                WinToast.toast(LoginActivity.this, R.string.connect_fail);
+                            }
+                        });
+                    }
 
-            });
+                });
+            }else{
+
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -401,5 +406,17 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
         return version;
     }
 
+    public static String getCurProcessName(Context context) {
+        int pid = android.os.Process.myPid();
+        ActivityManager activityManager = (ActivityManager) context
+                .getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningAppProcessInfo appProcess : activityManager
+                .getRunningAppProcesses()) {
+            if (appProcess.pid == pid) {
+                return appProcess.processName;
+            }
+        }
+        return null;
+    }
 
 }

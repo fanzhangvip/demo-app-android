@@ -115,7 +115,7 @@
     <!-- notification  -->
     <string name="notification_new_message">"您有了一条新消息"</string>
     <string name="notification_new_message_one_p">"发来了%1$s条消息"</string>
-    <string name="notification_new_message_mang_p">"%1$s个联系人发来%2$s条消息"</string>
+    <string name="notification_new_message_many_p">"%1$s个联系人发来%2$s条消息"</string>
     <string name="notification_new_message_one_p_one">"%1$s发来一条消息"</string>
     <string name="notification_custom_service">"客服"</string>
     <string name="new_message_more">"···"</string>

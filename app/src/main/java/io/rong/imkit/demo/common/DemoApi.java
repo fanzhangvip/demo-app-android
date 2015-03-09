@@ -23,7 +23,7 @@ import io.rong.imkit.demo.parser.GsonParser;
 
 public class DemoApi extends BaseApi {
 
-	private final static String HOST = "http://119.254.110.79:8080/";
+	private  static String HOST = "http://119.254.110.79:8080/";
 
     //客服
 	private final static String DEMO_REG = "reg";
@@ -32,6 +32,8 @@ public class DemoApi extends BaseApi {
 
 	public DemoApi(HttpHandler handler, Context context) {
 		super(handler, context);
+//        HOST ="http://119.254.110.241:8080/";
+
 	}
 
 

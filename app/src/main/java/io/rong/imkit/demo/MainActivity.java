@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Process;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import io.rong.imkit.RongIM;
+import io.rong.imkit.demo.message.GroupInvitationNotification;
 import io.rong.imkit.view.ActionBar;
 import io.rong.imkit.view.AlterDialog;
 import io.rong.imlib.RongIMClient;
@@ -200,7 +202,36 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
             } else if (position == 8) {
                 startActivity(new Intent(this, TestFragment2Activity.class));
             } else if (position == 9) {
+                final  GroupInvitationNotification mGroupInvitationNotification = new GroupInvitationNotification("6878","I'm Bob");
+                if(RongIM.getInstance() != null){
+                    RongIM.getInstance().sendMessage(RongIMClient.ConversationType.PRIVATE,"6878",mGroupInvitationNotification, new RongIMClient.SendMessageCallback()
+                            {
+                                @Override
+                                public void onSuccess(int i) {
+                                    Log.e(TAG,"---自定义消息 onSuccess---");
+                                    GroupInvitationNotification groupInvitationNotification =  mGroupInvitationNotification;
+                                    Log.e("sendMessage", "VoiceMessage--发发发发发--发送了一条【群组邀请消息】---message--" + groupInvitationNotification.getMessage());
+                                }
+
+                                @Override
+                                public void onError(int i, ErrorCode errorCode) {
+
+                                }
+
+                                @Override
+                                public void onProgress(int i, int i2) {
+
+                                }
+                            }
+                    );
+                }
+
+
+            }else if (position == 10){
                 startActivity(new Intent(this, BlackListActivity.class));
+            }else if(position == 11){
+                startActivity(new Intent(this,DemoNotificationCycleSettingActivity.class));
+
             }
         }
     }
