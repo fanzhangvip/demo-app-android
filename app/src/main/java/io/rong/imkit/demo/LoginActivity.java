@@ -201,7 +201,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
 
                     @Override
                     public void onSuccess(String userId) {
-                        Log.d("LoginActivity", "--------- onSuccess userId----------:" + userId);
+                        Log.e("LoginActivity", "--------- onSuccess userId----------:" + userId);
 
                         mHandler.obtainMessage(HANDLER_LOGIN_SUCCESS).sendToTarget();
                         mIsLoginSuccess = true;
