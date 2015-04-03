@@ -20,6 +20,7 @@ import io.rong.imkit.demo.message.GroupInvitationNotification;
 import io.rong.imkit.view.ActionBar;
 import io.rong.imkit.view.AlterDialog;
 import io.rong.imlib.RongIMClient;
+import io.rong.message.HandshakeMessage;
 import io.rong.message.RichContentMessage;
 
 public class MainActivity extends BaseActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
@@ -32,8 +33,9 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
     private ActionBar mAction;
     private int numbermessage = 0;
     private ImageView mImageView;
-    private String TOKEN="6TFD0OUBUvI2LCD68J77icvm/o4XK5QTKgksvmQJQNaM+V+bYwBTgldvROK68J1P8z9Kj2yVRGSIc+V4IbZWKA==";
+    private String TOKEN = "6TFD0OUBUvI2LCD68J77icvm/o4XK5QTKgksvmQJQNaM+V+bYwBTgldvROK68J1P8z9Kj2yVRGSIc+V4IbZWKA==";
     private ReceiveMessageBroadcastReciver mBroadcastReciver;
+
     @Override
     protected int setContentViewResId() {
         return R.layout.activity_functioan_list;
@@ -123,12 +125,31 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
 
 
         } else if (position == 2) {
-            if (RongIM.getInstance() != null)
+            if (RongIM.getInstance() != null) {
+                RongIM.getInstance().sendMessage(RongIMClient.ConversationType.CUSTOMER_SERVICE, "kefu114", new HandshakeMessage(), new RongIMClient.SendMessageCallback() {
+
+                            @Override
+                            public void onSuccess(int messageId) {
+
+                            }
+
+                            @Override
+                            public void onError(int messageId, ErrorCode errorCode) {
+
+                            }
+
+                            @Override
+                            public void onProgress(int messageId, int percent) {
+
+                            }
+                        }
+                );
                 RongIM.getInstance().startCustomerServiceChat(this, "kefu114", "客服");
+            }
 
 
         } else if (position == 3) {
-            if(RongIM.getInstance() != null) {
+            if (RongIM.getInstance() != null) {
 
                 String content = "新华网莫斯科10月14日电 国务院总理李克强14日出席第三届莫斯科国际创新发展论坛并发表题为《以创新实现共同发展包容发展》的演讲。演讲全文如下：创新是人类发展进步的不熄引擎。当今世界正处于大变革、大调整之中，迫切要求更大范围、更深层次的创新。实现这样的创新，墨守成规不行，单打独斗也不行，需要开放、合作与分享。6年前，面对国际金融危机，国际社会同舟共济，避免了危机向纵深蔓延。随着经济全球化、社会信息化的深入推进，更需要各国携起手来，在合作创新中实现知识的倍增、价值的倍增，解决发展的难题，促进共同繁荣。这正是开放式创新的意义所在。";
                 String title = "新华网莫斯科10月14日电,李克强在第三届莫斯科国际创新发展论坛上的演讲";
@@ -185,9 +206,9 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
                  *
                  * API详见 http://docs.rongcloud.cn/android.html
                  */
-                if (RongIM.getInstance() != null  && DemoContext.getInstance().getCurrentUser() != null && !"".equals(DemoContext.getInstance().getCurrentUser()))
+                if (RongIM.getInstance() != null && DemoContext.getInstance().getCurrentUser() != null && !"".equals(DemoContext.getInstance().getCurrentUser()))
                     RongIM.getInstance().startPrivateChat(this, DemoContext.getInstance().getCurrentUser().getUserId(), "光头强");
-                else{
+                else {
                     RongIM.getInstance().startPrivateChat(this, "11", "光头强");
                 }
 
@@ -202,14 +223,13 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
             } else if (position == 8) {
                 startActivity(new Intent(this, TestFragment2Activity.class));
             } else if (position == 9) {
-                final  GroupInvitationNotification mGroupInvitationNotification = new GroupInvitationNotification("6878","I'm Bob");
-                if(RongIM.getInstance() != null){
-                    RongIM.getInstance().sendMessage(RongIMClient.ConversationType.PRIVATE,"6878",mGroupInvitationNotification, new RongIMClient.SendMessageCallback()
-                            {
+                final GroupInvitationNotification mGroupInvitationNotification = new GroupInvitationNotification("6878", "I'm Bob");
+                if (RongIM.getInstance() != null) {
+                    RongIM.getInstance().sendMessage(RongIMClient.ConversationType.PRIVATE, "6878", mGroupInvitationNotification, new RongIMClient.SendMessageCallback() {
                                 @Override
                                 public void onSuccess(int i) {
-                                    Log.e(TAG,"---自定义消息 onSuccess---");
-                                    GroupInvitationNotification groupInvitationNotification =  mGroupInvitationNotification;
+                                    Log.e(TAG, "---自定义消息 onSuccess---");
+                                    GroupInvitationNotification groupInvitationNotification = mGroupInvitationNotification;
                                     Log.e("sendMessage", "VoiceMessage--发发发发发--发送了一条【群组邀请消息】---message--" + groupInvitationNotification.getMessage());
                                 }
 
@@ -227,10 +247,10 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
                 }
 
 
-            }else if (position == 10){
+            } else if (position == 10) {
                 startActivity(new Intent(this, BlackListActivity.class));
-            }else if(position == 11){
-                startActivity(new Intent(this,DemoNotificationCycleSettingActivity.class));
+            } else if (position == 11) {
+                startActivity(new Intent(this, DemoNotificationCycleSettingActivity.class));
 
             }
         }
