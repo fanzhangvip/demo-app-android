@@ -26,6 +26,7 @@ public class DemoApplication extends Application {
         RongCloudEvent.init(this);
 
         DemoContext.init(this);
+
         try {
             //注册自定义消息类型
             RongIM.registerMessageType(GroupInvitationNotification.class);

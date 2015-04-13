@@ -119,7 +119,6 @@ public final class RongCloudEvent implements RongIM.OnReceiveMessageListener, Ro
             TextMessage textMessage = (TextMessage) messageContent;
             Log.d(TAG, "onReceived-TextMessage:" + textMessage.getContent());
             Log.d(TAG, "onReceived-TextMessage:" + textMessage.getPushContent());
-
         } else if (messageContent instanceof ImageMessage) {//图片消息
             ImageMessage imageMessage = (ImageMessage) messageContent;
             Log.d(TAG, "onReceived-ImageMessage:" + imageMessage.getRemoteUri());
