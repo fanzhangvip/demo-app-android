@@ -45,3 +45,6 @@
 }
 -keep class **$Properties
 -dontwarn  org.eclipse.jdt.annotation.**
+
+##--voip--
+-keep class com.ultrapower.** {*;}
