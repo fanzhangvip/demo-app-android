@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="E:\SourceTreeWorkSpace\GitHubWorkSpace\demo-app-android\app\libs\TencentMapSDK_Raster_v1.0.6.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="232c8c3964113f0f39a9f4cdd3473d5075d188aa">
+        <dex dex="E:\SourceTreeWorkSpace\GitHubWorkSpace\demo-app-android\app\build\intermediates\pre-dexed\debug\TencentMapSDK_Raster_v1.0.6-e426823b067e8966e0f3329596797f25b33981c0.jar" />
+    </item>
+    <item
+        jar="E:\SourceTreeWorkSpace\GitHubWorkSpace\demo-app-android\app\libs\TencentLocationSDK_v4.0_r139747.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a0981c8c4b5336c82ac2caf280c7e13373a8bf7b">
+        <dex dex="E:\SourceTreeWorkSpace\GitHubWorkSpace\demo-app-android\app\build\intermediates\pre-dexed\debug\TencentLocationSDK_v4.0_r139747-103db6871e039999490649988c422d4db9c6dc4d.jar" />
+    </item>
+    <item
+        jar="D:\android dev\sdk\extras\android\m2repository\com\android\support\support-v4\19.0.0\support-v4-19.0.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="afee690af14bd2c32d400cdf78e746fd45c386fa">
+        <dex dex="E:\SourceTreeWorkSpace\GitHubWorkSpace\demo-app-android\app\build\intermediates\pre-dexed\debug\support-v4-19.0.0-c79e83c5eae9e7e9ba009140c499fa03108385f0.jar" />
+    </item>
+    <item
+        jar="E:\SourceTreeWorkSpace\GitHubWorkSpace\demo-app-android\app\libs\TencentLocationSDK_v4.0_r139747.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="a0981c8c4b5336c82ac2caf280c7e13373a8bf7b">
+        <dex dex="E:\SourceTreeWorkSpace\GitHubWorkSpace\demo-app-android\app\build\intermediates\pre-dexed\debug\TencentLocationSDK_v4.0_r139747-103db6871e039999490649988c422d4db9c6dc4d.jar" />
+    </item>
+    <item
+        jar="D:\android dev\sdk\extras\android\m2repository\com\android\support\support-v4\19.0.0\support-v4-19.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="afee690af14bd2c32d400cdf78e746fd45c386fa">
+        <dex dex="E:\SourceTreeWorkSpace\GitHubWorkSpace\demo-app-android\app\build\intermediates\pre-dexed\debug\support-v4-19.0.0-c79e83c5eae9e7e9ba009140c499fa03108385f0.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.2.4\a60a5e993c98c864010053cb901b7eab25306568\gson-2.2.4.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568">
+        <dex dex="E:\SourceTreeWorkSpace\GitHubWorkSpace\demo-app-android\app\build\intermediates\pre-dexed\debug\gson-2.2.4-752a4694a6e7953de1b9e1ac68ee96a302f761f3.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.2.4\a60a5e993c98c864010053cb901b7eab25306568\gson-2.2.4.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568">
+        <dex dex="E:\SourceTreeWorkSpace\GitHubWorkSpace\demo-app-android\app\build\intermediates\pre-dexed\debug\gson-2.2.4-752a4694a6e7953de1b9e1ac68ee96a302f761f3.jar" />
+    </item>
+    <item
+        jar="E:\SourceTreeWorkSpace\GitHubWorkSpace\demo-app-android\app\libs\umeng-analytics-v5.2.4.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="0f9eccf79ae6006e4346725b09114182dca0c023">
+        <dex dex="E:\SourceTreeWorkSpace\GitHubWorkSpace\demo-app-android\app\build\intermediates\pre-dexed\debug\umeng-analytics-v5.2.4-d78f25b9194ff338e7e0d5a825302fefc113b6ed.jar" />
+    </item>
+    <item
+        jar="E:\SourceTreeWorkSpace\GitHubWorkSpace\demo-app-android\app\libs\umeng-analytics-v5.2.4.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="0f9eccf79ae6006e4346725b09114182dca0c023">
+        <dex dex="E:\SourceTreeWorkSpace\GitHubWorkSpace\demo-app-android\app\build\intermediates\pre-dexed\debug\umeng-analytics-v5.2.4-d78f25b9194ff338e7e0d5a825302fefc113b6ed.jar" />
+    </item>
+    <item
+        jar="E:\SourceTreeWorkSpace\GitHubWorkSpace\demo-app-android\app\libs\Rong_IMKit_v1_4_7.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4192f4ffe96edca6e631eb5a5bbfc7b672ca827d">
+        <dex dex="E:\SourceTreeWorkSpace\GitHubWorkSpace\demo-app-android\app\build\intermediates\pre-dexed\debug\Rong_IMKit_v1_4_7-88b57cf5807960289a86d4b9c416dc44bc42d4dc.jar" />
+    </item>
+    <item
+        jar="E:\SourceTreeWorkSpace\GitHubWorkSpace\demo-app-android\app\libs\TencentMapSDK_Raster_v1.0.6.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="232c8c3964113f0f39a9f4cdd3473d5075d188aa">
+        <dex dex="E:\SourceTreeWorkSpace\GitHubWorkSpace\demo-app-android\app\build\intermediates\pre-dexed\debug\TencentMapSDK_Raster_v1.0.6-e426823b067e8966e0f3329596797f25b33981c0.jar" />
+    </item>
+
+</items>
