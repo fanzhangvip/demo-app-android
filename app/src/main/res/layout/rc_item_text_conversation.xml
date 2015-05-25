@@ -65,20 +65,12 @@
                     android:paddingLeft="@dimen/px_to_dip_15"
                     android:visibility="gone" />
 
-                <LinearLayout
-                    android:id="@+id/conversation_left_bubble"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left|center_vertical"
-                    android:background="@drawable/rc_conversation_bubble_white"
-                    android:gravity="center_vertical|right"
-                    android:orientation="vertical">
-
                     <TextView
                         android:id="@+id/conversation_message_content_left_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left|center_vertical"
+                        android:background="@drawable/rc_conversation_bubble_white"
                         android:autoLink="all"
                         android:bufferType="spannable"
                         android:gravity="left|center_vertical"
@@ -89,8 +81,6 @@
                         android:paddingBottom="5dp"
                         android:textColor="@color/rc_item_conversation_recevier_color"
                         android:textSize="@dimen/px_to_dip_32" />
-                </LinearLayout>
-
 
             </LinearLayout>
         </LinearLayout>
@@ -128,16 +118,8 @@
                     android:padding="5dp"
                     android:src="@drawable/rc_ic_warning" />
 
-                <LinearLayout
-                    android:id="@+id/conversation_right_bubble"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right|center_vertical"
-                    android:background="@drawable/rc_conversation_bubble_blue"
-                    android:gravity="center_vertical|right"
-                    android:orientation="vertical">
-
                     <TextView
+                        android:background="@drawable/rc_conversation_bubble_blue"
                         android:id="@+id/conversation_message_content_right_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -151,7 +133,6 @@
                         android:textColor="@color/rc_item_conversation_send_color"
                         android:textSize="@dimen/px_to_dip_32" />
 
-                </LinearLayout>
             </LinearLayout>
 
             <io.rong.imkit.view.AsyncImageView
