@@ -23,6 +23,7 @@ public class DemoApplication extends Application {
         /**
          * 融云SDK事件监听处理
          */
+
         RongCloudEvent.init(this);
 
         DemoContext.init(this);
