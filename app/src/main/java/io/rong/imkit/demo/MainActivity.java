@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import java.util.List;
+
 import io.rong.imkit.RongIM;
 import io.rong.imkit.demo.message.GroupInvitationNotification;
 import io.rong.imkit.view.ActionBar;
@@ -250,7 +252,14 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
             } else if (position == 10) {
                 startActivity(new Intent(this, BlackListActivity.class));
             } else if (position == 11) {
-                startActivity(new Intent(this, DemoNotificationCycleSettingActivity.class));
+//                startActivity(new Intent(this, DemoNotificationCycleSettingActivity.class));
+                List<RongIMClient.Conversation> mLists =   RongIM.getInstance().getConversationList();
+                Log.e(TAG, "---------0909090--mLists.size()---" + mLists.size());
+
+                for(int i = 0;i<mLists.size();i++){
+                    Log.e(TAG,"---------0909090----mLists.getConversationTitle()-"+mLists.get(i).getConversationType()+"----"+mLists.get(i).getConversationTitle());
+
+                }
 
             }
         }
