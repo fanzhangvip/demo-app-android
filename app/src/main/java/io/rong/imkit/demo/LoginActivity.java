@@ -325,6 +325,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
             if (mDialog != null)
                 mDialog.dismiss();
 
+
         } else if (msg.what == HANDLER_LOGIN_SUCCESS) {
             WinToast.toast(LoginActivity.this, R.string.login_success);
 
@@ -332,6 +333,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
                 mDialog.dismiss();
 
             startActivity(new Intent(this, MainActivity.class));
+            finish();
 
             initGroupInfo();
         }
@@ -361,7 +363,7 @@ public class LoginActivity extends BaseApiActivity implements OnClickListener, C
 
                     @Override
                     public void onError(ErrorCode errorCode) {
-                        Log.e("syncGroup", "=============syncGroup====onError===========" + errorCode);
+
                     }
                 });
             }

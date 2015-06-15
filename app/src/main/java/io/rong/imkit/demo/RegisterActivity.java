@@ -87,7 +87,6 @@ public class RegisterActivity extends BaseApiActivity implements OnClickListener
             if (obj instanceof Status) {
                 Status status = (Status) obj;
 
-                Log.d(TAG + "--onCallApiSuccess--code:", "" + status.getCode());
 
                 if (status.getCode() == 200) {
                     WinToast.toast(this, R.string.register_success);
@@ -106,7 +105,6 @@ public class RegisterActivity extends BaseApiActivity implements OnClickListener
 
     @Override
     public void onCallApiFailure(AbstractHttpRequest request, BaseException e) {
-        Log.d(TAG + "--onCallApiFailure:", "onCallApiFailure");
 
         if (httpRequest == request) {
 

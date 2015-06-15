@@ -8,8 +8,8 @@ android {
         applicationId "io.rong.imkit.demo"
         minSdkVersion 10
         targetSdkVersion 19
-        versionName "1.5.0.stable"
-        versionCode 2015060118
+        versionName "1.5.1.stable"
+        versionCode 2015061518
     }
 
     signingConfigs {

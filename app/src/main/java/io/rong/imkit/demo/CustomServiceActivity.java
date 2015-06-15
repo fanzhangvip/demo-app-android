@@ -32,7 +32,7 @@ public class CustomServiceActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
 
         getIntent().setData(Uri.parse("rong://io.rong.imkit.demo").buildUpon().appendPath("conversation").appendPath("customer_service")
-                .appendQueryParameter("targetId", getString(R.string.CUSTOMER_SERVICE)).appendQueryParameter("title", "客服").build());
+                .appendQueryParameter("targetId", "kefu114").appendQueryParameter("title", "客服").build());
 
 
         setContentView(R.layout.activity_custom_service);
@@ -118,7 +118,7 @@ public class CustomServiceActivity extends FragmentActivity {
 
             @Override
             public void onClick(View v) {
-                RongIM.getInstance().startConversationSetting(CustomServiceActivity.this, RongIMClient.ConversationType.CUSTOMER_SERVICE, getString(R.string.CUSTOMER_SERVICE));
+                RongIM.getInstance().startConversationSetting(CustomServiceActivity.this, RongIMClient.ConversationType.CUSTOMER_SERVICE, "kefu114");
                 mPopupWindow.dismiss();
             }
         });
@@ -131,7 +131,7 @@ public class CustomServiceActivity extends FragmentActivity {
                 /**
                  * 发送一个SuspendMessage消息就退出了当前客服
                  */
-                RongIM.getInstance().sendMessage(RongIMClient.ConversationType.CUSTOMER_SERVICE, getString(R.string.CUSTOMER_SERVICE), new SuspendMessage(), new RongIMClient.SendMessageCallback() {
+                RongIM.getInstance().sendMessage(RongIMClient.ConversationType.CUSTOMER_SERVICE, "kefu114", new SuspendMessage(), new RongIMClient.SendMessageCallback() {
 
                     @Override
                     public void onSuccess(int messageId) {
