@@ -8,13 +8,13 @@ android {
         applicationId "io.rong.imkit.demo"
         minSdkVersion 10
         targetSdkVersion 19
-        versionName "1.5.1.stable"
-        versionCode 2015061518
+        versionName "1.5.2.stable"
+        versionCode 2015062918
     }
 
     signingConfigs {
         config {
-            storeFile file("../rong.key")
+            storeFile file("rong.key")
             storePassword "Amigo123"
             keyAlias "RongCloud"
             keyPassword "Amigo123"
@@ -24,7 +24,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }
@@ -45,4 +45,5 @@ dependencies {
     compile 'com.android.support:support-v4:19.0.0'
     compile 'com.google.code.gson:gson:2.2.+'
     compile files('libs/gson-2.2.4.jar')
+    compile files('libs/Rong_IMKit_v1_5_2.jar')
 }

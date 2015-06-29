@@ -2,46 +2,46 @@
 <items version="2" >
 
     <item
-        jar="/Users/Bob_ge/Documents/GitHubWorkSpace/GitHub1.0.+/demo-app-android/app/libs/TencentLocationSDK_v4.0_r139747.jar"
+        jar="/Users/zhouxuming/Documents/GitHubWorkSpace/GitHub1.0+/demo-app-android/app/libs/Rong_IMKit_v1_5_2.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="a0981c8c4b5336c82ac2caf280c7e13373a8bf7b">
-        <dex dex="/Users/Bob_ge/Documents/GitHubWorkSpace/GitHub1.0.+/demo-app-android/app/build/intermediates/pre-dexed/debug/TencentLocationSDK_v4.0_r139747-f2b31b0c34ad5a615a98c5054287c6e293ef26cd.jar" />
+        sha1="b2c03240bb61a1708c7fcb63f8b3f56ce73dd7f9">
+        <dex dex="/Users/zhouxuming/Documents/GitHubWorkSpace/GitHub1.0+/demo-app-android/app/build/intermediates/pre-dexed/debug/Rong_IMKit_v1_5_2-e566d63c993e90b82a62fc736bfee49c76b4b0cb.jar" />
     </item>
     <item
-        jar="/Users/Bob_ge/Documents/GitHubWorkSpace/GitHub1.0.+/demo-app-android/app/libs/umeng-analytics-v5.2.4.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="0f9eccf79ae6006e4346725b09114182dca0c023">
-        <dex dex="/Users/Bob_ge/Documents/GitHubWorkSpace/GitHub1.0.+/demo-app-android/app/build/intermediates/pre-dexed/debug/umeng-analytics-v5.2.4-7ef1f1ab824dca4213733263392af44922bf1d98.jar" />
-    </item>
-    <item
-        jar="/Users/Bob_ge/Library/Android/sdk/extras/android/m2repository/com/android/support/support-v4/19.0.0/support-v4-19.0.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="afee690af14bd2c32d400cdf78e746fd45c386fa">
-        <dex dex="/Users/Bob_ge/Documents/GitHubWorkSpace/GitHub1.0.+/demo-app-android/app/build/intermediates/pre-dexed/debug/support-v4-19.0.0-7bc34bee323f16e3680bfbf588c8c3bcb9ac2f20.jar" />
-    </item>
-    <item
-        jar="/Users/Bob_ge/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.4/a60a5e993c98c864010053cb901b7eab25306568/gson-2.2.4.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="a60a5e993c98c864010053cb901b7eab25306568">
-        <dex dex="/Users/Bob_ge/Documents/GitHubWorkSpace/GitHub1.0.+/demo-app-android/app/build/intermediates/pre-dexed/debug/gson-2.2.4-2358f2c58543711e133d13b4501dab72ce6e17e5.jar" />
-    </item>
-    <item
-        jar="/Users/Bob_ge/Documents/GitHubWorkSpace/GitHub1.0.+/demo-app-android/app/libs/Rong_IMKit_v1_4_8_1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="c02fa1c5fabcbe13b5e7ce80c34517eca2904388">
-        <dex dex="/Users/Bob_ge/Documents/GitHubWorkSpace/GitHub1.0.+/demo-app-android/app/build/intermediates/pre-dexed/debug/Rong_IMKit_v1_4_8_1-3766cffd2c5556d758a170d38a916ff3a80fbab3.jar" />
-    </item>
-    <item
-        jar="/Users/Bob_ge/Documents/GitHubWorkSpace/GitHub1.0.+/demo-app-android/app/libs/TencentMapSDK_Raster_v1.0.6.jar"
+        jar="/Users/zhouxuming/Documents/GitHubWorkSpace/GitHub1.0+/demo-app-android/app/libs/TencentMapSDK_Raster_v1.0.6.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="232c8c3964113f0f39a9f4cdd3473d5075d188aa">
-        <dex dex="/Users/Bob_ge/Documents/GitHubWorkSpace/GitHub1.0.+/demo-app-android/app/build/intermediates/pre-dexed/debug/TencentMapSDK_Raster_v1.0.6-558f71d0567822af97e6855726262cf3c8e25aac.jar" />
+        <dex dex="/Users/zhouxuming/Documents/GitHubWorkSpace/GitHub1.0+/demo-app-android/app/build/intermediates/pre-dexed/debug/TencentMapSDK_Raster_v1.0.6-8d2a202976fd3b91e03179e6da67f4e487baa046.jar" />
+    </item>
+    <item
+        jar="/Users/zhouxuming/Documents/GitHubWorkSpace/GitHub1.0+/demo-app-android/app/libs/TencentLocationSDK_v4.0_r139747.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a0981c8c4b5336c82ac2caf280c7e13373a8bf7b">
+        <dex dex="/Users/zhouxuming/Documents/GitHubWorkSpace/GitHub1.0+/demo-app-android/app/build/intermediates/pre-dexed/debug/TencentLocationSDK_v4.0_r139747-db284bf22c04e2048a28368d117e27acb39601fa.jar" />
+    </item>
+    <item
+        jar="/Users/zhouxuming/Library/Android/sdk/extras/android/m2repository/com/android/support/support-v4/19.0.0/support-v4-19.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="afee690af14bd2c32d400cdf78e746fd45c386fa">
+        <dex dex="/Users/zhouxuming/Documents/GitHubWorkSpace/GitHub1.0+/demo-app-android/app/build/intermediates/pre-dexed/debug/support-v4-19.0.0-1a140fb13d932755c75bcee60f6a6e81299edc86.jar" />
+    </item>
+    <item
+        jar="/Users/zhouxuming/Documents/GitHubWorkSpace/GitHub1.0+/demo-app-android/app/libs/umeng-analytics-v5.2.4.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="0f9eccf79ae6006e4346725b09114182dca0c023">
+        <dex dex="/Users/zhouxuming/Documents/GitHubWorkSpace/GitHub1.0+/demo-app-android/app/build/intermediates/pre-dexed/debug/umeng-analytics-v5.2.4-8e1cf611c5e21927d352cbcc59cb5afa3706a1c8.jar" />
+    </item>
+    <item
+        jar="/Users/zhouxuming/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.4/a60a5e993c98c864010053cb901b7eab25306568/gson-2.2.4.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568">
+        <dex dex="/Users/zhouxuming/Documents/GitHubWorkSpace/GitHub1.0+/demo-app-android/app/build/intermediates/pre-dexed/debug/gson-2.2.4-7d4486990bc0a12e4e39db54fab481f6e4d30a35.jar" />
     </item>
 
 </items>
