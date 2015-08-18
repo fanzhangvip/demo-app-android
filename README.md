@@ -18,7 +18,7 @@
 
 **Google GSON 2.2.+**
 
-**听云SDK(Android Studio自动支持，Eclipse请安装开发插件或屏蔽DemoApplication中引用)**
+**融云SDK(Android Studio自动支持，Eclipse请安装开发插件或屏蔽DemoApplication中引用)**
 **插件地址<http://download.networkbench.com/newlens/android_agent/eclipse>**
 
 *如需使用自行申请APP_Key测试，需要搭建自己的auth服务器*
